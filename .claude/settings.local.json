@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Item \"C:\\\\Users\\\\F-006USER\\\\Desktop\\\\HP\\\\haru_lp.html\")",
+      "Bash(Select-Object Name, Length, LastWriteTime)",
+      "PowerShell(\\(Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch 'Loopback' -and $_.IPAddress -notmatch '^169' } | Select-Object -First 1\\).IPAddress)",
+      "PowerShell(\\(Get-Content \"C:\\\\Users\\\\F-006USER\\\\Desktop\\\\HP\\\\haru_lp.html\" | Measure-Object -Line\\).Lines)",
+      "PowerShell(python --version 2>$null; python3 --version 2>$null)"
+    ]
+  }
+}

@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>占い師 kaku 公式鑑定</title>
+  <style>
+    :root {
+      --night: #080915;
+      --navy: #111a35;
+      --indigo: #24346f;
+      --violet: #4e277d;
+      --gold: #d4ad55;
+      --gold2: #f0d687;
+      --cream: #fff8e4;
+      --paper: #fffaf1;
+      --ink: #33283d;
+      --muted: #6d6072;
+      --red: #c5223f;
+      --line: rgba(212, 173, 85, .48);
+      --shadow: 0 18px 36px rgba(8, 9, 21, .24);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: #e8e8f0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Hiragino Mincho ProN", "Yu Mincho", "BIZ UDPMincho", Georgia, serif;
+      background: linear-gradient(90deg, #dedfe9 0, #faf8fd 24%, #faf8fd 76%, #dedfe9 100%);
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .phone {
+      width: min(100%, 430px);
+      margin: 0 auto;
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(240, 214, 135, .18), transparent 18%),
+        radial-gradient(circle at 85% 22%, rgba(78, 39, 125, .15), transparent 22%),
+        linear-gradient(90deg, rgba(212, 173, 85, .07) 1px, transparent 1px) 0 0 / 20px 20px,
+        linear-gradient(0deg, rgba(212, 173, 85, .055) 1px, transparent 1px) 0 0 / 20px 20px,
+        var(--paper);
+      box-shadow: 0 0 46px rgba(8, 9, 21, .2);
+    }
+
+    /* ---- header ---- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(8, 9, 21, .94);
+      border-bottom: 1px solid rgba(212, 173, 85, .62);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 54px;
+      padding: 8px 14px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 1px;
+      color: var(--cream);
+      line-height: 1.15;
+    }
+
+    .brand small {
+      color: var(--gold2);
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    .brand strong {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .menu-button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(212, 173, 85, .68);
+      border-radius: 50%;
+      background: linear-gradient(180deg, #263365, #11162e);
+      color: var(--cream);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    /* ---- hero ---- */
+    .hero {
+      position: relative;
+      min-height: 690px;
+      padding: 20px 18px 28px;
+      overflow: hidden;
+      color: #fff8e9;
+      background:
+        linear-gradient(180deg, rgba(8, 9, 21, .08), rgba(8, 9, 21, .96)),
+        url("samle02.png") center top / cover no-repeat,
+        var(--night);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(240, 214, 135, .18), transparent 25%),
+        linear-gradient(180deg, transparent 0 44%, rgba(8, 9, 21, .28) 56%, rgba(8, 9, 21, .98) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      min-height: 642px;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 8px;
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, .68);
+    }
+
+    .eyebrow {
+      align-self: center;
+      padding: 7px 13px;
+      border: 1px solid rgba(240, 214, 135, .74);
+      border-radius: 999px;
+      background: rgba(8, 9, 21, .58);
+      color: var(--gold2);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 13px 0 8px;
+      color: #fff;
+      font-size: 42px;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .hero-title-sub {
+      display: block;
+      margin-top: 8px;
+      color: var(--gold2);
+      font-size: 19px;
+      line-height: 1.45;
+    }
+
+    .hero-lead {
+      margin: 0 auto 16px;
+      max-width: 336px;
+      color: #fff1c6;
+      font-size: 16px;
+      line-height: 1.75;
+      font-weight: 800;
+    }
+
+    .proof {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 0 0 18px;
+    }
+
+    .proof span {
+      min-height: 58px;
+      padding: 9px 5px;
+      border: 1px solid rgba(212, 173, 85, .64);
+      border-radius: 8px;
+      background: rgba(10, 12, 28, .76);
+      color: #fff9e8;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 56px;
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 999px;
+      box-shadow: 0 9px 0 rgba(23, 76, 32, .78), 0 18px 28px rgba(0, 0, 0, .28);
+      background: linear-gradient(180deg, #43dc72, #07a642 62%, #087432);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    /* ---- layout ---- */
+    main { padding-bottom: 28px; }
+
+    .section { padding: 32px 20px; }
+
+    .section.dark {
+      background:
+        radial-gradient(circle at 50% 0, rgba(212, 173, 85, .25), transparent 31%),
+        linear-gradient(180deg, #172244, #080915);
+      color: #fff7df;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      text-align: center;
+      color: var(--navy);
+      font-size: 24px;
+      line-height: 1.5;
+    }
+
+    .dark .section-title {
+      color: var(--gold2);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .56);
+    }
+
+    .body-copy {
+      margin: 0;
+      font-size: 15px;
+      line-height: 2;
+    }
+
+    .body-copy + .body-copy { margin-top: 14px; }
+
+    .dark .body-copy { color: #fff3cf; }
+
+    .divider {
+      margin: 0;
+      border: none;
+      border-top: 1px solid rgba(212, 173, 85, .2);
+    }
+
+    /* ---- price problem block ---- */
+    .problem-box {
+      margin-bottom: 20px;
+      padding: 20px 16px;
+      border: 2px solid var(--red);
+      border-radius: 8px;
+      background: rgba(197, 34, 63, .04);
+      text-align: center;
+    }
+
+    .problem-box .q {
+      display: block;
+      color: var(--red);
+      font-size: 21px;
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .problem-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ---- logic steps ---- */
+    .logic-steps {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .logic-steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 13px 13px 13px 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(255, 246, 224, .9));
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .logic-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .value-badge {
+      padding: 18px 14px;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      background: linear-gradient(135deg, #172244, #0d0f1f);
+      color: var(--gold2);
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .value-badge small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(240, 214, 135, .7);
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    /* ---- profile ---- */
+    .profile-photo {
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      object-position: center 8%;
+    }
+
+    .quote {
+      margin: 0 0 14px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--gold);
+      background: rgba(255, 246, 221, .78);
+      color: var(--navy);
+      font-size: 18px;
+      line-height: 1.65;
+      font-weight: 900;
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .badge-list li {
+      padding: 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(255, 246, 220, .85));
+      font-size: 13px;
+      line-height: 1.4;
+      box-shadow: 0 2px 8px rgba(8, 9, 21, .1);
+    }
+
+    /* ---- poetic section ---- */
+    .poem-section {
+      padding: 40px 28px 36px;
+      text-align: center;
+    }
+
+    .poem-lines {
+      margin: 0 0 28px;
+    }
+
+    .poem-lines p {
+      margin: 0;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(212, 173, 85, .2);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      letter-spacing: .02em;
+    }
+
+    .poem-lines p:first-child {
+      border-top: 1px solid rgba(212, 173, 85, .2);
+    }
+
+    .poem-close {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2.1;
+    }
+
+    /* ---- tag clouds ---- */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-cloud li {
+      padding: 6px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(17, 26, 53, .05);
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .jutsu-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .jutsu-cloud li {
+      padding: 6px 14px;
+      border: 1px solid rgba(212, 173, 85, .45);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      color: var(--gold2);
+      font-size: 13px;
+    }
+
+    /* ---- key phrase ---- */
+    .key-phrase {
+      margin: 22px 0 0;
+      padding: 22px 16px;
+      border-top: 2px solid rgba(212, 173, 85, .45);
+      border-bottom: 2px solid rgba(212, 173, 85, .45);
+      background: rgba(240, 214, 135, .06);
+      text-align: center;
+    }
+
+    .key-phrase .phrase-main {
+      display: block;
+      color: var(--gold2);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.45;
+      letter-spacing: .04em;
+    }
+
+    .key-phrase .phrase-sub {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255, 243, 207, .72);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* ---- male insight list ---- */
+    .insight-list {
+      display: grid;
+      gap: 9px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .insight-list li {
+      position: relative;
+      padding: 12px 12px 12px 34px;
+      border: 1px solid rgba(212, 173, 85, .35);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .insight-list li::before {
+      content: "◉";
+      position: absolute;
+      left: 11px;
+      top: 13px;
+      color: var(--gold);
+      font-size: 13px;
+    }
+
+    /* ---- course cards ---- */
+    .course-list { display: grid; gap: 14px; }
+
+    .course-card {
+      padding: 17px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(255, 246, 224, .9));
+      box-shadow: var(--shadow);
+    }
+
+    .course-card h3 {
+      margin: 0 0 10px;
+      color: var(--violet);
+      font-size: 20px;
+      line-height: 1.45;
+    }
+
+    .course-card .price {
+      display: block;
+      margin: 0 0 10px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      background: rgba(17, 26, 53, .07);
+      color: var(--red);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.6;
+    }
+
+    /* ---- CTA limited box ---- */
+    .limited {
+      padding: 22px 16px;
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 50% 0, rgba(240, 214, 135, .32), transparent 33%),
+        linear-gradient(180deg, #28143e, #101326);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .limited .tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: var(--red);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .limited strong {
+      display: block;
+      color: #fff;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .limited em {
+      color: var(--gold2);
+      font-style: normal;
+    }
+
+    .limited p {
+      margin: 14px 0 18px;
+      color: #fff3cf;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    /* ---- footer ---- */
+    .footer {
+      padding: 20px 16px 32px;
+      text-align: center;
+      background: var(--night);
+      color: rgba(255, 247, 223, .72);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    @media (max-width: 360px) {
+      .brand strong { font-size: 14px; }
+      h1 { font-size: 37px; }
+      .hero-title-sub { font-size: 17px; }
+      .hero { min-height: 650px; }
+      .hero-content { min-height: 602px; }
+      .proof span { font-size: 11px; }
+      .poem-section { padding: 32px 18px 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="トップへ">
+          <small>FORTUNE PRODUCER</small>
+          <strong>占い師 BAKU 公式鑑定</strong>
+        </a>
+        <button class="menu-button" type="button" aria-label="メニュー">≡</button>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+      <div class="hero-content">
+        <span class="eyebrow">占い師が頼る占い師</span>
+        <h1>BAKU<span class="hero-title-sub">業界の表も裏も知る、<br>実力派プロデューサー占い師</span></h1>
+        <p class="hero-lead">低価格 × 高クオリティ。<br>本物の鑑定を、まずは10分から。</p>
+        <div class="proof" aria-label="実績">
+          <span>相談件数<br>15,000人超</span>
+          <span>業界歴<br>12年以上</span>
+          <span>育成<br>700名以上</span>
+        </div>
+        <a class="button" href="#cta">LINE登録で初回10分無料</a>
+      </div>
+    </section>
+
+    <main>
+
+      <!-- ===== 一番の訴求：価格×品質ロジック ===== -->
+      <section class="section">
+        <div class="problem-box">
+          <span class="q">電話占いって、<br>料金が高すぎませんか？</span>
+          <p>1分300円、1時間で18,000円。それが当たり前の業界です。</p>
+        </div>
+        <ol class="logic-steps">
+          <li>BAKUは占い師として<strong>15,000人以上</strong>を鑑定してきた</li>
+          <li>同時に<strong>6つの占いサイトを運営・プロデュース</strong>し、スクール講師として業界の「裏側」を知り抜いた</li>
+          <li>どこに無駄があり、なぜ高くなるのか——全部わかっている</li>
+          <li>だから余分なコストを省いて、<strong>低価格でも質を落とさない</strong>鑑定ができる</li>
+        </ol>
+        <div class="value-badge">
+          低価格 × 高クオリティ
+          <small>安いだけじゃない。経験・実績・鑑定力を兼ね備えた、<br>業界トップクラスのコスパ。</small>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ===== プロフィール ===== -->
+      <section class="section">
+        <h2 class="section-title">はじめまして、<br>占い師 BAKU です</h2>
+        <div class="profile-photo">
+          <img src="sample01.png" alt="占い師 BAKU" loading="lazy">
+        </div>
+        <p class="quote">今度は私が、あなたの味方になります。</p>
+        <p class="body-copy">有名占いサイトで専属占い師として活動後、「当たる」「話すと前に進める」と話題に。相談15,000人超を経て、同業の占い師からも相談が集まるように。大手占いサイトからスカウトを受け、現在も現役で鑑定中。</p>
+        <p class="body-copy">占い師としての活動と並行して、6つの占いサイトの運営・プロデュース、スクール講師として700名以上の占い師を育成。業界の表も裏も知っているからこそ、安くても妥協しない鑑定ができます。</p>
+        <ul class="badge-list">
+          <li>業界歴 12年以上</li>
+          <li>相談 15,000人超</li>
+          <li>占い師育成 700名以上</li>
+          <li>有名サイト専属・大手からスカウト</li>
+          <li>6サイト運営・プロデュース</li>
+          <li>同業占い師からも相談される</li>
+          <li>現役大手サイト所属</li>
+        </ul>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ===== 詩的：こんなお悩みを ===== -->
+      <section class="poem-section">
+        <h2 class="section-title">こんなお悩みを<br>解決してきました</h2>
+        <div class="poem-lines">
+          <p>ある人は、片想いの彼ともう一度近づきたくて。</p>
+          <p>ある人は、別れた恋人とやり直したくて。</p>
+          <p>ある人は、既読スルーが続く彼の本音を知りたくて。</p>
+          <p>ある人は、曖昧な関係に答えがほしくて。</p>
+          <p>ある人は、年の差の恋の不安を消したくて。</p>
+          <p>ある人は、結婚を考えてくれない彼に迷っていて。</p>
+          <p>ある人は、人間関係や仕事に疲れていて。</p>
+          <p>ある人は、ただ誰かに話を聞いてほしくて。</p>
+        </div>
+        <p class="poem-close">相談の理由は人それぞれ。<br>でもひとりで抱えなくていい。<br>BAKUと一緒に、整理しませんか。</p>
+        <ul class="tag-cloud">
+          <li>片想い</li>
+          <li>復縁</li>
+          <li>複雑愛</li>
+          <li>年の差恋愛</li>
+          <li>曖昧な関係</li>
+          <li>既読スルー</li>
+          <li>アプリ恋愛</li>
+          <li>結婚の悩み</li>
+          <li>人間関係</li>
+          <li>ビジネス</li>
+          <li>LGBT</li>
+        </ul>
+      </section>
+
+      <!-- ===== 鑑定スタイル ===== -->
+      <section class="section dark">
+        <h2 class="section-title">BAKUの鑑定スタイル</h2>
+        <p class="body-copy">結果を伝えて終わりにしない。「じゃあ、どうすればいい？」まで答えるのがBAKUの鑑定です。</p>
+        <p class="body-copy">相手の気持ち・今の状況・未来の流れ・次の行動まで整理し、根本にある考え方・見方・選び方を一緒に入れ替えていきます。</p>
+
+        <div class="key-phrase">
+          <span class="phrase-main">軽くする、じゃない。入れ替える。</span>
+          <span class="phrase-sub">一時的に心を楽にするだけでなく、<br>根本から整える鑑定をお届けします。</span>
+        </div>
+
+        <p class="body-copy" style="margin-top:20px;">使用する占術</p>
+        <ul class="jutsu-cloud">
+          <li>霊感霊視</li>
+          <li>スピリチュアルタロット</li>
+          <li>カバラ数秘術</li>
+          <li>ルーンストーン</li>
+          <li>宇宙天体・星読み</li>
+        </ul>
+      </section>
+
+      <!-- ===== 男性占い師の強み ===== -->
+      <section class="section">
+        <h2 class="section-title">男性占い師だから<br>わかること</h2>
+        <p class="body-copy">男性の本音は、男性占い師だからこそ見えます。言葉にしない気持ち、行動に隠れている本音——彼の中で何が起きているのかを読み解き、次にどう動けばいいかまで整理します。</p>
+        <ul class="insight-list">
+          <li>言葉にしない本音が読める</li>
+          <li>連絡が減った、距離を置く——本当の理由</li>
+          <li>冷めたのか、迷っているのかの見極め</li>
+          <li>まだ気持ちが残っているかどうか</li>
+          <li>本気か遊びかの判断</li>
+        </ul>
+      </section>
+
+      <!-- ===== 中間 CTA ===== -->
+      <section class="section dark" id="cta">
+        <div class="limited">
+          <span class="tag">今だけ限定</span>
+          <strong>LINE登録で<br><em>初回鑑定10分無料</em></strong>
+          <p>恋愛、復縁、複雑な関係、仕事、人間関係。ひとりで抱えてきた悩みを、まずは10分だけ話してください。</p>
+          <a class="button" href="https://line.me/" target="_blank" rel="noopener">LINE登録はこちら（無料）</a>
+        </div>
+      </section>
+
+      <!-- ===== 鑑定コース ===== -->
+      <section class="section">
+        <h2 class="section-title">鑑定コース</h2>
+        <div class="course-list">
+          <article class="course-card">
+            <h3>電話鑑定コース</h3>
+            <span class="price">初回 10分 無料<br>通常：10分 2,000円</span>
+            <p class="body-copy">恋愛・復縁・相手の気持ち・今後の流れ・仕事・人間関係。今すぐ相談したい方におすすめです。</p>
+          </article>
+          <article class="course-card">
+            <h3>対面鑑定コース</h3>
+            <span class="price">60分 12,000円<br>都内某所・完全予約制</span>
+            <p class="body-copy">じっくり相談したい方、人生全体を整理したい方に。</p>
+          </article>
+          <article class="course-card">
+            <h3>占い師育成コース</h3>
+            <span class="price">無料カウンセリングあり<br>本格コース：60分 18,000円</span>
+            <p class="body-copy">占い師として活動したい方、鑑定力を上げたい方向け。700名以上の育成実績から、実践で使える鑑定の考え方をお伝えします。</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===== 最終 CTA ===== -->
+      <section class="section dark">
+        <div class="limited">
+          <span class="tag">まずは無料から</span>
+          <strong>LINE登録で<br><em>初回10分無料</em></strong>
+          <p>ひとりで悩み続ける必要はありません。<br>今の状況を話してみてください。<br>一緒に整理します。</p>
+          <a class="button" href="https://line.me/" target="_blank" rel="noopener">LINE登録はこちら（無料）</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>占い師 BAKU 公式鑑定</p>
+      <p>掲載画像は制作素材です。LINE登録リンクは仮URLです。</p>
+      <p>Copyright © BAKU Fortune Produce.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
