@@ -81,6 +81,8 @@ body{
   text-align:center;margin:18px 0 8px;letter-spacing:.08em}
 .sec-title .gold{color:var(--gold-hi)}
 .divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:6px auto 30px}
+.eyebrow+.sec-title{margin-top:20px;margin-bottom:20px}
+.sec-title+.divider{margin-top:0}
 .divider span{height:1px;width:44px;background:linear-gradient(90deg,transparent,var(--gold-deep))}
 .divider span:last-child{background:linear-gradient(90deg,var(--gold-deep),transparent)}
 .diamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);
@@ -131,9 +133,7 @@ body{
   50%{filter:drop-shadow(0 4px 44px rgba(230,207,149,.6))}}
 
 /* ===== featured (cospa) ===== */
-.feature{z-index:2;margin-top:-112px;padding-top:86px;text-align:center}
-.feature::before{height:118px;background:linear-gradient(180deg,rgba(10,10,19,.34) 0%,rgba(10,10,19,.18) 38%,rgba(10,10,19,0) 100%)}
-.feature .sec-vid{inset:-56px 0 -18px;height:calc(100% + 74px);opacity:.38;filter:saturate(.96) contrast(.98) brightness(.9)}
+.feature{z-index:2;margin-top:-24px;text-align:center}
 .feature .lead{font-family:var(--serif);font-size:21px;line-height:1.95;
   font-weight:500;margin-bottom:22px;letter-spacing:.06em}
 .feature .lead em{font-style:normal;color:var(--gold-hi);
@@ -283,6 +283,7 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
 /* ===== video backgrounds ===== */
 .hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
 .sec-vid{position:absolute;inset:-18px 0;width:100%;height:calc(100% + 36px);object-fit:cover;z-index:0;pointer-events:none;opacity:.28;filter:saturate(.9) contrast(.95)}
+
 </style>
 </head>
 <body>
@@ -377,20 +378,13 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
     <video class="sec-vid" style="opacity:.22" autoplay muted loop playsinline><source src="mo03.mp4" type="video/mp4"></video>
     <div class="inner">
       <div class="eyebrow">Message</div>
+      <div class="sec-title">HARUの鑑定</div>
       <div class="divider"><span></span><i class="diamond"></i><span></span></div>
-      <p class="pull">軽くする、じゃない。<br><span class="gold">入れ替える。</span></p>
-    </div>
-  </section>
-
-  <!-- HARU鑑定とは -->
-  <section class="sec reveal" style="overflow:hidden">
-    <video class="sec-vid" autoplay muted loop playsinline><source src="mo02.mp4" type="video/mp4"></video>
-    <div class="eyebrow">HARUの鑑定とは</div>
-    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
-    <div class="glass teaser">
-      <div class="teaser-t">「じゃあ、どうすればいい？」<br>まで、答える。</div>
-      <p class="teaser-p">結果を伝えて終わり、にはしません。相手の気持ち・今の状況・未来の流れ・次の一手まで整理し、その根本にある考え方ごと、一緒に入れ替えていく。男性の本音は、男性占い師だからこそ視えるのです。</p>
-      <button class="readmore" data-modal="message">想いを読む<span class="ic">＋</span></button>
+      <div class="glass teaser">
+        <div class="teaser-t">「じゃあ、どうすればいい？」<br>まで、答える。</div>
+        <p class="teaser-p">結果を伝えて終わり、にはしません。相手の気持ち・今の状況・未来の流れ・次の一手まで整理し、その根本にある考え方ごと、一緒に入れ替えていく。男性の本音は、男性占い師だからこそ視えるのです。</p>
+        <button class="readmore" data-modal="message">想いを読む<span class="ic">＋</span></button>
+      </div>
     </div>
   </section>
 
@@ -512,7 +506,7 @@ const DATA={
       <li>占いを受けても受けても、現実が変わらない…</li>
     </ul>
     <p style="margin-top:18px">相談の理由は、人それぞれ。でも、ひとりで抱えなくていい。<strong>HARUと一緒に、整理しませんか。</strong></p>`},
-  message:{k:'Message',t:'軽くする、じゃない。\n入れ替える。',html:`
+  message:{k:'Message',t:'HARUの鑑定',html:`
     <p>結果を伝えて終わり、にはしません。「じゃあ、どうすればいい？」——<strong>そこまで答えるのが、HARUの鑑定です。</strong></p>
     <p>相手の気持ち、今の状況、未来の流れ、次の一手。そのすべてを整理し、根本にある“考え方・見方・選び方”ごと、一緒に入れ替えていきます。</p>
     <p>一時しのぎで心を楽にするだけではなく、<strong>根本から整える</strong>鑑定を。</p>
