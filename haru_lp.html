@@ -45,7 +45,7 @@ body{
     radial-gradient(80% 50% at 50% 102%, rgba(201,169,106,.08), transparent 70%),
     #050509;
 }
-.shell{position:relative;z-index:2;max-width:480px;margin:0 auto;overflow:hidden;
+.shell{position:relative;z-index:2;max-width:480px;margin:64px auto 0;overflow:hidden;
   background:
     radial-gradient(120% 55% at 86% 3%,  rgba(201,169,106,.12), transparent 55%),
     radial-gradient(95% 38% at 6% 20%,   rgba(96,62,128,.12),  transparent 60%),
@@ -65,10 +65,40 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132' height='132'%3E%3Cg fill='none' stroke='%23c9a96a' stroke-width='0.7'%3E%3Cpath d='M66 6 L126 66 L66 126 L6 66 Z'/%3E%3Cpath d='M66 30 L102 66 L66 102 L30 66 Z'/%3E%3Ccircle cx='66' cy='66' r='2.4'/%3E%3Ccircle cx='66' cy='6' r='1.4'/%3E%3Ccircle cx='66' cy='126' r='1.4'/%3E%3Ccircle cx='6' cy='66' r='1.4'/%3E%3Ccircle cx='126' cy='66' r='1.4'/%3E%3C/g%3E%3C/svg%3E");}
 .shell>*{position:relative;z-index:1}
 
+/* ===== site menu ===== */
+.site-header{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:120;
+  width:100%;max-width:480px;height:64px;display:flex;align-items:center;justify-content:center;
+  background:rgba(8,8,15,.94);border-bottom:1px solid rgba(201,169,106,.24);
+  box-shadow:0 8px 26px rgba(0,0,0,.28);backdrop-filter:blur(8px)}
+.menu-toggle{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:42px;height:42px;
+  border:0;background:transparent;cursor:pointer}
+.menu-toggle span,.menu-toggle::before,.menu-toggle::after{content:"";position:absolute;left:6px;width:30px;height:2px;
+  background:var(--gold-hi);transition:.25s}
+.menu-toggle::before{top:12px}
+.menu-toggle span{top:20px}
+.menu-toggle::after{top:28px}
+.menu-toggle[aria-expanded="true"]::before{top:20px;transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span{opacity:0}
+.menu-toggle[aria-expanded="true"]::after{top:20px;transform:rotate(-45deg)}
+.site-logo{font-family:var(--latin);font-weight:500;font-size:18px;letter-spacing:.08em;
+  color:var(--gold-hi);text-shadow:0 0 18px rgba(201,169,106,.22);white-space:nowrap;
+  max-width:calc(100% - 112px);overflow:hidden;text-overflow:clip;margin-left:34px}
+.menu-panel{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:115;width:100%;max-width:480px;
+  height:calc(100dvh - 64px);background:rgba(10,10,19,.94);backdrop-filter:blur(8px);
+  opacity:0;pointer-events:none;transition:opacity .25s}
+.menu-panel.open{opacity:1;pointer-events:auto}
+.menu-title{padding:18px 20px 14px;border-left:4px solid #ff8c67;font-weight:700;font-size:18px;
+  letter-spacing:.05em;color:var(--gold-hi)}
+.menu-list{list-style:none}
+.menu-list a{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid rgba(0,0,0,.1);
+  color:var(--cream);text-decoration:none;font-size:17px;letter-spacing:.03em;border-bottom-color:rgba(201,169,106,.16)}
+.menu-list a::before{content:"›";font-size:26px;line-height:1;color:var(--gold-hi)}
+body.menu-open{overflow:hidden}
+
 /* ===== shared ===== */
-.eyebrow{font-family:var(--serif);font-size:clamp(14px,3.8vw,17px);letter-spacing:.38em;color:var(--gold-hi);
+.eyebrow{font-family:var(--serif);font-size:17px;letter-spacing:.26em;color:var(--gold-hi);
   text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;flex-wrap:nowrap;text-shadow:0 2px 16px rgba(0,0,0,.85)}
-.eyebrow::before,.eyebrow::after{content:"";height:1px;width:clamp(24px,9vw,44px);flex:0 1 44px;
+.eyebrow::before,.eyebrow::after{content:"";height:1px;width:34px;flex:0 1 34px;
   background:linear-gradient(90deg,transparent,var(--gold))}
 .eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent)}
 .sec{padding:54px 26px 50px;position:relative}
@@ -93,8 +123,10 @@ body{
 .reveal.in{opacity:1;transform:none}
 
 /* ===== HERO ===== */
-.hero{position:relative;z-index:3;height:clamp(480px,72svh,620px);display:flex;flex-direction:column;
+.hero{position:relative;z-index:3;height:clamp(430px,62svh,540px);display:flex;flex-direction:column;
   justify-content:center;overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:118px;z-index:2;
+  pointer-events:none;background:linear-gradient(180deg,rgba(10,10,19,0) 0%,rgba(10,10,19,.72) 58%,#0a0a13 100%)}
 .hero-img{position:absolute;inset:0;background-size:cover;background-position:42% 42%;
   transform:scale(1.06);filter:saturate(.96) contrast(1.03)}
 .hero-veil{position:absolute;inset:0;background:
@@ -109,7 +141,7 @@ body{
   background:rgba(10,9,15,.4);backdrop-filter:blur(8px);
   animation:fadeDown 1.2s .2s both}
 .hero-badge b{color:#fff;font-weight:600}
-.hero-content{position:relative;z-index:3;padding:24px 26px 28px;text-align:center;background:radial-gradient(ellipse at center,rgba(5,5,10,.55) 0%,transparent 75%)}
+.hero-content{position:relative;z-index:3;padding:42px 26px 18px;text-align:center;background:radial-gradient(ellipse at center,rgba(5,5,10,.55) 0%,transparent 75%)}
 .hero-kicker{font-family:var(--serif);font-size:15px;letter-spacing:.3em;color:var(--cream);
   margin-bottom:6px;animation:fadeUp 1.1s .5s both;text-shadow:0 2px 14px rgba(0,0,0,1),0 0 40px rgba(0,0,0,.9)}
 .hero-name{font-family:var(--latin);font-weight:400;font-size:90px;line-height:.92;
@@ -133,21 +165,31 @@ body{
   50%{filter:drop-shadow(0 4px 44px rgba(230,207,149,.6))}}
 
 /* ===== featured (cospa) ===== */
-.feature{z-index:2;margin-top:-24px;text-align:center}
+.feature{z-index:2;margin-top:-150px;padding-top:150px;text-align:center;
+  background:linear-gradient(180deg,#08080f 0%,#08080f 82px,rgba(8,8,15,0) 150px)}
+.feature::before{top:-68px;height:132px;
+  background:linear-gradient(180deg,rgba(10,10,19,0) 0%,rgba(10,10,19,.58) 46%,rgba(10,10,19,0) 100%)}
+.feature .sec-title{font-size:23px;letter-spacing:.04em;white-space:nowrap}
 .feature .lead{font-family:var(--serif);font-size:21px;line-height:1.95;
   font-weight:500;margin-bottom:22px;letter-spacing:.06em}
 .feature .lead em{font-style:normal;color:var(--gold-hi);
   background:linear-gradient(transparent 62%,rgba(201,169,106,.22) 62%)}
-.priceflip{display:flex;align-items:center;justify-content:center;gap:16px;margin:28px 0 24px}
-.price-old{font-family:var(--latin);font-size:26px;color:var(--muted);position:relative}
-.price-old::after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:1px;
+.priceflip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin:28px 0 24px}
+.price-old{font-family:var(--latin);color:var(--muted);position:relative;display:flex;gap:12px;min-width:150px}
+.market-price{position:relative;flex:1}
+.market-price::after{content:"";position:absolute;left:-2px;right:-2px;top:18px;height:1px;
   background:var(--muted);transform:rotate(-8deg)}
-.price-old small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.2em}
-.arrow{color:var(--gold);font-size:18px}
+.market-price .yen{display:block;font-size:26px;line-height:1;color:var(--muted);white-space:nowrap}
+.market-price .yen small{font-size:11px;letter-spacing:.04em}
+.market-price .label{display:block;font-family:var(--sans);font-size:8.5px;letter-spacing:.06em;line-height:1.45;margin-top:5px}
+.arrow{color:var(--gold);font-size:18px;line-height:1;transform:rotate(90deg)}
 .price-new{font-family:var(--latin);font-size:52px;font-weight:500;line-height:.9;
   color:var(--gold-hi);text-shadow:0 0 30px rgba(201,169,106,.4)}
-.price-new small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.24em;
+.price-new small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.18em;
   color:var(--gold)}
+.price-new .per{display:inline;font-family:var(--sans);font-size:13px;letter-spacing:.08em;color:var(--gold)}
+.price-new .tax{font-size:.34em;letter-spacing:.04em}
+.price-note{font-family:var(--serif);font-size:13px;letter-spacing:.08em;color:var(--gold-hi);margin-top:-10px;margin-bottom:22px}
 .taglabel{font-family:var(--serif);font-size:14px;letter-spacing:.2em;color:var(--cream);
   margin-bottom:26px}
 .taglabel .x{color:var(--gold);font-family:var(--latin);padding:0 4px}
@@ -159,7 +201,7 @@ body{
 .teaser{padding:24px 22px;text-align:left;position:relative;overflow:hidden}
 .teaser::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6}
-.teaser-k{font-family:var(--serif);font-size:11px;letter-spacing:.34em;color:var(--gold);
+.teaser-k{font-family:var(--serif);font-size:14px;letter-spacing:.3em;color:var(--gold);
   margin-bottom:10px}
 .teaser-t{font-family:var(--serif);font-size:16.5px;font-weight:500;line-height:1.7;margin-bottom:9px}
 .teaser-p{font-size:13px;color:var(--muted);line-height:1.9;
@@ -180,19 +222,29 @@ body{
   line-height:1;letter-spacing:.02em;white-space:nowrap}
 .stat .num small{font-size:16px}
 .stat .lbl{font-size:10.5px;letter-spacing:.16em;color:var(--muted);margin-top:7px}
+.profile-icon{width:132px;height:132px;margin:-6px auto 10px;border-radius:50%;
+  padding:3px;background:linear-gradient(135deg,var(--gold-hi),var(--gold-deep));
+  box-shadow:0 16px 42px rgba(0,0,0,.48),0 0 28px rgba(201,169,106,.24)}
+.profile-icon img{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;
+  object-position:50% 18%;filter:saturate(.9) contrast(1.03);transform:scale(1.22)}
+.profile-name{font-family:var(--serif);font-size:12px;line-height:1.35;letter-spacing:.2em;color:var(--gold-hi);
+  text-align:center;margin:0 0 26px;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.profile-name span{display:block;font-family:var(--latin);font-size:28px;letter-spacing:.12em;margin-top:3px}
 .bio{font-size:13.5px;color:#cfc9bd;line-height:2.1;text-align:justify}
 .bio b{color:var(--gold-hi);font-weight:500}
 
 /* ===== concerns ===== */
-.concern-grid{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-bottom:8px}
-.chip{font-family:var(--serif);font-size:12.5px;letter-spacing:.08em;color:var(--cream);
-  border:1px solid var(--line);border-radius:30px;padding:8px 15px;
-  background:rgba(201,169,106,.04)}
-.subhead{font-family:var(--serif);font-size:12px;letter-spacing:.28em;color:var(--gold);
+.subhead{font-family:var(--serif);font-size:14px;letter-spacing:.24em;color:var(--gold);
   text-align:center;margin:30px 0 14px}
-.arts{display:flex;flex-wrap:wrap;gap:10px 7px;justify-content:center}
-.art{font-size:12.5px;color:#cfc9bd;letter-spacing:.06em;display:flex;align-items:center;gap:7px}
-.art::before{content:"✦";color:var(--gold);font-size:10px}
+.arts-card{padding:22px 20px;margin-top:12px}
+.arts{list-style:none;display:grid;gap:10px;margin:0}
+.arts li{font-size:13px;color:#cfc9bd;letter-spacing:.06em;display:flex;align-items:center;gap:9px}
+.arts li::before{content:"✦";color:var(--gold);font-size:10px}
+.flow-lead{font-family:var(--serif);text-align:center;color:#d4cec2;font-size:15px;letter-spacing:.08em;margin-bottom:24px}
+.flow-step{padding:24px 22px;margin-bottom:16px;position:relative}
+.flow-step .step{font-family:var(--latin);font-size:12px;letter-spacing:.24em;color:var(--gold);margin-bottom:8px}
+.flow-step h3{font-family:var(--serif);font-size:19px;color:var(--gold-hi);letter-spacing:.08em;margin-bottom:10px}
+.flow-step p{font-size:13px;color:var(--muted);line-height:1.9}
 
 /* ===== message ===== */
 .msgsec{position:relative;overflow:hidden}
@@ -219,7 +271,7 @@ body{
 
 /* ===== CTA ===== */
 .ctablock{text-align:center;padding:78px 26px 130px;position:relative}
-.ctablock .ck{font-family:var(--serif);font-size:13px;letter-spacing:.26em;color:var(--gold);margin-bottom:10px}
+.ctablock .ck{font-family:var(--serif);font-size:17px;letter-spacing:.26em;color:var(--gold);margin-bottom:10px}
 .ctablock .ct{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.6;margin-bottom:14px}
 .ctablock .cp{font-size:13px;color:var(--muted);line-height:2;margin-bottom:30px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;
@@ -290,11 +342,27 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
 <canvas id="stars"></canvas>
 <div class="bgglow"></div>
 
+<header class="site-header">
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false"><span></span></button>
+  <div class="site-logo">BAKU'S SPIRITUAL SALON</div>
+</header>
+
+<nav class="menu-panel" id="siteMenu" aria-hidden="true">
+  <div class="menu-title">MENU</div>
+  <ul class="menu-list">
+    <li><a href="haru_lp.html#top">ホーム</a></li>
+    <li><a href="reading.html">鑑定のご案内</a></li>
+    <li><a href="profile.html">profile</a></li>
+    <li><a href="voices.html">お客様の声</a></li>
+    <li><a href="line.html">お問い合わせ</a></li>
+  </ul>
+</nav>
+
 <div class="shell">
 
   <!-- HERO -->
-  <header class="hero">
-    <video class="hero-vid" id="heroVid" autoplay muted playsinline><source src="mo01.mp4" type="video/mp4"></video>
+  <header class="hero" id="top">
+    <video class="hero-vid" id="heroVid" autoplay muted playsinline><source src="assets/top-banner/mo01.mp4" type="video/mp4"></video>
     <div class="hero-veil"></div>
     <div class="hero-veil2"></div>
     <div class="hero-top">
@@ -311,17 +379,27 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
 
   <!-- COSPA / FEATURED -->
   <section class="sec feature reveal" style="overflow:hidden">
-    <video class="sec-vid" autoplay muted loop playsinline><source src="mo04.mp4" type="video/mp4"></video>
+    <video class="sec-vid" autoplay muted loop playsinline><source src="assets/top-banner/mo04.mp4" type="video/mp4"></video>
     <div class="eyebrow">業界一のコスパ</div>
     <div class="sec-title">「高い」を、<span class="gold">私が変える。</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
     <p class="lead">電話占いは高い——。<br>その<em>常識ごと</em>、覆します。</p>
 
     <div class="priceflip">
-      <div class="price-old">¥500+<small>相場 / 1分</small></div>
+      <div class="price-old">
+        <div class="market-price">
+          <span class="yen">¥550<small>〜（税込）</small></span>
+          <span class="label">ベテラン占い師の平均相場</span>
+        </div>
+        <div class="market-price">
+          <span class="yen">¥330<small>〜（税込）</small></span>
+          <span class="label">レギュラー占い師の平均相場</span>
+        </div>
+      </div>
       <div class="arrow">→</div>
-      <div class="price-new">¥200<small>特別鑑定 / 1分</small></div>
+      <div class="price-new"><small>1分間の特別料金</small>¥200<span class="tax">（税込）</span><span class="per">/1分</span></div>
     </div>
+    <p class="price-note">ベテラン占い師の鑑定を低価格で</p>
     <p class="taglabel">低価格 <span class="x">×</span> 高クオリティ</p>
 
     <div class="glass teaser">
@@ -334,48 +412,52 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
 
   <!-- PROFILE -->
   <section class="sec reveal" style="overflow:hidden">
-    <video class="sec-vid" autoplay muted loop playsinline><source src="mo01.mp4" type="video/mp4"></video>
+    <video class="sec-vid" autoplay muted loop playsinline><source src="assets/top-banner/mo01.mp4" type="video/mp4"></video>
     <div class="eyebrow">Profile</div>
     <div class="sec-title">数字が語る、<span class="gold">実力。</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <div class="profile-icon"><img src="sample01.png" alt="HARU"></div>
+    <div class="profile-name">占い師<span>BAKU</span></div>
     <div class="stats">
       <div class="stat"><div class="num">15,000<small>人+</small></div><div class="lbl">相談実績</div></div>
       <div class="stat"><div class="num">6<small>サイト</small></div><div class="lbl">運営・監修</div></div>
       <div class="stat"><div class="num">700<small>名+</small></div><div class="lbl">占い師を育成</div></div>
     </div>
     <div class="glass teaser">
-      <p class="bio" style="margin:0">有名占いサイトに<b>専属占い師</b>として所属。デビュー直後から話題を呼び、わずか数ヶ月で人気占い師へと急成長。口コミで評判が広がり、ついには<b>同業の占い師からも相談が殺到</b>。大手占いサイトからのスカウトを受け、現在は鑑定を続けながら、自ら6つの占いサイトを運営・プロデュースしている。</p>
+      <div class="teaser-k">プロフィール</div>
+      <div class="teaser-t">占い師が頼る、占い師。</div>
+      <p class="teaser-p">有名占いサイトに専属占い師として所属。デビュー直後から話題を呼び、口コミで評判が広がり、同業の占い師からも相談が殺到。</p>
+      <button class="readmore" data-modal="profile">続きを読む<span class="ic">＋</span></button>
     </div>
   </section>
 
   <!-- CONCERNS -->
   <section class="sec reveal" style="overflow:hidden">
-    <video class="sec-vid" autoplay muted loop playsinline><source src="mo01.mp4" type="video/mp4"></video>
+    <video class="sec-vid" autoplay muted loop playsinline><source src="assets/top-banner/mo01.mp4" type="video/mp4"></video>
     <div class="eyebrow">得意な相談</div>
-    <div class="sec-title">その<span class="gold">恋の迷い</span>、<br>ひとりで抱えないで。</div>
+    <div class="sec-title">こんな悩みを<br><span class="gold">解決してきました</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
-    <div class="glass" style="padding:22px 20px">
-      <div class="concern-grid">
-        <span class="chip">片想い</span><span class="chip">復縁</span><span class="chip">複雑愛</span>
-        <span class="chip">年の差恋愛</span><span class="chip">曖昧な関係</span><span class="chip">既読スルー</span>
-        <span class="chip">アプリ恋愛</span><span class="chip">結婚の悩み</span><span class="chip">人間関係</span>
-        <span class="chip">ビジネス</span><span class="chip">LGBT</span>
-      </div>
-      <div style="text-align:center;margin-top:18px">
-        <button class="readmore" data-modal="concern" style="justify-content:center">こんな悩みを解決してきました<span class="ic">＋</span></button>
-      </div>
+    <div class="glass teaser">
+      <div class="teaser-k">Case</div>
+      <div class="teaser-t">あなたが解決したい悩みはありますか？</div>
+      <p class="teaser-p">体だけの関係、婚活の不安、既読スルー、結婚の悩み、占いジプシー、復縁、年の差恋愛。誰にも打ち明けられない悩みも、ひとりで抱えなくて大丈夫です。</p>
+      <button class="readmore" data-modal="concern">続きをみる<span class="ic">＋</span></button>
     </div>
     <div class="subhead">― 鑑定に用いる占術 ―</div>
-    <div class="arts">
-      <span class="art">霊感霊視</span><span class="art">スピリチュアルタロット</span>
-      <span class="art">カバラ数秘術</span><span class="art">ルーンストーン</span>
-      <span class="art">宇宙天体・星読み</span>
+    <div class="glass arts-card">
+      <ul class="arts">
+        <li>霊感霊視</li>
+        <li>スピリチュアルタロット</li>
+        <li>カバラ数秘術</li>
+        <li>ルーンストーン</li>
+        <li>宇宙天体/星読み</li>
+      </ul>
     </div>
   </section>
 
   <!-- MESSAGE -->
   <section class="sec msgsec reveal">
-    <video class="sec-vid" style="opacity:.22" autoplay muted loop playsinline><source src="mo03.mp4" type="video/mp4"></video>
+    <video class="sec-vid" style="opacity:.22" autoplay muted loop playsinline><source src="assets/top-banner/mo03.mp4" type="video/mp4"></video>
     <div class="inner">
       <div class="eyebrow">Message</div>
       <div class="sec-title">HARUの鑑定</div>
@@ -388,36 +470,24 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
     </div>
   </section>
 
-  <!-- COURSES -->
+  <!-- FLOW -->
   <section class="sec reveal" style="overflow:hidden">
-    <video class="sec-vid" autoplay muted loop playsinline><source src="mo02.mp4" type="video/mp4"></video>
-    <div class="eyebrow">鑑定コース</div>
-    <div class="sec-title">あなたに合う、<span class="gold">扉を。</span></div>
+    <video class="sec-vid" autoplay muted loop playsinline><source src="assets/top-banner/mo02.mp4" type="video/mp4"></video>
+    <div class="eyebrow">鑑定の流れ</div>
+    <div class="sec-title">3つのスタイルから<br><span class="gold">お選びいただけます</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="flow-lead">LINEから、あなたに合う鑑定をお選びください。</p>
 
-    <div class="glass course">
-      <div class="cnum">01</div>
-      <div class="ctag">PHONE</div>
-      <div class="cname">電話鑑定コース</div>
-      <div class="cprice"><span class="free">初回10分 無料</span>10分 ¥2,000〜</div>
-      <p class="cdesc">恋愛・復縁・相手の気持ち・今後の流れ・仕事・人間関係。今すぐ相談したい方へ。以降は10分ごとに¥2,000。</p>
+    <div class="glass flow-step">
+      <div class="step">STEP 1</div>
+      <h3>LINE公式アカウントに登録</h3>
+      <p>まずはLINE公式アカウントに登録してください。</p>
     </div>
 
-    <div class="glass course">
-      <div class="cnum">02</div>
-      <div class="ctag">FACE TO FACE</div>
-      <div class="cname">対面鑑定コース</div>
-      <div class="cprice">60分 ¥12,000</div>
-      <p class="cdesc">じっくり相談したい方、人生全体を整理したい方に。</p>
-      <div class="cmeta">都内某所 / 完全予約制</div>
-    </div>
-
-    <div class="glass course">
-      <div class="cnum">03</div>
-      <div class="ctag">SCHOOL</div>
-      <div class="cname">占い師 育成コース</div>
-      <div class="cprice"><span class="free">無料カウンセリング有</span></div>
-      <p class="cdesc">占い師として活動したい方、鑑定力を上げたい方へ。700名以上の育成実績から、実践で使える鑑定の考え方をお伝えします。</p>
+    <div class="glass flow-step">
+      <div class="step">STEP 2</div>
+      <h3>好きなコースをコメント</h3>
+      <p>3つのコースからお好きなコースをコメントしてね。LINEトーク画面の「個人鑑定」をタップすると詳細がでてきます。</p>
     </div>
   </section>
 
@@ -456,6 +526,22 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
 </div>
 
 <script>
+/* ===== site menu ===== */
+(function(){
+  var btn=document.getElementById('menuToggle');
+  var menu=document.getElementById('siteMenu');
+  if(!btn||!menu)return;
+  function setMenu(open){
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');
+    menu.setAttribute('aria-hidden',open?'false':'true');
+    menu.classList.toggle('open',open);
+    document.body.classList.toggle('menu-open',open);
+  }
+  btn.addEventListener('click',function(){setMenu(btn.getAttribute('aria-expanded')!=='true');});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+})();
+
 /* ===== starfield ===== */
 (function(){
   const c=document.getElementById('stars'),x=c.getContext('2d');
@@ -492,20 +578,28 @@ const DATA={
     <p>かつて1分500円以上で鑑定していた私が、今回の特別鑑定では、わずか<strong>1分200円</strong>。デビューしたての占い師よりも低い価格で、業界トップクラスの鑑定をお届けします。</p>
     <div class="big">安いだけ、じゃない。</div>
     <p>経験・実績・鑑定力のすべてを兼ね備えた、本物のコスパ。はっきり言います——電話占い業界の概念を、変えます。</p>`},
-  concern:{k:'Case',t:'こんなお悩みを\n解決してきました',html:`
+  profile:{k:'プロフィール',t:'占い師が頼る、占い師。',html:`
+    <p>有名占いサイトに<strong>専属占い師</strong>として所属。デビュー直後から話題を呼び、わずか数ヶ月で人気占い師へと急成長。</p>
+    <p>口コミで評判が広がり、ついには<strong>同業の占い師からも相談が殺到</strong>。大手占いサイトからのスカウトを受け、現在は鑑定を続けながら、自ら6つの占いサイトを運営・プロデュースしている。</p>
+    <p>相談実績は15,000人以上。700名以上の占い師育成にも携わり、現場で使える鑑定力と、相談者の本音を読み解く力を磨き続けてきました。</p>`},
+  concern:{k:'Case',t:'あなたが解決したい悩みはありますか？',html:`
     <ul class="concern-list">
-      <li>片想いの彼と、なかなか距離が縮まらない…</li>
-      <li>別れを告げられた彼と、どうしても復縁したい</li>
-      <li>彼からの返信は、いつも既読のまま進まない…</li>
-      <li>彼との年の差が、ふとした瞬間に不安になる</li>
-      <li>好きなのに、彼から「付き合えない」と言われてしまった…</li>
-      <li>アプリで出会った彼が、本気なのか遊びなのか分からない…</li>
-      <li>彼が、なかなか結婚を考えてくれない</li>
-      <li>大切にされていないのに、ひとりが怖くて離れられない</li>
-      <li>婚活をがんばっても、ご縁に恵まれない…</li>
-      <li>占いを受けても受けても、現実が変わらない…</li>
+      <li>体だけの関係の彼に「付き合えない」と言われて、心が苦しい…</li>
+      <li>婚活を頑張ってもなかなかご縁に恵まれず、「このまま一生ひとりなのかな」と不安になる…</li>
+      <li>好きな人とのやり取りが、既読スルーから一歩も進まない…</li>
+      <li>彼氏がなかなか結婚を考えてくれなくて、焦ってしまう…</li>
+      <li>たくさんの占いにお金をかけてきたけれど、望みが叶わず「占いジプシー」になってしまっている…</li>
+      <li>片想いの彼との距離が、どうしても縮まらない…</li>
+      <li>大切にされていないと感じるのに、ひとりになるのが怖くて別れられない…</li>
+      <li>マッチングアプリで出会った彼が、遊びなのか本気なのか見極められない…</li>
+      <li>好きな彼とは年の差があって、この先のことを考えると不安でいっぱいになってしまう…</li>
+      <li>誰にも打ち明けられず、ひとりで悩みを抱え込んでしまっている…</li>
+      <li>大好きだった彼に別れを告げられて、それでも諦めきれない。もう一度やり直したい…</li>
+      <li>恋人とケンカが絶えなくて、穏やかな関係が築けない…</li>
+      <li>ほかの占い師さんに厳しい結果を告げられたり、相談しても何も解決しなかったりして、心が折れそう…</li>
+      <li>出会いを求めてアプリや合コンに通っても、なかなか実を結ばない…</li>
     </ul>
-    <p style="margin-top:18px">相談の理由は、人それぞれ。でも、ひとりで抱えなくていい。<strong>HARUと一緒に、整理しませんか。</strong></p>`},
+    <p style="margin-top:18px">相談の理由は、人それぞれ。でも、ひとりで抱えなくていい。<strong>BAKUと一緒に、整理しませんか。</strong></p>`},
   message:{k:'Message',t:'HARUの鑑定',html:`
     <p>結果を伝えて終わり、にはしません。「じゃあ、どうすればいい？」——<strong>そこまで答えるのが、HARUの鑑定です。</strong></p>
     <p>相手の気持ち、今の状況、未来の流れ、次の一手。そのすべてを整理し、根本にある“考え方・見方・選び方”ごと、一緒に入れ替えていきます。</p>
@@ -523,15 +617,29 @@ modal.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',(
 }));
 // hero video playlist
 (function(){
-  var vids=['mo01.mp4','mo02.mp4','mo03.mp4','mo04.mp4'];
-  var idx=0;
+  var vids=[
+    'assets/top-banner/mo01.mp4',
+    'assets/top-banner/mo02.mp4',
+    'assets/top-banner/mo03.mp4',
+    'assets/top-banner/mo04.mp4'
+  ];
+  var idx=Math.floor(Math.random()*vids.length);
   var v=document.getElementById('heroVid');
   if(!v)return;
-  v.addEventListener('ended',function(){
-    idx=(idx+1)%vids.length;
+  function playHeroVideo(nextIdx){
+    idx=nextIdx;
     v.src=vids[idx];
     v.load();
-    v.play();
+    var p=v.play();
+    if(p&&p.catch)p.catch(function(){});
+  }
+  playHeroVideo(idx);
+  v.addEventListener('ended',function(){
+    var next=idx;
+    if(vids.length>1){
+      while(next===idx)next=Math.floor(Math.random()*vids.length);
+    }
+    playHeroVideo(next);
   });
 })();</script>
 </body>
