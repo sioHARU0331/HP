@@ -69,15 +69,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--moon);outline-offse
 .site-logo{font-family:var(--latin);font-weight:500;font-size:17px;letter-spacing:.08em;
   color:var(--moon);text-shadow:0 0 18px rgba(211,232,234,.3);white-space:nowrap;
   max-width:calc(100% - 130px);overflow:hidden;text-overflow:clip;margin-left:0}
-.snd{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:40px;height:40px;
-  border:1px solid var(--line);border-radius:50%;background:rgba(8,24,30,.5);
-  color:var(--moon);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
-.snd:hover{border-color:rgba(207,230,232,.4)}
-.snd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.snd .muted-x{opacity:0}
-.snd.muted{color:var(--silver-d)}
-.snd.muted .wave{opacity:0}
-.snd.muted .muted-x{opacity:1}
+.snd{position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  border:0;background:transparent;cursor:pointer;padding:0;
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+.snd-label{font-family:var(--serif);font-size:8.5px;letter-spacing:.1em;color:var(--moon);
+  white-space:nowrap;text-shadow:0 1px 6px rgba(2,5,8,.9)}
+.snd-switch{position:relative;width:48px;height:21px;border-radius:21px;
+  border:1px solid var(--line-gold);background:rgba(8,24,30,.6);transition:.25s}
+.snd-knob{position:absolute;top:50%;left:2px;width:15px;height:15px;border-radius:50%;
+  background:var(--silver);transform:translateY(-50%);transition:.25s;box-shadow:0 1px 4px rgba(0,0,0,.45)}
+.snd-state{position:absolute;top:50%;transform:translateY(-50%);right:6px;
+  font-family:var(--latin);font-size:9px;font-weight:600;letter-spacing:.04em;color:var(--silver);transition:.2s}
+.snd.on .snd-switch{background:linear-gradient(180deg,var(--gold-hi),var(--gold));border-color:var(--gold)}
+.snd.on .snd-knob{left:29px;background:var(--abyss)}
+.snd.on .snd-state{right:auto;left:8px;color:var(--abyss)}
 .menu-panel{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:115;width:100%;max-width:480px;
   height:calc(100dvh - 64px);background:rgba(4,10,14,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   opacity:0;pointer-events:none;transition:opacity .25s}
@@ -319,8 +324,9 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 <header class="site-header">
   <button class="menu-toggle" id="menuToggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false"><span></span></button>
   <div class="site-logo">BAKU'S SPIRITUAL SALON</div>
-  <button class="snd" id="snd" type="button" aria-label="水の音を切り替え" aria-pressed="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16 9c1.5 1.5 1.5 4.5 0 6"/><path class="wave" d="M18.5 6.5c3 3 3 8 0 11"/><path class="muted-x" d="M16 9l5 6M21 9l-5 6"/></svg>
+  <button class="snd" id="snd" type="button" aria-label="癒しスイッチ（水の音）" aria-pressed="false">
+    <span class="snd-label">癒しスイッチ</span>
+    <span class="snd-switch" aria-hidden="true"><span class="snd-knob"></span><span class="snd-state">OFF</span></span>
   </button>
 </header>
 
@@ -647,9 +653,9 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
     });
   });
   const cursor=[0,0,0];
-  let muted=false;
+  let soundOn=false;                 // 癒しスイッチ: デフォルトOFF（無音）
   function plip(vol){
-    if(muted)return;
+    if(!soundOn)return;
     const i=(Math.random()*pools.length)|0;
     const a=pools[i][cursor[i]++%POOL];
     try{ if(a.readyState>0)a.currentTime=0; }catch(e){}
@@ -658,11 +664,14 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   }
 
   const sndBtn=document.getElementById('snd');
+  const sndState=sndBtn.querySelector('.snd-state');
   sndBtn.addEventListener('click',function(e){
     e.stopPropagation();
-    muted=!muted;
-    sndBtn.classList.toggle('muted',muted);
-    sndBtn.setAttribute('aria-pressed',muted?'true':'false');
+    soundOn=!soundOn;
+    sndBtn.classList.toggle('on',soundOn);
+    sndBtn.setAttribute('aria-pressed',soundOn?'true':'false');
+    if(sndState)sndState.textContent=soundOn?'ON':'OFF';
+    if(soundOn)plip(.6);             // ON切替時に一度ポチャンと鳴らす
   });
 
   let lastAuto=0;
