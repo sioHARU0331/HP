@@ -315,6 +315,21 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 .profile-sec>*:not(.cospa-stage){position:relative;z-index:1}
 .vidsec{position:relative;overflow:visible}
 .vidsec>*:not(.cospa-stage){position:relative;z-index:1}
+
+/* ===== voices / 口コミ ===== */
+.voice-card{padding:22px 20px;text-align:left}
+.voice-tag{display:inline-block;font-family:var(--latin);font-size:12px;letter-spacing:.14em;
+  color:var(--abyss);background:linear-gradient(180deg,var(--gold-hi),var(--gold));
+  border-radius:20px;padding:2px 14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(201,176,121,.3)}
+.voice-p{font-size:13.5px;color:var(--moon);line-height:1.95;letter-spacing:.04em}
+.voice-offer{margin-top:20px;text-align:center;font-family:var(--serif);font-size:15px;font-weight:600;
+  line-height:1.8;letter-spacing:.05em;color:var(--gold-hi);
+  border:1px solid var(--line-gold);border-radius:14px;padding:18px 18px;
+  background:rgba(201,176,121,.08);text-shadow:0 2px 14px rgba(2,5,8,.9)}
+.voice-offer b{color:#fff;font-size:18px}
+.voice-item{border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
+.voice-item:first-child{border-top:0;padding-top:0;margin-top:0}
+.voice-item p{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -336,7 +351,7 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
     <li><a href="#top">ホーム</a></li>
     <li><a href="reading.html">鑑定のご案内</a></li>
     <li><a href="profile.html">profile</a></li>
-    <li><a href="voices.html">お客様の声</a></li>
+    <li><a href="#voices">お客様の声</a></li>
     <li><a href="line.html">お問い合わせ</a></li>
   </ul>
 </nav>
@@ -488,6 +503,28 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
         <button class="readmore" data-modal="message">想いを読む<span class="ic">＋</span></button>
       </div>
     </div>
+  </section>
+
+  <!-- VOICES / 口コミ -->
+  <section class="sec vidsec reveal" id="voices">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="poster09.jpg" autoplay muted loop playsinline preload="auto">
+        <source src="mo09.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">口コミ</div>
+    <div class="sec-title">感謝や<span class="gold">喜びの声</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="flow-lead">ほんとうに、ありがとうございます！</p>
+
+    <div class="glass voice-card">
+      <span class="voice-tag">A</span>
+      <p class="voice-p">先生、いつもありがとうございます！<br>先生と出会って、大げさでもなんでもなく人生が一変しました！<br><br>もちろん、いい方向に！<br><br>深夜とか営業時間以外の突然の依頼でも対応してくれて本当に助かってます！<br><br>先生大好き！</p>
+      <button class="readmore" data-modal="voices">続きを見る<span class="ic">＋</span></button>
+    </div>
+
+    <div class="voice-offer">口コミ・レビューがDMまで掲載されたら<br><b>5分間サービス！！</b></div>
   </section>
 
   <!-- FLOW -->
@@ -743,7 +780,20 @@ const DATA={
     <p>結果を伝えて終わり、にはしません。「じゃあ、どうすればいい？」——<strong>そこまで答えるのが、HARUの鑑定です。</strong></p>
     <p>相手の気持ち、今の状況、未来の流れ、次の一手。そのすべてを整理し、根本にある“考え方・見方・選び方”ごと、一緒に入れ替えていきます。</p>
     <p>一時しのぎで心を楽にするだけではなく、<strong>根本から整える</strong>鑑定を。</p>
-    <p>そして——男性の本音は、男性占い師だからこそ視える。言葉にしない想い、行動の裏に隠れた本心。彼の中で今、何が起きているのか。それを読み解き、あなたが次にどう動けばいいかまで、導きます。</p>`}
+    <p>そして——男性の本音は、男性占い師だからこそ視える。言葉にしない想い、行動の裏に隠れた本心。彼の中で今、何が起きているのか。それを読み解き、あなたが次にどう動けばいいかまで、導きます。</p>`},
+  voices:{k:'口コミ',t:'お客様の声',html:`
+    <div class="voice-item"><span class="voice-tag">A</span>
+      <p>先生、いつもありがとうございます！先生と出会って、大げさでもなんでもなく人生が一変しました！もちろん、いい方向に！深夜とか営業時間以外の突然の依頼でも対応してくれて本当に助かってます！先生大好き！</p></div>
+    <div class="voice-item"><span class="voice-tag">B</span>
+      <p>占いジプシーでした、、、多いときは月に10万以上つかっていましたが、先生と出会ってからとにかく安い！そして当たる！コスパ良すぎ！！本当にありがとうございます。はじめて鑑定したときに、無料なのにしっかりした鑑定書をいただき「この人だ！」と思い、それからもうずーっと使ってます。</p></div>
+    <div class="voice-item"><span class="voice-tag">C</span>
+      <p>職場で少し苦手でどうしていいか分からずに相談しました。苦手な人をどうにかしようとするのではなく、その方に対する気持ちが軽くなる方法を教えて頂き、その通りにした途端気持ちが軽くなり普通に接することができるようになりました。私はなるべく関わらないようにするしかないと言われると思っていたのですが、先生は私の奥底の願望を読み取って下さり、私の気持ちが明るくなるように導いてくれます。先生のアドバイスに素直に従うと、いつも良い方向に進みます。いつも、ありがとうございます！</p></div>
+    <div class="voice-item"><span class="voice-tag">D</span>
+      <p>ありがとうございました。本当はどこかで諦めるきっかけが欲しかったのかもしれません。優しく背中を押してくださりありがとうございました。</p></div>
+    <div class="voice-item"><span class="voice-tag">E</span>
+      <p>昨夜は、初めて鑑定して頂き、ありがとうございました。今の仕事と今後の適職の相談をさせて頂きました。私の拙い話し方でも、瞬時に状況を読み取って下さり、的確なアドバイスをして下さって、一言一言が腑に落ちました。しかも、まだ話してないことを言われた時には、ただ驚くばかりでした。鑑定中のヒーリングで、心身ともに癒され、今までの負の連鎖が解かれていくようでした。時間ギリギリにも関わらず、丁寧に鑑定して頂き、本当にありがとうございます。また、道に迷ったら先生に鑑定して頂きたいと思います。出会えた御縁に感謝申し上げます。</p></div>
+    <div class="voice-item"><span class="voice-tag">F</span>
+      <p>3回目でした。新しい出会いがあり、どんなご縁かみていただきました。毎回サクサクみてくださり、アドバイスが充実していて、何より安心安定感が抜群です。受け止めてくださりながら、こうしていったほうがいいという事もお知らせくださいますし、悩んだら先生に観てもらいたいといつも思います。聞いた事にもわかりやすくすぐ回答いただけました。そして、アフターメールをいつも親切丁寧に下さり、配慮も素敵だなあとうれしく思います。またお願いすると思います。</p></div>`}
 };
 const modal=document.getElementById('modal'),mk=document.getElementById('mk'),mt=document.getElementById('mt'),mb=document.getElementById('mb');
 document.querySelectorAll('[data-modal]').forEach(b=>b.addEventListener('click',()=>{
