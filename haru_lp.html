@@ -245,6 +245,23 @@ body.menu-open{overflow:hidden}
 .flow-step .step{font-family:var(--latin);font-size:12px;letter-spacing:.24em;color:var(--gold);margin-bottom:8px}
 .flow-step h3{font-family:var(--serif);font-size:19px;color:var(--gold-hi);letter-spacing:.08em;margin-bottom:10px}
 .flow-step p{font-size:13px;color:var(--muted);line-height:1.9}
+.flow-group{font-family:var(--serif);font-size:16px;letter-spacing:.14em;color:var(--gold-hi);
+  text-align:center;margin:34px 0 16px;display:flex;align-items:center;justify-content:center;gap:12px}
+.flow-group::before,.flow-group::after{content:"";width:24px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.flow-group .tag{font-family:var(--latin);font-size:10px;letter-spacing:.2em;color:var(--gold);
+  border:1px solid var(--line);border-radius:20px;padding:3px 11px;letter-spacing:.16em}
+.flow-step h3 .free{display:inline-block;font-family:var(--latin);font-size:10.5px;letter-spacing:.14em;
+  color:#0a0a13;background:var(--gold-hi);border-radius:20px;padding:2px 9px;margin-left:8px;vertical-align:middle}
+.flow-say{margin-top:12px;padding:10px 14px;border-left:2px solid var(--gold-deep);
+  background:rgba(201,169,106,.07);border-radius:0 8px 8px 0;font-size:12.5px;color:#e4dccb;line-height:1.85}
+.flow-say b{color:var(--gold-hi);font-weight:600}
+.flow-price{margin-top:14px;padding-top:13px;border-top:1px dashed var(--line);
+  display:flex;align-items:baseline;justify-content:center;gap:9px;font-family:var(--serif)}
+.flow-price .p-lbl{font-size:12px;letter-spacing:.14em;color:var(--muted)}
+.flow-price .p-num{font-family:var(--latin);font-size:23px;color:var(--gold-hi);letter-spacing:.03em}
+.flow-price .p-num small{font-size:13px;margin-left:1px}
+.flow-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:8px;line-height:1.8}
 
 /* ===== message ===== */
 .msgsec{position:relative;overflow:hidden}
@@ -474,20 +491,36 @@ footer .note{font-size:10px;color:#5d5a52;line-height:1.9;letter-spacing:.04em}
   <section class="sec reveal" style="overflow:hidden">
     <video class="sec-vid" autoplay muted loop playsinline><source src="assets/top-banner/mo02.mp4" type="video/mp4"></video>
     <div class="eyebrow">鑑定の流れ</div>
-    <div class="sec-title">3つのスタイルから<br><span class="gold">お選びいただけます</span></div>
+    <div class="sec-title">鑑定までの<br><span class="gold">かんたんな流れ</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
-    <p class="flow-lead">LINEから、あなたに合う鑑定をお選びください。</p>
+    <p class="flow-lead">やり取りはLINEひとつ。<br>はじめての方は、無料カウンセリングから。</p>
+
+    <!-- はじめての方 -->
+    <div class="flow-group"><span class="tag">FIRST</span>はじめての方</div>
 
     <div class="glass flow-step">
       <div class="step">STEP 1</div>
-      <h3>LINE公式アカウントに登録</h3>
-      <p>まずはLINE公式アカウントに登録してください。</p>
+      <h3>無料カウンセリング<span class="free">初回無料 / 約10分</span></h3>
+      <p>LINEを登録したら、下のひとことを送ってください。初回鑑定の日時を一緒に決めましょう。約10分、いまの状況をお聞かせください。</p>
+      <div class="flow-say">LINEで送る言葉<br><b>「はじめての鑑定です。」</b></div>
     </div>
 
     <div class="glass flow-step">
       <div class="step">STEP 2</div>
-      <h3>好きなコースをコメント</h3>
-      <p>3つのコースからお好きなコースをコメントしてね。LINEトーク画面の「個人鑑定」をタップすると詳細がでてきます。</p>
+      <h3>続けるかを、あなたが決める</h3>
+      <p>10分のカウンセリングが終わったらお声がけします。そのまま占いを続けるか、ここでやめるかは自由。無理な勧誘はしません。</p>
+      <div class="flow-price"><span class="p-lbl">鑑定料</span><span class="p-num">10分 ￥2,000<small>〜</small></span></div>
+      <p class="flow-note">10分単位で購入いただけます。</p>
+    </div>
+
+    <!-- 2回目以降の方 -->
+    <div class="flow-group"><span class="tag">AGAIN</span>2回目以降の方</div>
+
+    <div class="glass flow-step">
+      <div class="step">STEP 1</div>
+      <h3>LINEで希望の時間を送るだけ</h3>
+      <p>次からは登録もカウンセリングも不要。ご希望の日時を送るだけでOKです。当日でも、先の予定でも受付中。お気軽にどうぞ☺</p>
+      <div class="flow-say">送り方の例<br><b>「今日の20時ごろ、鑑定希望です」</b><br><b>「明日の21時ごろ、お願いします」</b></div>
     </div>
   </section>
 
