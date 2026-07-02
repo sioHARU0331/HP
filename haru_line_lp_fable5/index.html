@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>占い師 BAKU｜恋愛・復縁・彼の気持ち｜LINE初回10分無料鑑定</title>
+<meta name="description" content="恋愛・復縁・彼の気持ちに強い占い師BAKU。ひとりで悩む前に、まずはLINEで初回10分の無料鑑定を。登録後は一言送るだけ。相談実績15,000人以上。">
+<meta name="theme-color" content="#04080c">
+<meta property="og:title" content="占い師 BAKU｜恋愛・復縁の月あかり鑑定">
+<meta property="og:description" content="彼の気持ちがわからない夜に。まずはLINEで初回10分、無料で相談できます。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<canvas id="water"></canvas>
+<div class="vignette"></div>
+
+<header class="site-header">
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false"><span></span></button>
+  <div class="site-logo">BAKU'S MOONLIGHT SALON</div>
+  <button class="snd" id="snd" type="button" aria-label="癒しスイッチ（水の音）" aria-pressed="false">
+    <span class="snd-label">癒しスイッチ</span>
+    <span class="snd-switch" aria-hidden="true"><span class="snd-knob"></span><span class="snd-state">OFF</span></span>
+  </button>
+</header>
+
+<nav class="menu-panel" id="siteMenu" aria-hidden="true">
+  <div class="menu-title">MENU</div>
+  <ul class="menu-list">
+    <li><a href="#top">ホーム</a></li>
+    <li><a href="#worry">こんなお悩み</a></li>
+    <li><a href="#offer">初回10分無料について</a></li>
+    <li><a href="#voices">お客様の声</a></li>
+    <li><a href="#profile">占い師プロフィール</a></li>
+    <li><a href="#flow">鑑定の流れ</a></li>
+  </ul>
+  <!-- LINE登録リンク①（メニュー内）: 本番のLINE公式URLに差し替え -->
+  <a class="btn menu-cta" href="#" data-line>
+    <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+    <span class="txt">LINEで無料鑑定を受ける</span>
+  </a>
+</nav>
+
+<div class="shell">
+
+  <!-- ============ ① HERO / ファーストビュー ============ -->
+  <header class="hero" id="top">
+    <div class="hero-top">
+      <span class="hero-badge"><span class="dot"></span>LINE登録で 初回10分 無料鑑定</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-kicker">恋愛・復縁・彼の気持ちに強い</div>
+      <div class="hero-name">BAKU</div>
+      <div class="hero-role">MOONLIGHT FORTUNE — 月あかりの鑑定</div>
+      <p class="hero-copy">彼の気持ちが、わからない夜に。<span class="sm"><em>ひとりで悩む前に、まず10分だけ話しませんか。</em></span></p>
+
+      <ul class="hero-values">
+        <li><span class="ck">✓</span><span><b>初回10分は無料</b>。登録して一言送るだけ</span></li>
+        <li><span class="ck">✓</span><span>恋愛・復縁・<b>相手の気持ち</b>が得意分野</span></li>
+        <li><span class="ck">✓</span><span>無理な勧誘なし。<b>話せば、心が整理できる</b></span></li>
+      </ul>
+
+      <div class="hero-btnwrap">
+        <!-- LINE登録リンク②（ヒーロー）: 本番のLINE公式URLに差し替え -->
+        <a class="btn" href="#" data-line>
+          <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+          <span class="free">無料</span><span class="txt">LINEで無料鑑定を受ける</span>
+        </a>
+        <p class="btn-sub">＼ 登録は30秒・しつこい連絡はしません ／</p>
+      </div>
+    </div>
+    <div class="hero-hint">S C R O L L<i></i>下へ</div>
+  </header>
+
+  <!-- ============ ② 悩み共感 ============ -->
+  <section class="sec vidsec reveal" id="worry">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster08.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo08.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">こんな夜に</div>
+    <div class="sec-title">その気持ち、<br><span class="gold">ひとりで抱えないで。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="worry-lead">恋の悩みは、誰にも言えないほど<br>ひとりで大きくなっていくもの。</p>
+
+    <ul class="worry-list">
+      <li>彼の気持ちが、わからない</li>
+      <li>既読スルーの理由が知りたい</li>
+      <li>復縁できる可能性を知りたい</li>
+      <li>本命なのか、遊びなのか</li>
+      <li>都合のいい関係から抜け出したい</li>
+      <li>この恋を、続けていいのか迷う</li>
+      <li>夜になると、不安になってしまう</li>
+      <li>誰にも相談できず、抱え込んでいる</li>
+    </ul>
+
+    <div class="worry-soft">
+      <b>大丈夫。話せば、ちゃんと整理できます。</b>
+      <span>不安をあおる占いはしません。まず10分、いまの気持ちを言葉にするだけで、驚くほど心が軽くなります。</span>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク③（悩み共感後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="txt">今の悩みをLINEで相談する</span>
+      </a>
+      <p class="btn-sub">＼ どんな小さな悩みでも大丈夫 ／</p>
+    </div>
+  </section>
+
+  <!-- ============ ③ 初回10分無料の案内 ============ -->
+  <section class="sec offer reveal" id="offer">
+    <div class="eyebrow">はじめての方へ</div>
+    <div class="sec-title">まずは、<span class="gold">無料の10分から。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <div class="glass offer-card">
+      <div class="offer-tag">FIRST COUNSELING — 初回カウンセリング</div>
+      <div class="offer-big">初回<em>10</em>分 無料</div>
+      <p class="offer-sub">「占いって、なんだか勇気がいる」——そんなあなたのために。<br>まずは無料の10分で、いまの気持ちをそのまま話してください。</p>
+
+      <ol class="offer-steps">
+        <li><span class="n">1</span><span>LINEを<b>友だち追加</b>する（登録は30秒）</span></li>
+        <li><span class="n">2</span><span>「<b>はじめての鑑定です</b>」と一言だけ送る</span></li>
+        <li><span class="n">3</span><span>日時を決めて、<b>10分だけ</b>お話しします</span></li>
+      </ol>
+
+      <p class="offer-reassure"><b>続けるかどうかは、あなたが決めて大丈夫。</b><br>無理な勧誘はしません。合わないと思えば、そこで終わってOKです。</p>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク④（初回無料の案内）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">初回10分無料で相談する</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ④ 口コミ ============ -->
+  <section class="sec vidsec reveal" id="voices">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster09.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo09.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">お客様の声</div>
+    <div class="sec-title">相談してよかった、<br><span class="gold">という声。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="lead-c">同じように悩んでいた方が、<br>いま <b>笑顔で</b> 送ってくれた言葉です。</p>
+
+    <div class="voice-grid">
+      <div class="glass voice-card">
+        <div class="voice-head">
+          <span class="voice-badge">A</span>
+          <span class="voice-title">本当に相談してよかったと思えた声</span>
+        </div>
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-p">彼のことで頭がいっぱいで、誰にも言えずにいた気持ちを、そのまま受け止めてもらえて。相談してよかった、と心から思えました。</p>
+        <button class="readmore" data-modal="voiceA">この声を読む<span class="ic">＋</span></button>
+      </div>
+
+      <div class="glass voice-card">
+        <div class="voice-head">
+          <span class="voice-badge">B</span>
+          <span class="voice-title">不安だった気持ちが軽くなった声</span>
+        </div>
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-p">夜になると不安で眠れない日が続いていました。無料の10分だけ、と勇気を出したら、話し終わるころには心がふっと軽くなっていて。</p>
+        <button class="readmore" data-modal="voiceB">この声を読む<span class="ic">＋</span></button>
+      </div>
+
+      <div class="glass voice-card">
+        <div class="voice-head">
+          <span class="voice-badge">C</span>
+          <span class="voice-title">また相談したいと思えた理由</span>
+        </div>
+        <div class="voice-stars">★★★★★</div>
+        <p class="voice-p">料金が良心的なのに、よく当たる。無理な勧誘もなく、こちらのペースを大事にしてくれる。だから迷ったら、また相談したくなるんです。</p>
+        <button class="readmore" data-modal="voiceC">この声を読む<span class="ic">＋</span></button>
+      </div>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク⑤（口コミ後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="txt">無料で相手の気持ちを占ってもらう</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ⑤ 占い師プロフィール ============ -->
+  <section class="sec vidsec reveal" id="profile">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster07.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo07.mp4" type="video/mp4">
+        <source src="assets/mo07.webm" type="video/webm">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">Profile</div>
+    <div class="sec-title">恋の悩みに、<br><span class="gold">いちばん寄り添う人。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <div class="profile-photo"><img src="assets/sample01.png" alt="占い師 BAKU" loading="lazy"></div>
+    <div class="profile-name">占い師<span>BAKU</span></div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">15,000<small>人+</small></div><div class="lbl">相談実績</div></div>
+      <div class="stat"><div class="num">運営<small></small></div><div class="lbl">占いサイト<br>運営・監修</div></div>
+      <div class="stat"><div class="num">700<small>名+</small></div><div class="lbl">占い師を育成</div></div>
+    </div>
+
+    <div class="glass teaser">
+      <div class="teaser-k">プロフィール</div>
+      <div class="teaser-t">占い師が頼る、占い師。</div>
+      <p class="teaser-p">有名占いサイトに専属占い師として所属。口コミで評判が広がり、やがて同業の占い師からも相談が寄せられるように。恋する女性の本音を読み解く力を磨いてきました。</p>
+      <button class="readmore" data-modal="profile">プロフィールを読む<span class="ic">＋</span></button>
+    </div>
+  </section>
+
+  <!-- ============ ⑥ 得意な相談 ============ -->
+  <section class="sec vidsec reveal" id="specialty">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster06.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo06.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">得意な相談</div>
+    <div class="sec-title">こんな恋を、<br><span class="gold">たくさん見てきました。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <div class="spec-grid">
+      <div class="glass spec">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#e7d6a6" stroke-width="1.4"><path d="M12 20.5S3.5 15 3.5 8.8A4.3 4.3 0 0112 6a4.3 4.3 0 018.5 2.8C20.5 15 12 20.5 12 20.5z"/></svg></span>
+        <div><h3>彼の気持ち・片想い</h3><p>言葉にしない本音、既読スルーの理由。彼の中でいま何が起きているのかを読み解きます。</p></div>
+      </div>
+      <div class="glass spec">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#e7d6a6" stroke-width="1.4"><path d="M4 12a8 8 0 0114-5"/><path d="M20 12a8 8 0 01-14 5"/><path d="M18 4v3.5h-3.5M6 20v-3.5H9.5"/></svg></span>
+        <div><h3>復縁・やり直したい恋</h3><p>もう一度やり直せる可能性、そのために今できること。諦めきれない想いに寄り添います。</p></div>
+      </div>
+      <div class="glass spec">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#e7d6a6" stroke-width="1.4"><path d="M12 3l2.4 5 5.6.6-4.2 3.8 1.2 5.6L12 15.9 6.8 18l1.2-5.6L3.8 8.6 9.4 8z"/></svg></span>
+        <div><h3>本命か遊びか・複雑な恋</h3><p>都合のいい関係、年の差、既婚者との恋。誰にも言えない恋も、否定せずにお聞きします。</p></div>
+      </div>
+      <div class="glass spec">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#e7d6a6" stroke-width="1.4"><path d="M12 21C7 17.5 4 14 4 9.5A4.5 4.5 0 0112 7a4.5 4.5 0 018 2.5C20 14 17 17.5 12 21z" opacity=".4"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div><h3>結婚・将来・出会い</h3><p>この恋を続けていいのか。結婚への不安、新しい出会い。これからの流れを一緒に描きます。</p></div>
+      </div>
+    </div>
+
+    <div class="subhead">― 鑑定に用いる占術 ―</div>
+    <div class="glass arts-card">
+      <ul class="arts">
+        <li>霊感霊視</li>
+        <li>スピリチュアルタロット</li>
+        <li>カバラ数秘術</li>
+        <li>ルーンストーン</li>
+        <li>宇宙天体／星読み</li>
+      </ul>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク⑥（得意な相談後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn ghost" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="txt">この悩み、相談できそうか聞いてみる</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ⑦ 鑑定の流れ ============ -->
+  <section class="sec vidsec reveal" id="flow">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster05.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo05.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">鑑定の流れ</div>
+    <div class="sec-title">やり取りは、<br><span class="gold">LINEひとつ。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="lead-c">むずかしい手続きはありません。<br>はじめての方は、<b>無料カウンセリング</b>から。</p>
+
+    <div class="flow-group"><span class="tag">FIRST</span>はじめての方</div>
+
+    <div class="glass flow-step">
+      <div class="step">STEP 1</div>
+      <h3>無料カウンセリング<span class="free">初回無料 / 約10分</span></h3>
+      <p>LINEを登録したら、下の一言を送ってください。初回鑑定の日時を一緒に決めましょう。約10分、いまの状況をお聞かせください。</p>
+      <div class="flow-say">LINEで送る言葉<br><b>「はじめての鑑定です」</b></div>
+    </div>
+
+    <div class="glass flow-step">
+      <div class="step">STEP 2</div>
+      <h3>続けるかを、あなたが決める</h3>
+      <p>10分のカウンセリングが終わったら、お声がけします。そのまま続けるか、ここで終えるかは自由。無理な勧誘はしません。</p>
+      <div class="flow-price"><span class="p-lbl">鑑定料</span><span class="p-num">10分 ￥2,000<small>〜</small></span></div>
+      <p class="flow-note">10分単位でご利用いただけます。</p>
+    </div>
+
+    <div class="flow-group"><span class="tag">AGAIN</span>2回目以降の方</div>
+
+    <div class="glass flow-step">
+      <div class="step">STEP 1</div>
+      <h3>希望の時間を送るだけ</h3>
+      <p>次からは登録もカウンセリングも不要。ご希望の日時を送るだけでOKです。当日でも、先の予定でも受付中。お気軽にどうぞ。</p>
+      <div class="flow-say">送り方の例<br><b>「今日の20時ごろ、鑑定希望です」</b><br><b>「明日の21時ごろ、お願いします」</b></div>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク⑦（鑑定の流れ後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="txt">まずはLINEで10分だけ相談する</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ⑧ 料金・コスパ ============ -->
+  <section class="sec feature vidsec reveal" id="price">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo01.mp4" type="video/mp4">
+        <source src="assets/mo01.webm" type="video/webm">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">料金について</div>
+    <div class="sec-title">続けやすい、<span class="gold">良心価格。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="lead">初回が無料なだけじゃない。<br><em>続けるときも、安心の価格</em>です。</p>
+
+    <div class="priceflip">
+      <div class="price-old">
+        <div class="market-price">
+          <span class="yen">¥550<small>〜（税込）</small></span>
+          <span class="label">ベテラン占い師の相場</span>
+        </div>
+        <div class="market-price">
+          <span class="yen">¥330<small>〜（税込）</small></span>
+          <span class="label">レギュラー占い師の相場</span>
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="price-new"><small>1分間の特別料金</small>¥200<span class="tax">（税込）</span><span class="per">/1分</span></div>
+    </div>
+    <p class="price-note">ベテランの鑑定を、続けやすい価格で。</p>
+    <p class="taglabel">低価格 <span class="x">×</span> 高クオリティ</p>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク⑧（料金後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">まずは無料の10分から始める</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ⑨ 最終CTA ============ -->
+  <section class="ctablock reveal">
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <div class="ck">まずは、無料から。</div>
+    <div class="ct">ひとりで悩み続ける<br>必要は、ありません。</div>
+    <p class="cp">彼の気持ちも、これからの恋も。<br>今の状況を話してみてください。<br>一緒に、そっと整理します。</p>
+    <div class="btn-wrap">
+      <!-- LINE登録リンク⑨（最終CTA）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">LINE登録で初回10分を体験する</span>
+      </a>
+      <p class="btn-sub">＼ 登録は30秒・一言送るだけ ／</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fname">BAKU</div>
+    <div class="fsub">MOONLIGHT FORTUNE</div>
+    <p class="note">掲載画像は制作素材です。LINE登録リンクは仮URLです。<br>Copyright © BAKU Moonlight Fortune.</p>
+  </footer>
+
+</div>
+
+<!-- STICKY CTA -->
+<div class="sticky" id="sticky">
+  <!-- LINE登録リンク⑩（追尾ボタン）: 本番のLINE公式URLに差し替え -->
+  <a class="btn" href="#" data-line>
+    <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+    <span class="free">無料</span><span class="txt">まずはLINEで10分だけ相談する</span>
+  </a>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-bd" data-close></div>
+  <div class="modal-card">
+    <div class="grip"></div>
+    <div class="modal-k" id="mk"></div>
+    <div class="modal-t" id="mt"></div>
+    <div class="modal-body" id="mb"></div>
+    <button class="modal-close" data-close>閉じる</button>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
