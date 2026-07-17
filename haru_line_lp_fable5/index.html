@@ -50,18 +50,12 @@
   <header class="hero" id="top">
     <div class="hero-top">
       <span class="hero-badge"><span class="dot"></span>LINE登録で 初回10分 無料鑑定</span>
+      <div class="hero-pricehint">初回10分無料 → その後 ¥200/分〜</div>
     </div>
     <div class="hero-content">
-      <div class="hero-kicker">恋愛・復縁・彼の気持ちに強い</div>
+      <div class="hero-photo"><img src="assets/sample01.png" alt="占い師 BAKU" fetchpriority="high"></div>
       <div class="hero-name">BAKU</div>
-      <div class="hero-role">MOONLIGHT FORTUNE — 月あかりの鑑定</div>
-      <p class="hero-copy">彼の気持ちが、わからない夜に。<span class="sm"><em>ひとりで悩む前に、まず10分だけ話しませんか。</em></span></p>
-
-      <ul class="hero-values">
-        <li><span class="ck">✓</span><span>相談実績<b>15,000人</b>。彼の本音を読み解きます</span></li>
-        <li><span class="ck">✓</span><span>恋愛・復縁・<b>相手の気持ち</b>が専門</span></li>
-        <li><span class="ck">✓</span><span><b>初回10分は無料</b>。登録して一言送るだけ</span></li>
-      </ul>
+      <p class="hero-copy">彼の気持ちが、わからない夜に。</p>
 
       <div class="hero-btnwrap">
         <!-- LINE登録リンク②（ヒーロー）: 本番のLINE公式URLに差し替え -->
@@ -70,6 +64,15 @@
           <span class="free">無料</span><span class="txt">LINEで無料鑑定を受ける</span>
         </a>
         <p class="btn-sub">＼ 登録は30秒・しつこい連絡はしません ／</p>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-kicker">恋愛・復縁・彼の気持ちに強い ／ MOONLIGHT FORTUNE</div>
+        <ul class="hero-values">
+          <li><span class="ck">✓</span><span>相談実績<b>15,000人</b></span></li>
+          <li><span class="ck">✓</span><span>恋愛・復縁・<b>相手の気持ち</b>が専門</span></li>
+          <li><span class="ck">✓</span><span><b>初回10分は無料</b></span></li>
+        </ul>
       </div>
     </div>
     <div class="hero-hint">S C R O L L<i></i>下へ</div>
@@ -126,15 +129,15 @@
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
     <p class="worry-lead">恋の悩みは、誰にも言えないほど<br>ひとりで大きくなっていくもの。</p>
 
-    <ul class="worry-list">
-      <li>彼の気持ちが、わからない</li>
-      <li>既読スルーの理由が知りたい</li>
-      <li>復縁できる可能性を知りたい</li>
-      <li>本命なのか、遊びなのか</li>
-      <li>都合のいい関係から抜け出したい</li>
-      <li>この恋を、続けていいのか迷う</li>
-      <li>夜になると、不安になってしまう</li>
-      <li>誰にも相談できず、抱え込んでいる</li>
+    <ul class="worry-list" id="worryList">
+      <li data-key="彼の気持ち">彼の気持ちが、わからない</li>
+      <li data-key="既読スルー">既読スルーの理由が知りたい</li>
+      <li data-key="復縁">復縁できる可能性を知りたい</li>
+      <li data-key="本命か遊びか">本命なのか、遊びなのか</li>
+      <li data-key="体だけの関係">都合のいい関係から抜け出したい</li>
+      <li data-key="迷い">この恋を、続けていいのか迷う</li>
+      <li data-key="不安">夜になると、不安になってしまう</li>
+      <li data-key="誰にも相談できない">誰にも相談できず、抱え込んでいる</li>
     </ul>
 
     <div class="worry-soft">
@@ -195,34 +198,25 @@
     <p class="lead-c">同じように悩んでいた方が、<br>いま <b>笑顔で</b> 送ってくれた言葉です。</p>
 
     <div class="voice-grid">
-      <div class="glass voice-card">
-        <div class="voice-head">
-          <span class="voice-badge">A</span>
-          <span class="voice-title">本当に相談してよかったと思えた声</span>
-        </div>
-        <div class="voice-stars">★★★★★</div>
-        <p class="voice-p">彼のことで頭がいっぱいで、誰にも言えずにいた気持ちを、そのまま受け止めてもらえて。相談してよかった、と心から思えました。</p>
-        <button class="readmore" data-modal="voiceA">この声を読む<span class="ic">＋</span></button>
+      <div class="glass talk">
+        <div class="talk-topic">既読スルーの相談</div>
+        <div class="talk-row them"><div class="bubble them">3日既読無視されてて、もう終わりなのかなって…</div></div>
+        <div class="talk-row me"><div class="bubble me">大丈夫、既読を止めた理由がちゃんとあります。順番に見ていきましょうね。</div></div>
+        <div class="talk-meta"><span class="voice-stars">★★★★★</span><span class="talk-who">20代・会社員・彼の気持ち相談</span></div>
       </div>
 
-      <div class="glass voice-card">
-        <div class="voice-head">
-          <span class="voice-badge">B</span>
-          <span class="voice-title">不安だった気持ちが軽くなった声</span>
-        </div>
-        <div class="voice-stars">★★★★★</div>
-        <p class="voice-p">夜になると不安で眠れない日が続いていました。無料の10分だけ、と勇気を出したら、話し終わるころには心がふっと軽くなっていて。</p>
-        <button class="readmore" data-modal="voiceB">この声を読む<span class="ic">＋</span></button>
+      <div class="glass talk">
+        <div class="talk-topic">本命か遊びかの相談</div>
+        <div class="talk-row them"><div class="bubble them">本命か遊びか、ずっとモヤモヤしてました</div></div>
+        <div class="talk-row me"><div class="bubble me">相手の中の“本音”を視てみますね。今の距離感には理由があります。</div></div>
+        <div class="talk-meta"><span class="voice-stars">★★★★★</span><span class="talk-who">20代・パート・複雑な恋の相談</span></div>
       </div>
 
-      <div class="glass voice-card">
-        <div class="voice-head">
-          <span class="voice-badge">C</span>
-          <span class="voice-title">また相談したいと思えた理由</span>
-        </div>
-        <div class="voice-stars">★★★★★</div>
-        <p class="voice-p">料金が良心的なのに、よく当たる。無理な勧誘もなく、こちらのペースを大事にしてくれる。だから迷ったら、また相談したくなるんです。</p>
-        <button class="readmore" data-modal="voiceC">この声を読む<span class="ic">＋</span></button>
+      <div class="glass talk">
+        <div class="talk-topic">復縁の相談</div>
+        <div class="talk-row them"><div class="bubble them">別れてから半年、もう一度会いたいって思ってます</div></div>
+        <div class="talk-row me"><div class="bubble me">タイミングと、あなたの動き方が鍵になりそうです。焦らず進めましょう。</div></div>
+        <div class="talk-meta"><span class="voice-stars">★★★★★</span><span class="talk-who">30代・会社員・復縁の相談</span></div>
       </div>
     </div>
 
@@ -334,6 +328,12 @@
     </div>
   </section>
 
+  <!-- ============ ⑦.5 安心の一言（料金の直前） ============ -->
+  <section class="reassure-band reveal">
+    <span class="reassure-ic" aria-hidden="true">🌙</span>
+    <p class="reassure-txt">多くの方が、無料の10分だけでも<br>「話せてよかった」と感じています。<br>続けるかどうかは、そのあとゆっくり決めてください。</p>
+  </section>
+
   <!-- ============ ⑧ 料金・コスパ ============ -->
   <section class="sec feature vidsec reveal" id="price">
     <div class="cospa-stage" aria-hidden="true">
@@ -375,7 +375,7 @@
   </section>
 
   <!-- ============ ⑨ 最終CTA ============ -->
-  <section class="ctablock reveal">
+  <section class="ctablock reveal" id="final">
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
     <div class="ck">まずは、無料から。</div>
     <div class="ct">ひとりで悩み続ける<br>必要は、ありません。</div>

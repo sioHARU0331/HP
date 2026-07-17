@@ -285,12 +285,50 @@
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-/* ===== sticky cta ===== */
+/* ===== sticky cta：表示制御＋セクション連動の文言切替 ===== */
 (function(){
   const sticky=document.getElementById('sticky');
   const hero=document.querySelector('.hero');
   if(!sticky||!hero)return;
+
+  // 追尾ボタンの表示/非表示（ヒーローを過ぎたら出す）
   new IntersectionObserver(([e])=>{sticky.classList.toggle('show',!e.isIntersecting&&e.boundingClientRect.top<0);},{threshold:0}).observe(hero);
+
+  // スクロール位置（表示中セクション）に応じて文言を切替
+  const ctaTextMap={
+    top:'LINEで無料鑑定を受ける',
+    profile:'この先生に無料で相談してみる',
+    worry:'今の悩みをLINEで相談する',
+    offer:'初回10分無料で相談する',
+    voices:'無料で相手の気持ちを占ってもらう',
+    specialty:'この悩み、相談できそうか聞いてみる',
+    flow:'まずはLINEで10分だけ相談する',
+    price:'まずは無料の10分から始める',
+    final:'LINE登録で初回10分を体験する'
+  };
+  const label=sticky.querySelector('.txt');
+  if(!label)return;
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        const t=ctaTextMap[entry.target.id];
+        if(t)label.textContent=t;
+      }
+    });
+  },{threshold:.5});
+  Object.keys(ctaTextMap).forEach((id)=>{const el=document.getElementById(id);if(el)io.observe(el);});
+})();
+
+/* ===== 悩みリストの出し分け（?utm_content= で先頭を差し替え） ===== */
+(function(){
+  const list=document.getElementById('worryList');
+  if(!list)return;
+  const featured=new URLSearchParams(location.search).get('utm_content');
+  if(!featured)return;
+  const target=list.querySelector('li[data-key="'+(window.CSS&&CSS.escape?CSS.escape(featured):featured)+'"]');
+  if(!target)return;
+  list.insertBefore(target,list.firstElementChild); // 先頭へ移動
+  target.classList.add('featured');                 // 強調（CSS側でボーダー太く）
 })();
 
 /* ===== modals ===== */
