@@ -472,13 +472,134 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 .reassure-txt{font-family:var(--serif);font-size:14px;font-weight:500;line-height:2;
   letter-spacing:.04em;color:var(--moon)}
 
+/* =========================================================
+   ⓪ 水晶トップバナー（固定メニューのすぐ下・ヒーローの上）
+   ---------------------------------------------------------
+   ■ 水晶の光の位置をずらしたいときは、下の3つの数値だけ変えてください。
+       --orb-x  … 左からの位置（％が大きいほど右へ）
+       --orb-y  … 上からの位置（％が大きいほど下へ）
+       --orb-size … 光の直径
+     画面幅ごとの値は、この下の @media の中にも同じ名前で並べています。
+   ■ --img-pos は画像のどこを画面に残すか（object-position）です。
+     水晶が切れてしまう場合は、この値を調整してください。
+   ========================================================= */
+.crystal-hero{
+  position:relative;z-index:2;
+  width:100%;
+  margin:64px 0 0;                 /* 固定ヘッダー(64px)のすぐ下 */
+  scroll-margin-top:64px;          /* メニュー「ホーム」で隠れないように */
+  /* --- スマホ（初期値） --- */
+  --orb-x:72%;
+  --orb-y:44%;
+  --orb-size:clamp(150px,46vw,260px);
+  --img-pos:68% 50%;
+  --band-h:58vh;
+  --band-min:420px;
+  --band-max:620px;
+}
+/* バナーの下に余分なすき間を作らない（.shell の上マージンを打ち消す） */
+.crystal-hero + .shell{margin-top:0}
+
+/* ★PCで「バナーだけ画面いっぱいに横長」ではなく、
+   本文と同じ480pxの幅にそろえたい場合は、次の1行のコメントを外してください。
+.crystal-hero{max-width:480px;margin-left:auto;margin-right:auto}
+*/
+
+.crystal-hero__image{
+  position:relative;overflow:hidden;isolation:isolate;
+  width:100%;
+  height:var(--band-h);
+  min-height:var(--band-min);
+  max-height:var(--band-max);
+  /* 画像の読み込み前でも高さが決まるので、表示がずれません */
+  background:radial-gradient(120% 90% at 70% 40%,#0d2733 0%,var(--abyss) 70%);
+}
+.crystal-hero__image img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;                /* 縦横比を保ったまま自然に切り抜く */
+  object-position:var(--img-pos);
+  z-index:1;
+}
+/* 下端をページの闇へ自然になじませる（境目の線を作らない） */
+.crystal-hero__image::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:22%;z-index:3;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,8,12,0),var(--abyss));
+}
+
+/* --- 水晶の上に重ねる、色が移ろう光 --------------------------------
+   画像全体ではなく、この円だけが色を変えます。
+   中央が明るく、外へ向かって透明になります。 */
+.crystal-hero__orb{
+  position:absolute;z-index:2;pointer-events:none;
+  left:var(--orb-x);top:var(--orb-y);
+  width:var(--orb-size);height:var(--orb-size);
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  mix-blend-mode:screen;           /* 水晶の透明感・模様を残したまま発光させる */
+  opacity:.62;
+  filter:blur(calc(var(--orb-size)*.06));
+  background-color:#e3bd6a;        /* この色が @keyframes でゆっくり移ろいます */
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,
+      #000 0%, rgba(0,0,0,.78) 30%, rgba(0,0,0,.34) 58%, rgba(0,0,0,0) 78%);
+          mask-image:radial-gradient(circle at 50% 50%,
+      #000 0%, rgba(0,0,0,.78) 30%, rgba(0,0,0,.34) 58%, rgba(0,0,0,0) 78%);
+  animation:crystalGlow 14s ease-in-out infinite;
+}
+/* 中心の白い芯（水晶の内側の輝き） */
+.crystal-hero__orb::before{
+  content:"";position:absolute;inset:26%;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,
+      rgba(255,255,255,.75) 0%, rgba(255,255,255,.28) 42%, rgba(255,255,255,0) 72%);
+}
+/* 金 → 赤紫 → 青 → 水色 → 緑 → 金（約14秒でゆっくり一周） */
+@keyframes crystalGlow{
+  0%   {background-color:#e3bd6a}  /* 金 */
+  20%  {background-color:#a8508f}  /* 赤紫 */
+  40%  {background-color:#3f6fd8}  /* 青 */
+  60%  {background-color:#4fc4e8}  /* 水色 */
+  80%  {background-color:#4fc98a}  /* 緑 */
+  100% {background-color:#e3bd6a}  /* 金 */
+}
+
+/* --- タブレット --- */
+@media (min-width:600px){
+  .crystal-hero{
+    --orb-x:70%;
+    --orb-y:46%;
+    --orb-size:clamp(200px,30vw,300px);
+    --img-pos:66% 50%;
+    --band-h:62vh;
+    --band-min:460px;
+    --band-max:680px;
+  }
+}
+/* --- PC --- */
+@media (min-width:1024px){
+  .crystal-hero{
+    --orb-x:68%;
+    --orb-y:47%;
+    --orb-size:clamp(240px,20vw,360px);
+    --img-pos:center 50%;
+    --band-h:70vh;
+    --band-min:500px;
+    --band-max:760px;
+  }
+  .crystal-hero__orb{opacity:.56}
+}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important}
   .reveal{opacity:1;transform:none;transition:none}
+  /* 水晶の色変化は止めて、金色で静止させます */
+  .crystal-hero__orb{background-color:#e3bd6a}
 }
 @media (max-width:360px){
   .hero-name{font-size:70px}
   .hero-photo{width:min(70vw,220px)}
   .sec{padding:38px 20px 34px}
   .offer-big em{font-size:48px}
+  .crystal-hero{--orb-size:clamp(140px,48vw,220px);--band-min:400px}
 }
