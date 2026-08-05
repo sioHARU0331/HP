@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>占い師 BAKU｜恋愛・復縁・彼の気持ち｜LINE登録で初回10分の無料電話鑑定</title>
+<meta name="description" content="恋愛・復縁・彼の気持ちに強い占い師BAKU。ひとりで悩む前に、まずはLINE登録で初回10分の無料電話鑑定を。登録後は一言送るだけ。相談実績15,000人以上。">
+<meta name="theme-color" content="#bfe7f8">
+<meta property="og:title" content="占い師 BAKU｜恋愛・復縁の月あかり鑑定">
+<meta property="og:description" content="彼の気持ちがわからない夜に。声で、話してみませんか。まずは初回10分、無料の電話で相談できます。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<canvas id="water"></canvas>
+<div class="vignette"></div>
+
+<header class="site-header">
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false"><span></span></button>
+  <div class="site-logo">BAKU'S MOONLIGHT SALON</div>
+  <button class="snd" id="snd" type="button" aria-label="癒しスイッチ（水の音）" aria-pressed="false">
+    <span class="snd-label">癒しスイッチ</span>
+    <span class="snd-switch" aria-hidden="true"><span class="snd-knob"></span><span class="snd-state">OFF</span></span>
+  </button>
+</header>
+
+<nav class="menu-panel" id="siteMenu" aria-hidden="true">
+  <div class="menu-title">MENU</div>
+  <ul class="menu-list">
+    <li><a href="#top">ホーム</a></li>
+    <li><a href="#offer">はじめての方へ（無料電話鑑定）</a></li>
+    <li><a href="#profile">占い師プロフィール・実績</a></li>
+    <li><a href="#worry">こんなお悩み</a></li>
+    <li><a href="#voices">お客様の声</a></li>
+    <li><a href="#final">無料で電話相談する</a></li>
+  </ul>
+  <!-- LINE登録リンク①（メニュー内）: 本番のLINE公式URLに差し替え -->
+  <a class="btn menu-cta" href="#" data-line>
+    <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+    <span class="txt">LINEで無料電話鑑定を受ける</span>
+  </a>
+</nav>
+
+<div class="shell">
+
+  <!-- ============ ① HERO / ファーストビュー ============ -->
+  <header class="hero" id="top">
+    <div class="hero-top">
+      <span class="hero-badge"><span class="dot"></span>LINE登録で 無料電話鑑定</span>
+      <div class="hero-pricehint">初回10分の電話鑑定は無料 → その後 ¥200/分〜</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-photo"><img src="assets/sample01.png" alt="占い師 BAKU" fetchpriority="high"></div>
+      <p class="hero-copy">彼の気持ちが、わからない夜に。<br>声で、話してみませんか。</p>
+
+      <div class="hero-btnwrap">
+        <!-- LINE登録リンク②（ヒーロー）: 本番のLINE公式URLに差し替え -->
+        <a class="btn" href="#" data-line>
+          <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+          <span class="free">無料</span><span class="txt">LINEで無料電話鑑定を受ける</span>
+        </a>
+        <p class="btn-sub">＼ 登録は30秒・しつこい連絡はしません ／</p>
+      </div>
+
+      <div class="hero-meta">
+        <div class="hero-kicker">恋愛・復縁・彼の気持ちに強い ／ MOONLIGHT FORTUNE ― 月あかりの鑑定</div>
+        <ul class="hero-values">
+          <li><span class="ck">✓</span><span>相談実績<b>15,000人</b></span></li>
+          <li><span class="ck">✓</span><span>恋愛・復縁・<b>相手の気持ち</b>が専門</span></li>
+          <li><span class="ck">✓</span><span>初回は<b>無料で電話鑑定</b></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hero-hint">S C R O L L<i></i>下へ</div>
+  </header>
+
+  <!-- ============ ② はじめての方へ（初回無料の電話鑑定） ============ -->
+  <section class="sec offer reveal" id="offer">
+    <div class="eyebrow">はじめての方へ</div>
+    <div class="sec-title">まずは、<span class="gold">無料の電話から。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <div class="glass offer-card">
+      <div class="offer-tag">FIRST CALL — 初回の無料電話鑑定</div>
+      <div class="offer-big">初回<em>10</em>分 電話鑑定 無料</div>
+      <p class="offer-sub">いまの気持ちを、そのまま声にするだけで大丈夫。<br>まずは無料の電話で、BAKUの鑑定を確かめてください。</p>
+
+      <ol class="offer-steps">
+        <li><span class="n">1</span><span>LINEを<b>友だち追加</b>する（30秒）</span></li>
+        <li><span class="n">2</span><span>「<b>はじめての鑑定です</b>」と一言送る</span></li>
+        <li><span class="n">3</span><span>日時を決めて、<b>10分だけ電話</b>でお話しします</span></li>
+      </ol>
+
+      <p class="offer-reassure"><b>まずは“当たる”を、無料の電話で確かめて。</b><br>続けるかどうかは、そのあと決めればOKです。</p>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク②（初回無料の電話鑑定）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">無料で電話鑑定を予約する</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ③ 占い師プロフィール・実績 ============ -->
+  <section class="sec vidsec reveal" id="profile">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster07.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo07.mp4" type="video/mp4">
+        <source src="assets/mo07.webm" type="video/webm">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">Profile</div>
+    <div class="sec-title">その実力を、<br><span class="gold">数字が語る。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <div class="profile-photo"><img src="assets/sample01.png" alt="占い師 BAKU" loading="lazy"></div>
+    <div class="profile-name">占い師<span>BAKU</span></div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">15,000<small>人+</small></div><div class="lbl">相談実績</div></div>
+      <div class="stat"><div class="num">6<small>サイト</small></div><div class="lbl">運営・監修</div></div>
+      <div class="stat"><div class="num">700<small>名+</small></div><div class="lbl">占い師を育成</div></div>
+    </div>
+
+    <div class="glass teaser">
+      <div class="teaser-k">プロフィール</div>
+      <div class="teaser-t">占い師が頼る、占い師。</div>
+      <p class="teaser-p">同業の占い師からも相談が集まる実力者。15,000人の恋を見てきた“当てる鑑定”で、彼の本音まで読み解きます。</p>
+      <button class="readmore" data-modal="profile">プロフィールを読む<span class="ic">＋</span></button>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク③（プロフィール後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">この先生に無料の電話で相談してみる</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ④ 悩み共感 ============ -->
+  <section class="sec vidsec reveal" id="worry">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster08.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo08.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">こんな夜に</div>
+    <div class="sec-title">その気持ち、<br><span class="gold">ひとりで抱えないで。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="worry-lead">恋の悩みは、誰にも言えないほど<br>ひとりで大きくなっていくもの。</p>
+
+    <ul class="worry-list" id="worryList">
+      <li data-key="彼の気持ち">彼の気持ちが、わからない</li>
+      <li data-key="既読スルー">既読スルーの理由が知りたい</li>
+      <li data-key="復縁">復縁できる可能性を知りたい</li>
+      <li data-key="本命か遊びか">本命なのか、遊びなのか</li>
+    </ul>
+
+    <div class="worry-soft">
+      <b>大丈夫。ひとりで抱えなくていい。</b>
+      <span>15,000人の恋を見てきたBAKUが、彼の本音と次の一歩を、はっきり導きます。</span>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク④（悩み共感後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="txt">今の悩みを無料の電話で相談する</span>
+      </a>
+      <p class="btn-sub">＼ どんな小さな悩みでも大丈夫 ／</p>
+    </div>
+  </section>
+
+  <!-- ============ ⑤ お客様の声 ============ -->
+  <section class="sec vidsec reveal" id="voices">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster09.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo09.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">お客様の声</div>
+    <div class="sec-title">相談してよかった、<br><span class="gold">という声。</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <p class="lead-c">同じように悩んでいた方が、<br>いま <b>笑顔で</b> 送ってくれた言葉です。</p>
+
+    <div class="voice-grid">
+      <div class="glass talk">
+        <div class="talk-topic">既読スルーの相談</div>
+        <div class="talk-row them"><div class="bubble them">3日既読無視されてて、もう終わりなのかなって…</div></div>
+        <div class="talk-row me"><div class="bubble me">大丈夫、既読を止めた理由がちゃんとあります。順番に見ていきましょうね。</div></div>
+        <div class="talk-meta"><span class="voice-stars">★★★★★</span><span class="talk-who">20代・会社員・彼の気持ち相談</span></div>
+      </div>
+
+      <div class="glass talk">
+        <div class="talk-topic">本命か遊びかの相談</div>
+        <div class="talk-row them"><div class="bubble them">本命か遊びか、ずっとモヤモヤしてました</div></div>
+        <div class="talk-row me"><div class="bubble me">相手の中の“本音”を視てみますね。今の距離感には理由があります。</div></div>
+        <div class="talk-meta"><span class="voice-stars">★★★★★</span><span class="talk-who">20代・パート・複雑な恋の相談</span></div>
+      </div>
+
+      <div class="glass talk">
+        <div class="talk-topic">復縁の相談</div>
+        <div class="talk-row them"><div class="bubble them">別れてから半年、もう一度会いたいって思ってます</div></div>
+        <div class="talk-row me"><div class="bubble me">タイミングと、あなたの動き方が鍵になりそうです。焦らず進めましょう。</div></div>
+        <div class="talk-meta"><span class="voice-stars">★★★★★</span><span class="talk-who">30代・会社員・復縁の相談</span></div>
+      </div>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク⑤（お客様の声の後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="txt">無料の電話で相手の気持ちを占ってもらう</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ ⑥ 最終CTA ============ -->
+  <section class="ctablock reveal" id="final">
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+    <div class="ck">まずは、無料の電話から。</div>
+    <div class="ct">ひとりで悩み続ける<br>必要は、ありません。</div>
+    <p class="cp">彼の気持ちも、これからの恋も。<br>まずは声で、話してみてください。</p>
+    <div class="btn-wrap">
+      <!-- LINE登録リンク⑥（最終CTA）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">LINE登録で無料電話鑑定を受ける</span>
+      </a>
+      <p class="btn-sub">＼ 登録は30秒・一言送るだけ ／</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fname">BAKU</div>
+    <div class="fsub">MOONLIGHT FORTUNE</div>
+    <p class="note">掲載画像は制作素材です。LINE登録リンクは仮URLです。<br>Copyright © BAKU Moonlight Fortune.</p>
+  </footer>
+
+</div>
+
+<!-- STICKY CTA -->
+<div class="sticky" id="sticky">
+  <!-- LINE登録リンク⑦（追尾ボタン）: 本番のLINE公式URLに差し替え -->
+  <a class="btn" href="#" data-line>
+    <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+    <span class="free">無料</span><span class="txt">まずは無料の電話で相談する</span>
+  </a>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-bd" data-close></div>
+  <div class="modal-card">
+    <div class="grip"></div>
+    <div class="modal-k" id="mk"></div>
+    <div class="modal-t" id="mt"></div>
+    <div class="modal-body" id="mb"></div>
+    <button class="modal-close" data-close>閉じる</button>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
