@@ -437,10 +437,57 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   color:var(--silver-d);text-shadow:0 2px 10px rgba(255,255,255,.7)}
 /* 画像と同じ比率（1896:829）のまま、横幅いっぱいに表示します。
    左右のマイナスマージンは .hero-content の padding(26px) を打ち消すためのものです。 */
-.hero-photo{width:auto;aspect-ratio:1896/829;margin:6px -26px 16px;
-  box-shadow:0 20px 52px rgba(12,64,102,.55);
-  animation:fadeUp 1s .1s both}
+
+/* ===== バナー下端の波形 ==================================================
+   下端を直線で切らず、ゆるやかな波で抜いて背景の水面へつなげます。
+
+   ■ 調整用の変数（この2つだけ触れば形が変わります）
+       --wave-amplitude … 波の深さ（山から谷まで）。20〜40px が目安
+       --wave-fade      … 波のすぐ上に重ねる、色をなじませるフェードの高さ
+
+   ■ 波形は下の SVG（ベジェ曲線・1.5周期）を preserveAspectRatio="none" で
+     横に引き伸ばして使います。そのため画面幅が変わっても
+       ・波の深さ = --wave-amplitude（常に一定）
+       ・波の数   = 1.5周期（常に一定）
+     のままで、細い画面でも波が潰れたり伸びたりしません。
+
+   ■ clip-path ではなく mask を使っています。
+     CSS の clip-path:path() は座標が px 固定でレスポンシブにできず、
+     SVG の <clipPath clipPathUnits="objectBoundingBox"> は座標が要素サイズの
+     比率なので、波の深さを px の CSS 変数で指定できません。
+     mask なら「深さは px の変数・幅は自動で追従」を両立できます。
+     Safari 用に -webkit- 付きも併記しています（iOS/Safari とも対応済み）。
+   ======================================================================== */
+.hero-photo{
+  --wave-amplitude:30px;
+  --wave-fade:54px;
+  --wave-shape:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C133,0 267,40 400,40 C533,40 667,0 800,0 C933,0 1067,40 1200,40 L1200,0 Z' fill='%23000'/%3E%3C/svg%3E");
+  position:relative;
+  width:auto;aspect-ratio:1896/829;margin:6px -26px 16px;
+  animation:fadeUp 1s .1s both;
+  /* 1枚目＝波より上のベタ、2枚目＝下端の波。合わせて1つの形になります */
+  -webkit-mask-image:linear-gradient(#000,#000),var(--wave-shape);
+          mask-image:linear-gradient(#000,#000),var(--wave-shape);
+  -webkit-mask-size:100% calc(100% - var(--wave-amplitude)),100% var(--wave-amplitude);
+          mask-size:100% calc(100% - var(--wave-amplitude)),100% var(--wave-amplitude);
+  -webkit-mask-position:left top,left bottom;
+          mask-position:left top,left bottom;
+  -webkit-mask-repeat:no-repeat,no-repeat;
+          mask-repeat:no-repeat,no-repeat;
+}
 .hero-photo img{width:100%;height:100%;object-fit:contain;display:block}
+/* 波のすぐ上を、バナーのターコイズ → 下の背景の水色へ薄くフェードさせて、
+   色のトーンが急に切り替わらないようにします（波と一緒に切り抜かれます） */
+.hero-photo::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;
+  height:calc(var(--wave-amplitude) + var(--wave-fade));
+  pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(23,140,190,0) 0%,
+    rgba(88,186,224,.34) 40%,
+    rgba(150,215,242,.72) 70%,
+    rgba(191,231,248,.99) 100%);
+}
 .hero-meta{margin-top:22px}
 .hero-meta .hero-kicker{margin:0 0 10px;font-size:11px;letter-spacing:.14em;color:var(--silver);opacity:.9}
 .hero-meta .hero-values{margin-top:0}
@@ -604,7 +651,8 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 }
 @media (max-width:360px){
   .hero-name{font-size:70px}
-  .hero-photo{width:auto}
+  /* 画面が細いぶんバナーも低くなるので、波もひとまわり浅くします */
+  .hero-photo{width:auto;--wave-amplitude:22px;--wave-fade:20px}
   .sec{padding:38px 20px 34px}
   .offer-big em{font-size:48px}
   .crystal-hero{--orb-size:clamp(140px,48vw,220px);--band-min:400px}
