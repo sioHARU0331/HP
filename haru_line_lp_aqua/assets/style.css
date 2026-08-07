@@ -438,98 +438,52 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 /* 画像と同じ比率（1896:829）のまま、横幅いっぱいに表示します。
    左右のマイナスマージンは .hero-content の padding(26px) を打ち消すためのものです。 */
 
-/* ===== バナー上下端の波形 ================================================
-   上端・下端とも直線で切らず、ゆるやかな波で抜いて背景の水面へつなげます。
+/* ===== バナー上下端のなじませ ============================================
+   上下端は直線（通常の矩形）のまま、グラデーションのフェードだけで
+   背景となじませています。
 
-   ■ 調整用の変数（ここだけ触れば形が変わります）
-       --wave-amplitude     … 下端の波の深さ（山から谷まで）。20〜40px が目安
-       --wave-fade          … 下端の波の上に重ねる、色をなじませるフェードの高さ
-       --wave-amplitude-top … 上端の波の深さ。下端よりやや浅めにしています
-       --wave-band-top      … 上端に足す帯の高さ（上端のフェードもこの範囲）
+   ■ 以前は上下端を波形マスクで切り抜いていましたが、撤去しました。
+     バナー画像そのものに波紋と光の演出が入っているため、そこに切り抜きの
+     波を重ねると「画像の中の波」と「輪郭の波」でリズムがぶつかり、
+     装飾過多に見えてしまうためです。
+     （関連していた --wave-amplitude / --wave-shape などの変数も削除済み。
+       波形に戻す場合はコミット a78ee4f を参照してください）
 
-   ■ 上端は写真そのものを削っていません。
-     この画像は髪の毛が上端から 15px（画像高さの 1.8%）の位置から始まっていて
-     頭上の余白がほとんどないため、上端を波で抜くと頭が欠けます。
-     そこで画像の上に「バナー上端と同じ色の帯」を padding で足し、
-     波はその帯だけを削るようにしています（写真は無傷）。
-     帯の色は画像の1行目の色をそのまま横方向のグラデーションにしたものなので、
-     継ぎ目は見えません。
-
-   ■ 波形は下の SVG（ベジェ曲線・1.5周期）を preserveAspectRatio="none" で
-     横に引き伸ばして使います。そのため画面幅が変わっても
-       ・波の深さ = --wave-amplitude（常に一定）
-       ・波の数   = 1.5周期（常に一定）
-     のままで、細い画面でも波が潰れたり伸びたりしません。
-
-   ■ clip-path ではなく mask を使っています。
-     CSS の clip-path:path() は座標が px 固定でレスポンシブにできず、
-     SVG の <clipPath clipPathUnits="objectBoundingBox"> は座標が要素サイズの
-     比率なので、波の深さを px の CSS 変数で指定できません。
-     mask なら「深さは px の変数・幅は自動で追従」を両立できます。
-     Safari 用に -webkit- 付きも併記しています（iOS/Safari とも対応済み）。
+   ■ 調整用の変数
+       --fade-height-top   … 上端フェードの高さ（20〜30px が目安）
+       --fade-height       … 下端フェードの高さ
+       --fade-opacity-top  … 上端フェードの濃さ（0〜1）
+       --fade-opacity      … 下端フェードの濃さ（0〜1）
    ======================================================================== */
 .hero-photo{
-  --wave-amplitude:30px;
-  --wave-fade:54px;
-  --wave-amplitude-top:20px;
-  /* 帯は波より少し高くしておきます。同じ高さだと谷の位置で帯が消え、
-     写真の上端（直線）がむき出しになってしまうためです。 */
-  --wave-band-top:calc(var(--wave-amplitude-top) + 8px);
-  /* 下端の波：左が山→33%で谷→67%で山→右端で谷 */
-  --wave-shape:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C133,0 267,40 400,40 C533,40 667,0 800,0 C933,0 1067,40 1200,40 L1200,0 Z' fill='%23000'/%3E%3C/svg%3E");
-  /* 上端の波：下端と半周期ずらした（山と谷が逆の）形。上下が平行に並びません */
-  --wave-shape-top:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C133,40 267,0 400,0 C533,0 667,40 800,40 C933,40 1067,0 1200,0 L1200,40 Z' fill='%23000'/%3E%3C/svg%3E");
+  --fade-height-top:26px;
+  --fade-height:30px;
+  --fade-opacity-top:.96;
+  --fade-opacity:.98;
   position:relative;
-  width:auto;margin:6px -26px 16px;
-  /* 写真の上に足す帯。中身は ::before（写真の上端を上下反転したもの）で描きます。
-     この背景は画像1行目の色を並べたもので、読み込み前の保険です。 */
-  padding-top:var(--wave-band-top);
-  background:linear-gradient(90deg,
-    #0161db 0%,#0185e4 8%,#8bf3fe 16%,#bff2fd 24%,#9ee6fd 32%,
-    #c5f1fe 47%,#b0effd 63%,#8fe3fb 79%,#cdeefa 100%);
+  width:auto;aspect-ratio:1896/829;margin:6px -26px 16px;
   animation:fadeUp 1s .1s both;
-  /* 1枚目＝上端の波、2枚目＝間のベタ、3枚目＝下端の波。合わせて1つの形になります */
-  -webkit-mask-image:var(--wave-shape-top),linear-gradient(#000,#000),var(--wave-shape);
-          mask-image:var(--wave-shape-top),linear-gradient(#000,#000),var(--wave-shape);
-  -webkit-mask-size:100% var(--wave-amplitude-top),
-                    100% calc(100% - var(--wave-amplitude-top) - var(--wave-amplitude)),
-                    100% var(--wave-amplitude);
-          mask-size:100% var(--wave-amplitude-top),
-                    100% calc(100% - var(--wave-amplitude-top) - var(--wave-amplitude)),
-                    100% var(--wave-amplitude);
-  -webkit-mask-position:left top,left var(--wave-amplitude-top),left bottom;
-          mask-position:left top,left var(--wave-amplitude-top),left bottom;
-  -webkit-mask-repeat:no-repeat,no-repeat,no-repeat;
-          mask-repeat:no-repeat,no-repeat,no-repeat;
 }
-.hero-photo img{width:100%;height:auto;aspect-ratio:1896/829;display:block}
-/* 上端の帯の中身。写真の1行目を縦に引き伸ばして帯にしています
-   （background-size の高さを極端に大きくすると、上端の数pxだけが伸びます）。
-   帯の下端＝写真の1行目そのものなので、境目に横線が出ません。
-   ベタ塗りだと継ぎ目が見え、上下反転させると髪が写り込むため、この方法です。
-   その上に、上の明るい背景 → バナーのターコイズへのフェードを重ねています。 */
+.hero-photo img{width:100%;height:100%;object-fit:contain;display:block}
+/* 上端：上の明るい背景 → バナーのターコイズへ */
 .hero-photo::before{
   content:"";position:absolute;left:0;right:0;top:0;
-  height:var(--wave-band-top);
+  height:var(--fade-height-top);
   pointer-events:none;
-  background:
-    linear-gradient(180deg,
-      rgba(214,240,252,.94) 0%,
-      rgba(163,216,241,.45) 45%,
-      rgba(23,140,190,0) 100%),
-    url("sample01.png") left top/100% 4000px no-repeat;
+  background:linear-gradient(180deg,
+    rgba(214,240,252,var(--fade-opacity-top)) 0%,
+    rgba(180,224,245,.40) 55%,
+    rgba(150,215,242,0) 100%);
 }
-/* 下端：バナーのターコイズ → 下の背景の水色へ薄くフェードさせて、
-   色のトーンが急に切り替わらないようにします（波と一緒に切り抜かれます） */
+/* 下端：バナーのターコイズ → 下の背景の水色へ */
 .hero-photo::after{
   content:"";position:absolute;left:0;right:0;bottom:0;
-  height:calc(var(--wave-amplitude) + var(--wave-fade));
+  height:var(--fade-height);
   pointer-events:none;
   background:linear-gradient(180deg,
     rgba(23,140,190,0) 0%,
-    rgba(88,186,224,.34) 40%,
-    rgba(150,215,242,.72) 70%,
-    rgba(191,231,248,.99) 100%);
+    rgba(120,200,235,.44) 50%,
+    rgba(191,231,248,var(--fade-opacity)) 100%);
 }
 .hero-meta{margin-top:22px}
 .hero-meta .hero-kicker{margin:0 0 10px;font-size:11px;letter-spacing:.14em;color:var(--silver);opacity:.9}
@@ -694,9 +648,8 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 }
 @media (max-width:360px){
   .hero-name{font-size:70px}
-  /* 画面が細いぶんバナーも低くなるので、波もひとまわり浅くします */
-  .hero-photo{width:auto;--wave-amplitude:22px;--wave-fade:40px;
-    --wave-amplitude-top:14px}
+  /* 画面が細いぶんバナーも低くなるので、フェードもひとまわり浅くします */
+  .hero-photo{width:auto;--fade-height-top:18px;--fade-height:20px}
   .sec{padding:38px 20px 34px}
   .offer-big em{font-size:48px}
   .crystal-hero{--orb-size:clamp(140px,48vw,220px);--band-min:400px}
