@@ -21,6 +21,9 @@
 /* =========================================================
    WATER SURFACE — cinematic moonlit ripple
    - height-field wave sim
+   - raindrop impact profile (crater + expanding rim) → real concentric rings
+   - perspective-squashed ripples → a surface seen at an angle, not from above
+   - absorbing borders → waves leave the frame instead of bouncing like a tank
    - bilinear (sub-pixel) refraction  → no blocky edges
    - moon-directional specular + crest sparkle + chromatic dispersion
    - shimmering moonlight reflection column
@@ -44,14 +47,21 @@
 
   let W,H,cols,rows,cur,prev,frame,bgData;
   let glare;                 // precomputed moonlight-column intensity (per cell)
+  let ldx,ldy;               // precomputed unit vector toward the moon (per cell)
+  let damp;                  // per-cell damping — absorbs waves at the frame edge
   let mcx,mcy;               // moon centre in sim coords
   let scaleBase;             // current downscale factor (raised if a device is slow)
 
-  const DAMP    = 0.977;     // long-lived, calm ripples
+  const DAMP    = 0.982;     // long-lived, calm ripples
   const REFRACT = 0.95;      // light-bending strength (bilinear → can push higher)
   const SPEC    = 7.5;       // moon-facing glint
-  const FOAM    = 0.22;      // white sparkle on wave crests
-  const CHROMA  = 1.6;       // prismatic edge dispersion
+  const FOAM    = 0.18;      // white sparkle on wave crests
+  const CHROMA  = 1.3;       // prismatic edge dispersion
+  const SQUASH  = 0.66;      // 水面を斜めから見た遠近 — 波紋は縦につぶれた楕円に広がる
+  /* 波の伝わる速さを縦方向だけ遅くする（速さの比 = SQUASH）。
+     こうしないと最初だけ楕円で、広がるうちに真円に戻ってしまう。
+     WX+WY=1 を保てば元のスキームと同じ安定性。 */
+  const WY = 1/(1+1/(SQUASH*SQUASH)), WX = 1-WY;
 
   function buildBG(){
     const off = document.createElement('canvas'); off.width=cols; off.height=rows;
@@ -85,6 +95,24 @@
     for(let x=0;x<cols;x++){ const dx=(x-mcx)/wx; gcol[x]=Math.exp(-dx*dx); }
     for(let y=0;y<rows;y++){ const dy=y-mcy; grow[y]=dy<0?Math.exp(-Math.pow(dy/upFall,2)):Math.exp(-Math.pow(dy/dnFall,2)); }
     for(let y=0;y<rows;y++){ const gr=grow[y]*AMP; for(let x=0;x<cols;x++){ glare[y*cols+x]=gcol[x]*gr; } }
+    buildFields();
+  }
+  /* per-cell constants — computed once per resize so the hot loop stays cheap.
+     ldx/ldy replace a per-pixel sqrt every frame; damp turns the canvas border
+     into open water (waves leave) instead of a tank wall (waves bounce back). */
+  function buildFields(){
+    ldx=new Float32Array(cols*rows); ldy=new Float32Array(cols*rows);
+    damp=new Float32Array(cols*rows);
+    const bx=Math.max(4,Math.round(cols*.11)), by=Math.max(4,Math.round(rows*.11));
+    for(let y=0;y<rows;y++){
+      for(let x=0;x<cols;x++){
+        const idx=y*cols+x;
+        const lvx=mcx-x, lvy=mcy-y, inv=1/Math.sqrt(lvx*lvx+lvy*lvy+1);
+        ldx[idx]=lvx*inv; ldy[idx]=lvy*inv;
+        const e=Math.min(1,Math.min(Math.min(x,cols-1-x)/bx,Math.min(y,rows-1-y)/by));
+        damp[idx]=DAMP*(.80+.20*e*e*(3-2*e));
+      }
+    }
   }
   function resize(){
     W=innerWidth; H=innerHeight;
@@ -97,18 +125,38 @@
     frame=sctx.createImageData(cols,rows);
     buildBG();
   }
-  function drop(px,py,power,rad){
-    const x=Math.floor(px/W*cols), y=Math.floor(py/H*rows), r=rad||3;
-    for(let j=-r;j<=r;j++)for(let i=-r;i<=r;i++){
-      const xx=x+i,yy=y+j; if(xx<1||yy<1||xx>=cols-1||yy>=rows-1)continue;
-      const d=Math.hypot(i,j); if(d<=r) prev[yy*cols+xx]+=power*(1-d/(r+1));
+  /* 着水。soft=false は雨粒そのもの — 中心がへこみ、縁が輪になって広がる
+     （ガウスの2階微分＝クレーター＋リング）。soft=true は風のうねり用の緩い盛り上がり。
+     どちらも SQUASH で縦につぶした楕円にして、斜めから見た水面に見せる。 */
+  function drop(px,py,power,rad,soft){
+    const cx=px/W*cols, cy=py/H*rows;
+    const rx=rad||6, ry=Math.max(1.2,rx*SQUASH);
+    const xa=Math.max(1,Math.floor(cx-rx)), xb=Math.min(cols-2,Math.ceil(cx+rx));
+    const ya=Math.max(1,Math.floor(cy-ry)), yb=Math.min(rows-2,Math.ceil(cy+ry));
+    for(let y=ya;y<=yb;y++){
+      const dy=(y-cy)/ry, dy2=dy*dy, row=y*cols;
+      for(let x=xa;x<=xb;x++){
+        const dx=(x-cx)/rx, u2=dx*dx+dy2;
+        if(u2>1.7)continue;
+        if(soft) prev[row+x]+=power*Math.exp(-u2*1.6);
+        else     prev[row+x]-=power*(1-4.8*u2)*Math.exp(-u2*2.4);
+      }
+    }
+  }
+  /* 跳ね返りの二次滴など、少し遅れて落ちる水滴 */
+  const pending=[];
+  function later(ms,x,y,power,rad,soft){ pending.push({t:performance.now()+ms,x:x,y:y,p:power,r:rad,s:soft}); }
+  function flushPending(now){
+    for(let i=pending.length-1;i>=0;i--){
+      const d=pending[i];
+      if(now>=d.t){ drop(d.x,d.y,d.p,d.r,d.s); pending.splice(i,1); }
     }
   }
   function step(){
     const c=cols;
     for(let y=1;y<rows-1;y++){ let idx=y*c+1;
       for(let x=1;x<c-1;x++,idx++){
-        cur[idx]=((prev[idx-1]+prev[idx+1]+prev[idx-c]+prev[idx+c])*.5 - cur[idx])*DAMP;
+        cur[idx]=((prev[idx-1]+prev[idx+1])*WX + (prev[idx-c]+prev[idx+c])*WY - cur[idx])*damp[idx];
       }
     }
     const t=prev; prev=cur; cur=t;
@@ -129,9 +177,8 @@
         let R=bg[i00]*w00+bg[i10]*w10+bg[i01]*w01+bg[i11]*w11;
         let G=bg[i00+1]*w00+bg[i10+1]*w10+bg[i01+1]*w01+bg[i11+1]*w11;
         let B=bg[i00+2]*w00+bg[i10+2]*w10+bg[i01+2]*w01+bg[i11+2]*w11;
-        // ---- lighting ----
-        const lvx=mcx-x, lvy=mcy-y, inv=1/Math.sqrt(lvx*lvx+lvy*lvy+1);
-        const ndl=(gx*lvx+gy*lvy)*inv;               // slope facing the moon
+        // ---- lighting ---- (light direction is precomputed: no sqrt in the hot loop)
+        const ndl=gx*ldx[idx]+gy*ldy[idx];           // slope facing the moon
         const spec=ndl>0?ndl*SPEC:ndl*1.2;           // bright toward moon, soft shadow away
         const crest=(gx*gx+gy*gy)*FOAM;              // sparkle on ripple crests
         const gl=glare[idx]*(1+(ndl>0?ndl*0.12:0));  // moonlight column, shattering with waves
@@ -199,14 +246,17 @@
   }
 
   function drawOverlay(now){
-    // glowing tap rings
+    // glowing tap rings — 水面の波紋と同じ楕円で、ゆっくり静かに開く
     if(rings.length){
       ctx.globalCompositeOperation='lighter';
       for(let i=rings.length-1;i>=0;i--){
-        const rg=rings[i], age=now-rg.t; if(age>1000){rings.splice(i,1);continue;}
-        const k=age/1000, rad=8+k*Math.min(W,H)*0.28, a=(1-k)*0.5;
-        ctx.strokeStyle='rgba(214,236,238,'+a+')'; ctx.lineWidth=2*(1-k)+0.4;
-        ctx.beginPath(); ctx.arc(rg.x,rg.y,rad,0,6.283); ctx.stroke();
+        const rg=rings[i], age=now-rg.t-rg.d;
+        if(age>1500){rings.splice(i,1);continue;}
+        if(age<0)continue;
+        const k=age/1500, ease=1-Math.pow(1-k,2.2);          // 開きはじめが速く、外へ行くほど緩む
+        const rad=6+ease*Math.min(W,H)*0.34, a=Math.pow(1-k,1.8)*0.40*rg.a;
+        ctx.strokeStyle='rgba(214,236,238,'+a+')'; ctx.lineWidth=1.6*(1-k)+0.35;
+        ctx.beginPath(); ctx.ellipse(rg.x,rg.y,rad,rad*SQUASH,0,0,6.283); ctx.stroke();
       }
       ctx.globalCompositeOperation='source-over';
     }
@@ -216,7 +266,7 @@
     for(const m of motes){
       m.y+=m.vy; m.x+=Math.sin(now*0.0006*m.sway+m.ph)*0.35;
       if(m.y>H+16){ Object.assign(m,newMote(true)); continue; }
-      if(now>m.next){ drop(m.x,m.y,16,2); m.next=now+2200+Math.random()*3200; } // touch the water
+      if(now>m.next){ drop(m.x,m.y,26,3.5); m.next=now+2200+Math.random()*3200; } // touch the water
       const a=m.base*(0.55+0.45*Math.sin(now*0.001*m.tw+m.ph));
       const g=ctx.createRadialGradient(m.x,m.y,0,m.x,m.y,m.rad);
       g.addColorStop(0,'rgba(233,224,190,'+a+')');
@@ -239,43 +289,73 @@
       hg.addColorStop(0,'rgba(255,255,255,'+fade+')'); hg.addColorStop(1,'rgba(255,255,255,0)');
       ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(star.x,star.y,7,0,6.283); ctx.fill();
       if(star.life>=star.max || star.x<-60 || star.x>W+60 || star.y>H*0.6){
-        if(star.y>0 && star.y<H){ drop(star.x,star.y,120,3); plip(.5); } // splash
+        if(star.y>0 && star.y<H){                                        // splash
+          drop(star.x,star.y,230,9); later(300,star.x,star.y,70,4);
+          rings.push({x:star.x,y:star.y,t:now,d:0,a:.8});
+          plip(.5);
+        }
         star=null;
       }
     }
     ctx.globalCompositeOperation='source-over';
   }
 
-  /* ===== main loop with light perf auto-tune ===== */
-  let lastAuto=0, fpsT=0, fpsN=0, tuned=false;
+  /* ===== main loop with light perf auto-tune =====
+     スマホは30fps上限。水はゆっくり動くので見た目はほぼ変わらず、
+     計算量と発熱・電池消費が半分になる（＝リッチにしても軽い）。 */
+  const FRAME_MS = reduce?50:(lowPower?32:16);
+  const SUB = reduce?1:(lowPower?2:1);   // 描画を間引いても波の進む速さは変えない
+  let lastF=0, lastAuto=0, lastSwell=0, workSum=0, workN=0, tuned=false;
   function loop(ts){
-    step(); render();
-    try{ drawOverlay(ts); }catch(err){ /* particles must never halt the water */ }
-    if(!reduce && ts-lastAuto>7000){
-      lastAuto=ts+Math.random()*4000;
-      drop(W*(.1+Math.random()*.8),H*(.12+Math.random()*.72),44);
-    }
-    // one-time downscale if the device can't keep up
-    if(!tuned){
-      fpsT+=1; if(fpsN===0)fpsN=ts;
-      if(fpsT===90){ const avg=(ts-fpsN)/90; if(avg>26 && scaleBase<6){ scaleBase++; resize(); } tuned=true; }
-    }
     requestAnimationFrame(loop);
+    if(ts-lastF<FRAME_MS-1) return;
+    lastF=ts;
+
+    const t0=tuned?0:performance.now();
+    flushPending(ts);
+    for(let s=0;s<SUB;s++) step();
+    render();
+    try{ drawOverlay(ts); }catch(err){ /* particles must never halt the water */ }
+
+    if(!reduce){
+      // 遠くで魚が跳ねたような、たまの一滴
+      if(ts-lastAuto>7000){
+        lastAuto=ts+Math.random()*4000;
+        drop(W*(.1+Math.random()*.8),H*(.12+Math.random()*.72),80,8);
+      }
+      // 風のうねり — 水面が完全に止まる瞬間をなくす（ほぼ無コスト）
+      if(ts-lastSwell>1500){
+        lastSwell=ts+Math.random()*1400;
+        drop(W*Math.random(),H*(.1+Math.random()*.85),3+Math.random()*4,16+Math.random()*14,true);
+      }
+    }
+
+    // one-time downscale if the device can't keep up (measures real work, not the frame cap)
+    if(!tuned){
+      workSum+=performance.now()-t0; workN++;
+      if(workN===90){ if(workSum/90>15 && scaleBase<6){ scaleBase++; resize(); } tuned=true; }
+    }
   }
 
   function pointer(e){
     if(e.target&&(e.target.closest('#snd')||e.target.closest('.modal-card')||e.target.closest('a')||e.target.closest('button')))return;
     const t=e.touches?e.touches[0]:e;
-    drop(t.clientX,t.clientY,reduce?140:300);
-    if(!reduce) rings.push({x:t.clientX,y:t.clientY,t:performance.now()});
-    plip(reduce?.45:.9);
+    const x=t.clientX, y=t.clientY;
+    if(reduce){ drop(x,y,150,6); plip(.45); return; }
+    drop(x,y,340,7);                       // 着水
+    later(240,x,y,105,4);                  // 跳ね返った二次滴が落ちる
+    later(620,x,y,38,3);                   // さらに小さく、もう一度
+    const now=performance.now();
+    rings.push({x:x,y:y,t:now,d:0,a:1});
+    rings.push({x:x,y:y,t:now,d:240,a:.55});
+    plip(.9);
   }
 
   addEventListener('resize',resize,{passive:true});
   addEventListener('pointerdown',pointer,{passive:true});
   resize();
   initMotes();                 // W/H are ready only after the first resize()
-  setTimeout(function(){drop(W*.5,H*.42,reduce?110:230);},700);
+  setTimeout(function(){drop(W*.5,H*.42,reduce?130:270,8);later(280,W*.5,H*.42,80,4);},700);
   requestAnimationFrame(loop);
 })();
 
