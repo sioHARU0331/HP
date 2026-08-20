@@ -64,7 +64,9 @@ img{max-width:100%;display:block}
 .menu-toggle[aria-expanded="true"]::before{top:20px;transform:rotate(45deg)}
 .menu-toggle[aria-expanded="true"] span{opacity:0}
 .menu-toggle[aria-expanded="true"]::after{top:20px;transform:rotate(-45deg)}
-.site-logo{font-family:var(--latin);font-weight:500;font-size:16px;letter-spacing:.08em;
+/* ロゴが日本語混じり（BAKUの占い部屋）になったので、欧文専用の --latin ではなく
+   和文も持っている明朝（--serif）に。--latin のままだと「の占い部屋」だけ別の書体になります。 */
+.site-logo{font-family:var(--serif);font-weight:600;font-size:16.5px;letter-spacing:.12em;
   color:var(--moon);text-shadow:0 0 18px rgba(211,232,234,.3);white-space:nowrap;
   max-width:calc(100% - 150px);overflow:hidden;text-overflow:clip}
 .snd{position:absolute;right:12px;top:50%;transform:translateY(-50%);
@@ -320,9 +322,15 @@ body.menu-open{overflow:hidden}
 /* ===== PROFILE ===== */
 /* 丸く切り抜くと画像が欠けるので、こちらもヒーローと同じく横幅いっぱいに表示します。
    左右のマイナスマージンは .sec の padding(26px) を打ち消すためのものです。 */
-.profile-photo{width:auto;aspect-ratio:1896/829;margin:2px -26px 14px;
-  box-shadow:0 16px 42px rgba(0,0,0,.48)}
-.profile-photo img{width:100%;height:100%;object-fit:contain}
+/* 占い師の顔写真。正方形に切り抜いた assets/baku_icon.jpg を、丸いアイコンとして出します。
+   金の細い輪＋その外側にうっすら金のにじみを重ねて、月あかりの雰囲気に合わせています。 */
+.profile-photo{width:min(172px,46vw);aspect-ratio:1;margin:4px auto 16px;
+  border-radius:50%;overflow:hidden;
+  box-shadow:0 14px 36px rgba(0,0,0,.5),
+             0 0 0 1px rgba(201,176,121,.5),
+             0 0 0 7px rgba(201,176,121,.07),
+             0 0 30px rgba(211,232,234,.13)}
+.profile-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .profile-name{font-family:var(--serif);font-size:12px;line-height:1.35;letter-spacing:.2em;color:var(--moon);
   text-align:center;margin:0 0 22px;text-shadow:0 2px 18px rgba(2,5,8,.8)}
 .profile-name span{display:block;font-family:var(--latin);font-size:30px;letter-spacing:.12em;margin-top:3px}
@@ -463,8 +471,6 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 .modal-body .voice-item p{margin-bottom:0}
 
 /* ===== HERO：SNS特化（写真拡大・文字圧縮・価格の匂わせ） ===== */
-.hero-pricehint{margin-top:8px;font-family:var(--serif);font-size:10.5px;letter-spacing:.1em;
-  color:var(--silver-d);text-shadow:0 2px 10px rgba(2,5,8,.7)}
 /* ヒーロー上部のバナー画像。いまは index.html 側でコメントアウトしていて未使用ですが、
    戻せるようにスタイルは残してあります。
    画像と同じ比率（1896:829）のまま、横幅いっぱいに表示します。
