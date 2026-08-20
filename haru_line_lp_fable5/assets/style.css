@@ -1,5 +1,5 @@
 /* =========================================================
-   BAKU｜恋愛・復縁の月あかり鑑定 — LINE登録特化LP
+   BAKUの占い部屋｜恋愛・復縁の月あかり鑑定 — LINE登録特化LP
    Design: 深い青 × 金 × 月 × 水面 / 女性向け・安心感重視
    ========================================================= */
 :root{
@@ -440,7 +440,8 @@ footer{text-align:center;padding:30px 26px 30px;border-top:1px solid var(--line)
   position:relative;background:linear-gradient(180deg,transparent,rgba(2,6,9,.5))}
 footer .fname{font-family:var(--latin);font-size:30px;color:var(--moon);letter-spacing:.14em;
   text-shadow:0 0 24px rgba(211,232,234,.3)}
-footer .fsub{font-family:var(--serif);font-size:11px;letter-spacing:.26em;color:var(--gold);margin:6px 0 20px}
+/* 日本語（BAKUの占い部屋）になったので、字間を欧文向けの .26em から少し詰めています。 */
+footer .fsub{font-family:var(--serif);font-size:11.5px;letter-spacing:.16em;color:var(--gold);margin:6px 0 20px}
 footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing:.04em}
 
 /* ===== modal ===== */
