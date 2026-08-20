@@ -359,6 +359,89 @@
   requestAnimationFrame(loop);
 })();
 
+/* =========================================================
+   HERO PHRASES — 横から流れてくるコピー＋残り時間メーター
+   数字の直後にメーターが入り、満ちたら次の言葉へ切り替わる。
+   ヒーローが画面外にあるあいだは止めて、無駄に回さない。
+   ========================================================= */
+(function(){
+  const slider=document.getElementById('heroSlider');
+  const meter=document.getElementById('hsMeter');
+  if(!slider||!meter)return;
+  const phrases=Array.prototype.slice.call(slider.querySelectorAll('.hs-phrase'));
+  if(!phrases.length)return;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DUR=4800, STAGGER=38, OUT=520;
+
+  // 禁則処理：span は folding の単位でもあるので、行頭にきてほしくない文字（、。ー など）は
+  // 前の文字と、行末にきてほしくない文字（「（ など）は次の文字と、同じ span にまとめます。
+  const NO_HEAD='、。，．・：；？！?!」』）］｝〉》〕”’ーぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ…‥〜～';
+  const NO_TAIL='「『（［｛〈《〔“‘';
+  function chunk(text){
+    const out=[];
+    Array.from(text).forEach(function(c){
+      const last=out.length?out[out.length-1]:'';
+      if(last&&(NO_HEAD.indexOf(c)>=0||NO_TAIL.indexOf(last.slice(-1))>=0)) out[out.length-1]=last+c;
+      else out.push(c);
+    });
+    return out;
+  }
+
+  // 1文字ずつ span に分けて、流れ込むタイミングをずらす
+  phrases.forEach(function(p){
+    const text=p.textContent.trim();
+    p.textContent='';
+    let n=0;                              // 遅延は「見た目の文字数」で数える
+    chunk(text).forEach(function(part){
+      const s=document.createElement('span');
+      s.textContent=part;
+      if(!reduce) s.style.animationDelay=(n*STAGGER)+'ms';
+      n+=Array.from(part).length;
+      p.appendChild(s);
+    });
+  });
+
+  // メーターの数字を言葉の数だけ用意する
+  const nums=phrases.map(function(_,i){
+    const n=document.createElement('span');
+    n.className='hs-n';
+    n.textContent=i+1;
+    meter.appendChild(n);
+    return n;
+  });
+  const track=document.createElement('span'); track.className='hs-track';
+  const fill=document.createElement('i');     fill.className='hs-fill';
+  track.appendChild(fill); meter.appendChild(track);
+  meter.style.setProperty('--hs-dur',DUR+'ms');
+
+  let cur=-1, timer=0, outTimer=0;
+  function show(i){
+    clearTimeout(timer);
+    if(cur>=0 && cur!==i){
+      const prev=phrases[cur];
+      prev.classList.remove('is-on');
+      prev.classList.add('is-out');
+      clearTimeout(outTimer);
+      outTimer=setTimeout(function(){prev.classList.remove('is-out');},OUT);
+    }
+    cur=i;
+    const p=phrases[cur];
+    p.classList.remove('is-out','is-on');
+    void p.offsetWidth;                 // 頭から流し直す
+    p.classList.add('is-on');
+    nums.forEach(function(n,k){n.classList.toggle('is-now',k===cur);});
+    // トラックを「いまの数字」の直後へ移す＝次に切り替わるまでの残り時間
+    meter.insertBefore(track,nums[cur].nextSibling);
+    fill.classList.remove('run'); void fill.offsetWidth; fill.classList.add('run');
+    timer=setTimeout(function(){show((cur+1)%phrases.length);},DUR);
+  }
+
+  new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting) show(cur<0?0:cur);
+    else { clearTimeout(timer); fill.classList.remove('run'); }
+  },{threshold:.2}).observe(slider);
+})();
+
 /* ===== reveal ===== */
 (function(){
   const io=new IntersectionObserver((e)=>{e.forEach(t=>{if(t.isIntersecting){t.target.classList.add('in');io.unobserve(t.target);}})},{threshold:.14});
