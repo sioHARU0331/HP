@@ -264,12 +264,6 @@ img{max-width:100%;display:block}
 .voice-p{font-size:13px;color:var(--silver);line-height:1.9;letter-spacing:.03em;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .voice-meta{font-size:11px;color:var(--silver-d);letter-spacing:.08em;margin-top:10px;font-family:var(--serif)}
-.readmore{margin-top:14px;display:inline-flex;align-items:center;gap:9px;
-  font-family:var(--serif);font-size:12.5px;letter-spacing:.16em;color:var(--gold-hi);
-  background:none;border:none;cursor:pointer;padding:0}
-.readmore .ic{width:26px;height:26px;border:1px solid var(--line-gold);border-radius:50%;
-  display:grid;place-items:center;font-family:var(--latin);transition:.3s}
-.readmore:active .ic{background:var(--gold);color:var(--abyss)}
 .voice-offer{margin-top:20px;text-align:center;font-family:var(--serif);font-size:14.5px;font-weight:600;
   line-height:1.8;letter-spacing:.04em;color:var(--gold-hi);
   border:1px solid var(--line-gold);border-radius:14px;padding:16px 18px;
@@ -298,17 +292,19 @@ img{max-width:100%;display:block}
 .stat{flex:1;text-align:center;padding:0 6px;position:relative}
 .stat+.stat::before{content:"";position:absolute;left:0;top:14%;height:72%;width:1px;
   background:linear-gradient(transparent,var(--line),transparent)}
-.stat .num{font-family:var(--latin);font-size:33px;font-weight:500;color:var(--moon);
+.stat .num{font-family:var(--latin);font-size:34px;font-weight:500;color:var(--moon);
   line-height:1;letter-spacing:.02em;white-space:nowrap;text-shadow:0 0 22px rgba(211,232,234,.3)}
-.stat .num small{font-size:15px}
-.stat .lbl{font-size:10px;letter-spacing:.12em;color:var(--silver);margin-top:7px;line-height:1.4}
-.teaser{padding:22px 22px;text-align:left;position:relative;overflow:hidden}
-.teaser::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--silver),transparent);opacity:.5}
-.teaser-k{font-family:var(--serif);font-size:13px;letter-spacing:.3em;color:var(--gold);margin-bottom:10px}
-.teaser-t{font-family:var(--serif);font-size:16px;font-weight:500;line-height:1.7;margin-bottom:9px;color:var(--moon)}
-.teaser-p{font-size:12.5px;color:var(--silver);line-height:1.9;
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* 単位は数字の真下。横に並べると「20,000人以上」が3等分した列からはみ出します。 */
+.stat .num small{display:block;font-family:var(--serif);font-size:12.5px;font-weight:600;
+  letter-spacing:.06em;color:var(--gold-hi);margin-top:5px;line-height:1}
+.stat .lbl{font-size:10px;letter-spacing:.1em;color:var(--silver);margin-top:9px;line-height:1.5}
+/* 見出しは指定どおり2行で収めたいので、狭い画面では少しだけ縮めます */
+#profile .sec-title{font-size:clamp(19px,5.9vw,25px)}
+/* 数字の下の一文。長文にはせず、1〜2行で終わる高さに収めています。 */
+.about-note{font-family:var(--serif);text-align:center;font-size:13.5px;line-height:1.95;
+  letter-spacing:.04em;color:var(--moon);margin-top:4px;
+  text-shadow:0 2px 14px rgba(2,5,8,.9)}
+.about-note b{color:var(--gold-hi);font-weight:600}
 
 /* ===== SPECIALTIES / 得意な相談 ===== */
 .spec-grid{display:grid;gap:12px;margin-bottom:22px}
@@ -679,9 +675,9 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
              0 0 30px rgba(255,255,255,.6)}
 [data-theme="morning"] .profile-name{text-shadow:0 2px 18px rgba(255,255,255,.9)}
 [data-theme="morning"] .stat .num{text-shadow:0 2px 18px rgba(255,255,255,.9)}
-[data-theme="morning"] .teaser-k{color:var(--accent)}
-[data-theme="morning"] .readmore{color:var(--accent)}
-[data-theme="morning"] .readmore:active .ic{background:var(--accent);color:#fff}
+[data-theme="morning"] .stat .num small{color:var(--accent)}
+[data-theme="morning"] .about-note{text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .about-note b{color:var(--accent)}
 
 /* --- 悩み共感 --- */
 [data-theme="morning"] .worry-lead{text-shadow:0 2px 14px rgba(255,255,255,.9)}

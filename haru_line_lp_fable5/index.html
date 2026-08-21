@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260821f">
+<link rel="stylesheet" href="assets/style.css?v=20260821g">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -79,7 +79,7 @@
     <div class="hero-hint">S C R O L L<i></i>下へ</div>
   </header>
 
-  <!-- ============ ② 占い師プロフィール・実績 ============ -->
+  <!-- ============ ② ABOUT BAKU（BAKU紹介） ============ -->
   <section class="sec vidsec reveal" id="profile">
     <div class="cospa-stage" aria-hidden="true">
       <video poster="assets/poster07.jpg" autoplay muted loop playsinline preload="none">
@@ -88,25 +88,22 @@
       </video>
       <div class="veil"></div>
     </div>
-    <div class="eyebrow">Profile</div>
-    <div class="sec-title">その実力を、<br><span class="gold">数字が語る。</span></div>
+    <div class="eyebrow">ABOUT BAKU</div>
+    <div class="sec-title">占うだけじゃない。<br><span class="gold">占いをつくる側も、13年以上。</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
 
     <div class="profile-photo"><img src="assets/baku_icon.jpg" alt="占い師 BAKU" width="560" height="560" loading="lazy"></div>
     <div class="profile-name">占い師<span>BAKU</span></div>
 
+    <!-- このセクションで一番目立たせる3つの数字。単位は数字の下に置いて、
+         「20,000」のような桁の多い数字でも横にはみ出さないようにしています。 -->
     <div class="stats">
-      <div class="stat"><div class="num">15,000<small>人+</small></div><div class="lbl">相談実績</div></div>
-      <div class="stat"><div class="num">6<small>サイト</small></div><div class="lbl">運営・監修</div></div>
-      <div class="stat"><div class="num">700<small>名+</small></div><div class="lbl">占い師を育成</div></div>
+      <div class="stat"><div class="num">13<small>年以上</small></div><div class="lbl">占い業界で活動</div></div>
+      <div class="stat"><div class="num">20,000<small>人以上</small></div><div class="lbl">これまでに鑑定</div></div>
+      <div class="stat"><div class="num">5<small>サイト</small></div><div class="lbl">占いサイトをプロデュース</div></div>
     </div>
 
-    <div class="glass teaser">
-      <div class="teaser-k">プロフィール</div>
-      <div class="teaser-t">占い師が頼る、占い師。</div>
-      <p class="teaser-p">同業の占い師からも相談が集まる実力者。15,000人の恋を見てきた“当てる鑑定”で、彼の本音まで読み解きます。</p>
-      <button class="readmore" data-modal="profile">プロフィールを読む<span class="ic">＋</span></button>
-    </div>
+    <p class="about-note">恋愛・復縁・相手の気持ちを中心に、<br>これまで<b>2万人以上</b>の相談と向き合ってきました。</p>
 
     <div class="btn-wrap cta-line">
       <!-- LINE登録リンク②（プロフィール後）: 本番のLINE公式URLに差し替え -->
@@ -242,6 +239,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260821f"></script>
+<script src="assets/app.js?v=20260821g"></script>
 </body>
 </html>

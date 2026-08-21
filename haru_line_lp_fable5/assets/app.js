@@ -532,13 +532,12 @@
 
 /* ===== modals ===== */
 (function(){
-  const DATA={
-    profile:{k:'Profile',t:'占い師が頼る、占い師。',html:`
-      <p>有名占いサイトの<strong>専属占い師</strong>として活躍。口コミで評判が広がり、やがて<strong>同業の占い師からも相談が集まる</strong>存在に。現在は6つの占いサイトの運営・監修も手がけています。</p>
-      <p>相談実績は<strong>15,000人以上</strong>、育成した占い師は<strong>700名以上</strong>。恋する女性の本音を読み解いてきた、場数が違います。</p>
-      <div class="big">「当てる」その先まで、導く。</div>
-      <p>彼の本音、今の状況、これからの流れ。そして<strong>あなたが次にどう動けばいいか</strong>まで、電話ではっきりお伝えします。</p>`}
-  };
+  /* 下から出るパネルの中身。いまは空＝どこからも開きません。
+     「ABOUT BAKU」を数字だけの短い構成にしたときに、長文を読ませていた
+     「プロフィールを読む」ボタンごと外したためです。
+     また使うときは、ここに { キー:{k,t,html} } を足して、
+     HTML側のボタンに data-modal="そのキー" を付けてください。 */
+  const DATA={};
   const modal=document.getElementById('modal');
   if(!modal)return;
   const mk=document.getElementById('mk'),mt=document.getElementById('mt'),mb=document.getElementById('mb');
