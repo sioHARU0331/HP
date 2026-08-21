@@ -374,7 +374,8 @@
   }
 
   function pointer(e){
-    if(e.target&&(e.target.closest('#snd')||e.target.closest('.modal-card')||e.target.closest('a')||e.target.closest('button')))return;
+    // 3STEPを横スワイプしている指で、背後の水面に波紋を落とさない
+    if(e.target&&(e.target.closest('#snd')||e.target.closest('.modal-card')||e.target.closest('.steps-track')||e.target.closest('a')||e.target.closest('button')))return;
     const t=e.touches?e.touches[0]:e;
     const x=t.clientX, y=t.clientY;
     if(reduce){ drop(x,y,150,6); plip(.45); return; }
@@ -516,6 +517,64 @@
     });
   },{threshold:.5});
   Object.keys(ctaTextMap).forEach((id)=>{const el=document.getElementById(id);if(el)io.observe(el);});
+})();
+
+/* =========================================================
+   ご利用の流れ — 3STEPの横スワイプ
+   指の動きはブラウザの横スクロールに任せ、JSは「いま何枚目か」を
+   読み取ってドットと矢印に反映するだけ。だから慣性も端の挙動もOS標準です。
+   ========================================================= */
+(function(){
+  const track=document.getElementById('stepsTrack');
+  const dots=document.getElementById('stepsDots');
+  if(!track||!dots)return;
+  const slides=Array.prototype.slice.call(track.children);
+  if(!slides.length)return;
+  const prev=document.querySelector('.steps-arw.prev');
+  const next=document.querySelector('.steps-arw.next');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  slides.forEach(function(_,i){
+    const d=document.createElement('i');
+    d.setAttribute('role','button');
+    d.setAttribute('aria-label',(i+1)+'枚目を見る');
+    d.addEventListener('click',function(){go(i);});
+    dots.appendChild(d);
+  });
+  const marks=Array.prototype.slice.call(dots.children);
+
+  // 画面の中央にいちばん近いカードを「いま見ているカード」とみなす
+  function current(){
+    const mid=track.scrollLeft+track.clientWidth/2;
+    let best=0, bestDist=Infinity;
+    slides.forEach(function(s,i){
+      const d=Math.abs((s.offsetLeft+s.offsetWidth/2)-mid);
+      if(d<bestDist){bestDist=d;best=i;}
+    });
+    return best;
+  }
+  function go(i){
+    const s=slides[Math.max(0,Math.min(slides.length-1,i))];
+    const left=s.offsetLeft-(track.clientWidth-s.offsetWidth)/2;
+    if(track.scrollTo) track.scrollTo({left:left,behavior:reduce?'auto':'smooth'});
+    else track.scrollLeft=left;
+  }
+  function sync(){
+    const i=current();
+    marks.forEach(function(m,k){m.classList.toggle('on',k===i);});
+    if(prev)prev.disabled=(i===0);
+    if(next)next.disabled=(i===slides.length-1);
+  }
+  let waiting=false;
+  track.addEventListener('scroll',function(){
+    if(waiting)return;
+    waiting=true;
+    requestAnimationFrame(function(){waiting=false;sync();});
+  },{passive:true});
+  addEventListener('resize',sync,{passive:true});
+  if(prev)prev.addEventListener('click',function(){go(current()-1);});
+  if(next)next.addEventListener('click',function(){go(current()+1);});
+  sync();
 })();
 
 /* ===== 悩みリストの出し分け（?utm_content= で先頭を差し替え） ===== */

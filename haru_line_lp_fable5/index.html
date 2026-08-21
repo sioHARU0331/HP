@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260821h">
+<link rel="stylesheet" href="assets/style.css?v=20260821j">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -114,7 +114,29 @@
     </div>
   </section>
 
-  <!-- ============ ③ 悩み共感 ============ -->
+  <!-- ============ ③ ご利用の流れ（LINE登録3STEP） ============ -->
+  <section class="sec reveal" id="flow">
+    <div class="eyebrow">ご利用の流れ</div>
+    <div class="sec-title">LINE登録は<span class="gold">かんたん3STEP</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <!-- 横スワイプはCSSのスクロールスナップに任せています（指の動きをJSで追いかけていません）。
+         ブラウザ本来の横スクロールなので、慣性も端の止まり方もOS標準どおりに動きます。
+         JSがやるのは、ドットの点灯と矢印を押したときの移動だけです。
+         左右のカードが少しのぞくように、1枚の幅を74%にしてあります。 -->
+    <div class="steps">
+      <button class="steps-arw prev" type="button" aria-label="前のステップを見る">‹</button>
+      <div class="steps-track" id="stepsTrack">
+        <figure class="step-slide"><img src="assets/line_step1.jpg" alt="STEP1 LINEで友だち追加。LINE登録ボタンから友だち追加します。" width="840" height="1050" loading="lazy"></figure>
+        <figure class="step-slide"><img src="assets/line_step2.jpg" alt="STEP2 メッセージを送信。トークで「はじめての鑑定です。」と送ります。" width="840" height="1050" loading="lazy"></figure>
+        <figure class="step-slide"><img src="assets/line_step3.jpg" alt="STEP3 無料鑑定の日時を決める。日時を決めて、当日お電話で鑑定します。24時間365日受付中。" width="840" height="1050" loading="lazy"></figure>
+      </div>
+      <button class="steps-arw next" type="button" aria-label="次のステップを見る">›</button>
+    </div>
+    <div class="steps-dots" id="stepsDots"></div>
+  </section>
+
+  <!-- ============ ④ 悩み共感 ============ -->
   <section class="sec vidsec reveal" id="worry">
     <div class="cospa-stage" aria-hidden="true">
       <video poster="assets/poster08.jpg" autoplay muted loop playsinline preload="none">
@@ -149,7 +171,7 @@
     </div>
   </section>
 
-  <!-- ============ ④ お客様の声 ============ -->
+  <!-- ============ ⑤ お客様の声 ============ -->
   <section class="sec vidsec reveal" id="voices">
     <div class="cospa-stage" aria-hidden="true">
       <video poster="assets/poster09.jpg" autoplay muted loop playsinline preload="none">
@@ -194,7 +216,7 @@
     </div>
   </section>
 
-  <!-- ============ ⑤ 最終CTA ============ -->
+  <!-- ============ ⑥ 最終CTA ============ -->
   <section class="ctablock reveal" id="final">
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
     <div class="ck">まずは、無料の電話から。</div>
@@ -239,6 +261,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260821h"></script>
+<script src="assets/app.js?v=20260821j"></script>
 </body>
 </html>
