@@ -709,7 +709,6 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 [data-theme="morning"] .hero-kicker{text-shadow:0 2px 14px rgba(255,255,255,1),0 0 40px rgba(255,255,255,.9)}
 [data-theme="morning"] .hero-copy{text-shadow:0 2px 16px rgba(255,255,255,1),0 0 34px rgba(255,255,255,.9)}
 [data-theme="morning"] .hs-phrase{text-shadow:0 2px 16px rgba(255,255,255,1),0 0 34px rgba(255,255,255,.9)}
-[data-theme="morning"] .hs-n.is-now{color:var(--accent)}
 [data-theme="morning"] .hs-fill{background:linear-gradient(90deg,rgba(11,91,147,.35),var(--accent))}
 [data-theme="morning"] .hero-values li{background:rgba(255,255,255,.66)}
 [data-theme="morning"] .hero-values b{color:var(--accent)}
