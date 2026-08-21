@@ -54,16 +54,22 @@ img{max-width:100%;display:block}
   width:100%;max-width:480px;height:64px;display:flex;align-items:center;justify-content:center;
   background:rgba(4,9,13,.78);border-bottom:1px solid var(--line);
   box-shadow:0 8px 26px rgba(0,0,0,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.menu-toggle{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:42px;height:42px;
-  border:0;background:transparent;cursor:pointer}
-.menu-toggle span,.menu-toggle::before,.menu-toggle::after{content:"";position:absolute;left:6px;width:30px;height:2px;
-  background:var(--moon);transition:.25s}
-.menu-toggle::before{top:12px}
-.menu-toggle span{top:20px}
-.menu-toggle::after{top:28px}
-.menu-toggle[aria-expanded="true"]::before{top:20px;transform:rotate(45deg)}
-.menu-toggle[aria-expanded="true"] span{opacity:0}
-.menu-toggle[aria-expanded="true"]::after{top:20px;transform:rotate(-45deg)}
+/* ヘッダー左の朝／夜スイッチ。右の癒しスイッチと同じ形にそろえてあります。
+   OFF（左）＝夜、ON（右）＝朝。ONのときだけ、つまみが右へ動いて朝日色になります。 */
+.theme-tg{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  border:0;background:transparent;cursor:pointer;padding:0;
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+.tg-label{font-family:var(--serif);font-size:8.5px;letter-spacing:.1em;color:var(--moon);
+  white-space:nowrap;text-shadow:0 1px 6px rgba(2,5,8,.9)}
+.tg-switch{position:relative;width:48px;height:21px;border-radius:21px;
+  border:1px solid var(--line-gold);background:rgba(8,24,30,.6);transition:.25s}
+.tg-knob{position:absolute;top:50%;left:2px;width:15px;height:15px;border-radius:50%;
+  background:var(--silver);transform:translateY(-50%);transition:.25s;box-shadow:0 1px 4px rgba(0,0,0,.45)}
+.tg-state{position:absolute;top:50%;transform:translateY(-50%);right:6px;
+  font-family:var(--serif);font-size:9.5px;font-weight:600;color:var(--silver);transition:.2s}
+.theme-tg.on .tg-switch{background:linear-gradient(180deg,#ffe6a4,#f5c25c);border-color:#e0ac4c}
+.theme-tg.on .tg-knob{left:29px;background:#fff}
+.theme-tg.on .tg-state{right:auto;left:8px;color:#6b4a10}
 /* ロゴが日本語混じり（BAKUの占い部屋）になったので、欧文専用の --latin ではなく
    和文も持っている明朝（--serif）に。--latin のままだと「の占い部屋」だけ別の書体になります。 */
 .site-logo{font-family:var(--serif);font-weight:600;font-size:16.5px;letter-spacing:.12em;
@@ -83,19 +89,6 @@ img{max-width:100%;display:block}
 .snd.on .snd-switch{background:linear-gradient(180deg,var(--gold-hi),var(--gold));border-color:var(--gold)}
 .snd.on .snd-knob{left:29px;background:var(--abyss)}
 .snd.on .snd-state{right:auto;left:8px;color:var(--abyss)}
-.menu-panel{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:115;width:100%;max-width:480px;
-  height:calc(100dvh - 64px);background:rgba(4,10,14,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  opacity:0;pointer-events:none;transition:opacity .25s}
-.menu-panel.open{opacity:1;pointer-events:auto}
-.menu-title{padding:18px 20px 14px;border-left:4px solid var(--gold);font-weight:700;font-size:18px;
-  letter-spacing:.05em;color:var(--moon)}
-.menu-list{list-style:none}
-.menu-list a{display:flex;align-items:center;gap:12px;padding:16px 22px;
-  color:var(--pearl);text-decoration:none;font-size:17px;letter-spacing:.03em;border-bottom:1px solid var(--line)}
-.menu-list a::before{content:"›";font-size:26px;line-height:1;color:var(--gold-hi)}
-.menu-cta{margin:22px 22px 0}
-body.menu-open{overflow:hidden}
-
 /* ===== shared ===== */
 .eyebrow{font-family:var(--serif);font-size:15px;letter-spacing:.26em;color:var(--gold-hi);
   display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;flex-wrap:nowrap;
@@ -643,3 +636,132 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   .offer-big em{font-size:48px}
   .crystal-hero{--orb-size:clamp(140px,48vw,220px);--band-min:400px}
 }
+
+/* =========================================================
+   ☀ 朝の水面（<html data-theme="morning">）
+   ---------------------------------------------------------
+   ヘッダー左の朝／夜スイッチで切り替わります。
+   夜は「暗い水に明るい文字」、朝は「明るい水に濃紺の文字」なので、
+   色を反転させるだけでなく、影の落とし方も逆にする必要があります。
+     夜: 文字のうしろに黒い影を敷いて、明るい文字を浮かせる
+     朝: 文字のうしろに白い光を敷いて、濃紺の文字を浮かせる
+   背景キャンバスの色は assets/app.js の PALETTES で持っています。
+   ========================================================= */
+[data-theme="morning"]{
+  --deep:#e8f7fe;
+  --tide:#bde6f7;
+  --panel:rgba(255,255,255,.62);
+  --panel-soft:rgba(255,255,255,.76);
+  --moon:#0d456f;            /* 見出しの濃紺 */
+  --pearl:#0a2f52;           /* 本文の濃紺 */
+  --silver:#2b6a91;          /* 補足テキスト */
+  --silver-d:#5d93b1;        /* さらに薄い補足・区切り線 */
+  --accent:#0b5b93;          /* 明るい背景では、金の代わりにこの濃い青で強調します */
+  --gold:#a8842f;            /* 明るい背景でも読める、落ち着いた金 */
+  --line:rgba(11,91,147,.22);
+  --line-gold:rgba(11,91,147,.28);
+}
+[data-theme="morning"] body{background:#bfe7f8}
+[data-theme="morning"] .vignette{
+  background:radial-gradient(125% 85% at 50% 6%, transparent 42%, rgba(255,255,255,.34) 100%),
+  linear-gradient(180deg, rgba(255,255,255,.20) 0%, transparent 24%, transparent 66%, rgba(255,255,255,.40) 100%)}
+
+/* --- ヘッダーまわり --- */
+[data-theme="morning"] .site-header{background:rgba(255,255,255,.78);
+  box-shadow:0 8px 26px rgba(12,64,102,.18)}
+[data-theme="morning"] .site-logo{text-shadow:0 1px 6px rgba(255,255,255,.9)}
+[data-theme="morning"] .tg-label,
+[data-theme="morning"] .snd-label{text-shadow:0 1px 6px rgba(255,255,255,.9)}
+[data-theme="morning"] .tg-switch,
+[data-theme="morning"] .snd-switch{background:rgba(255,255,255,.72)}
+[data-theme="morning"] .tg-knob,
+[data-theme="morning"] .snd-knob{box-shadow:0 1px 4px rgba(12,64,102,.4)}
+[data-theme="morning"] .snd.on .snd-switch{border-color:var(--accent)}
+
+/* --- 見出し・リード文（影を白い光に） --- */
+[data-theme="morning"] .eyebrow{color:var(--accent);text-shadow:0 2px 16px rgba(255,255,255,.9)}
+[data-theme="morning"] .sec-title{text-shadow:0 2px 20px rgba(255,255,255,.9)}
+[data-theme="morning"] .sec-title .gold{color:var(--accent)}
+[data-theme="morning"] .lead-c{text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .lead-c b{color:var(--accent)}
+[data-theme="morning"] .btn-sub{text-shadow:0 2px 12px rgba(255,255,255,.9)}
+
+/* --- カードと背景動画 --- */
+[data-theme="morning"] .glass{
+  box-shadow:0 20px 44px rgba(12,64,102,.18),inset 0 1px 0 rgba(255,255,255,.7)}
+[data-theme="morning"] .cospa-stage{border-color:rgba(11,91,147,.28);
+  box-shadow:0 24px 56px rgba(12,64,102,.22)}
+/* 明るい背景なので、動画は暗く沈めるのではなく白でふわっと覆います */
+[data-theme="morning"] .cospa-stage video{opacity:.34;
+  filter:brightness(1.35) contrast(.92) saturate(.8) hue-rotate(6deg)}
+[data-theme="morning"] .cospa-stage .veil{
+  background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.62) 26%,rgba(255,255,255,.6) 52%,rgba(255,255,255,.68) 74%,rgba(255,255,255,.9))}
+
+/* --- ファーストビュー --- */
+[data-theme="morning"] .hero-kicker{text-shadow:0 2px 14px rgba(255,255,255,1),0 0 40px rgba(255,255,255,.9)}
+[data-theme="morning"] .hero-copy{text-shadow:0 2px 16px rgba(255,255,255,1),0 0 34px rgba(255,255,255,.9)}
+[data-theme="morning"] .hs-phrase{text-shadow:0 2px 16px rgba(255,255,255,1),0 0 34px rgba(255,255,255,.9)}
+[data-theme="morning"] .hs-n.is-now{color:var(--accent)}
+[data-theme="morning"] .hs-fill{background:linear-gradient(90deg,rgba(11,91,147,.35),var(--accent))}
+[data-theme="morning"] .hero-values li{background:rgba(255,255,255,.66)}
+[data-theme="morning"] .hero-values b{color:var(--accent)}
+[data-theme="morning"] .hero-hint i{box-shadow:0 0 12px rgba(11,91,147,.5)}
+
+/* --- はじめての方へ --- */
+[data-theme="morning"] .offer-card::before{
+  background:radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.6),transparent 60%)}
+[data-theme="morning"] .offer-big{text-shadow:0 2px 20px rgba(255,255,255,.9)}
+[data-theme="morning"] .offer-big em{color:var(--accent);text-shadow:0 0 20px rgba(255,255,255,.9)}
+[data-theme="morning"] .offer-steps b{color:var(--accent)}
+
+/* --- プロフィール --- */
+[data-theme="morning"] .profile-photo{
+  box-shadow:0 14px 32px rgba(12,64,102,.28),
+             0 0 0 1px rgba(11,91,147,.35),
+             0 0 0 7px rgba(255,255,255,.55),
+             0 0 30px rgba(255,255,255,.6)}
+[data-theme="morning"] .profile-name{text-shadow:0 2px 18px rgba(255,255,255,.9)}
+[data-theme="morning"] .stat .num{text-shadow:0 2px 18px rgba(255,255,255,.9)}
+[data-theme="morning"] .teaser-k{color:var(--accent)}
+[data-theme="morning"] .readmore{color:var(--accent)}
+[data-theme="morning"] .readmore:active .ic{background:var(--accent);color:#fff}
+
+/* --- 悩み共感 --- */
+[data-theme="morning"] .worry-lead{text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .worry-list li{background:rgba(255,255,255,.66)}
+[data-theme="morning"] .worry-list li::before{
+  background:radial-gradient(circle at 35% 30%,var(--accent),transparent 70%)}
+[data-theme="morning"] .worry-list li.featured{border-color:var(--accent);
+  background:rgba(11,91,147,.10);box-shadow:0 6px 20px rgba(12,64,102,.14)}
+[data-theme="morning"] .worry-list li.featured::before{background:var(--accent)}
+[data-theme="morning"] .worry-soft{color:var(--accent);border-color:rgba(11,91,147,.28);
+  background:rgba(255,255,255,.6);text-shadow:0 2px 14px rgba(255,255,255,.9)}
+/* 夜は白抜きだった強調文字。明るい背景では見えなくなるので濃紺に戻します */
+[data-theme="morning"] .worry-soft b{color:var(--pearl)}
+
+/* --- お客様の声 --- */
+[data-theme="morning"] .talk-topic{color:var(--accent)}
+[data-theme="morning"] .voice-stars{color:#d99b1f}
+[data-theme="morning"] .voice-offer{color:var(--accent);border-color:rgba(11,91,147,.28);
+  background:rgba(255,255,255,.6);text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .voice-offer b{color:var(--pearl)}
+
+/* --- 最終CTA・フッター・追尾ボタン --- */
+[data-theme="morning"] .ctablock .ck{color:var(--accent);text-shadow:0 2px 16px rgba(255,255,255,.9)}
+[data-theme="morning"] .ctablock .ct{text-shadow:0 2px 20px rgba(255,255,255,.9)}
+[data-theme="morning"] .ctablock .cp{text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .sticky{
+  background:linear-gradient(180deg,transparent,rgba(233,248,255,.88) 30%,rgba(233,248,255,.98))}
+[data-theme="morning"] footer{background:linear-gradient(180deg,transparent,rgba(255,255,255,.5))}
+[data-theme="morning"] footer .fname{text-shadow:0 2px 18px rgba(255,255,255,.9)}
+
+/* --- プロフィールのパネル（下から出るやつ） --- */
+[data-theme="morning"] .modal-bd{background:rgba(10,47,82,.34)}
+[data-theme="morning"] .modal-card{
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(232,247,254,.99));
+  border-top-color:var(--accent);box-shadow:0 -30px 80px rgba(12,64,102,.35)}
+[data-theme="morning"] .modal-k{color:var(--accent)}
+/* 夜は薄いグレー文字。明るい背景では読めないので濃紺にします */
+[data-theme="morning"] .modal-body p,
+[data-theme="morning"] .concern-list li{color:var(--pearl)}
+[data-theme="morning"] .modal-body p strong{color:var(--accent)}

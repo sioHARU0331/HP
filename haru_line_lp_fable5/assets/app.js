@@ -2,20 +2,31 @@
    BAKU LINE LP — interactions
    ========================================================= */
 
-/* ===== site menu ===== */
+/* ===== 朝／夜の切り替え（ヘッダー左のスイッチ） =====
+   <html data-theme="morning"> が付くと、CSS側の配色と背景の水面が朝になります。
+   選んだほうは localStorage に覚えるので、次に開いたときも同じ側で始まります。
+   （最初の一瞬だけ夜が見えるのを防ぐため、読み込みは index.html の <head> でやっています） */
 (function(){
-  var btn=document.getElementById('menuToggle');
-  var menu=document.getElementById('siteMenu');
-  if(!btn||!menu)return;
-  function setMenu(open){
-    btn.setAttribute('aria-expanded',open?'true':'false');
-    btn.setAttribute('aria-label',open?'メニューを閉じる':'メニューを開く');
-    menu.setAttribute('aria-hidden',open?'false':'true');
-    menu.classList.toggle('open',open);
-    document.body.classList.toggle('menu-open',open);
+  var btn=document.getElementById('themeToggle');
+  if(!btn)return;
+  var state=btn.querySelector('.tg-state');
+  function apply(morning,save){
+    document.documentElement.dataset.theme = morning ? 'morning' : 'night';
+    btn.classList.toggle('on',morning);
+    btn.setAttribute('aria-pressed',morning?'true':'false');
+    if(state)state.textContent = morning ? '朝' : '夜';
+    // スマホのブラウザ上部の色も、水面に合わせる
+    var tc=document.querySelector('meta[name="theme-color"]');
+    if(tc)tc.setAttribute('content',morning?'#bfe7f8':'#04080c');
+    // 水面の色を差し替える（water の IIFE が用意する）
+    if(window.__water && window.__water.setTheme) window.__water.setTheme(morning?'morning':'night');
+    if(save){ try{ localStorage.setItem('baku-theme', morning?'morning':'night'); }catch(e){} }
   }
-  btn.addEventListener('click',function(){setMenu(btn.getAttribute('aria-expanded')!=='true');});
-  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  apply(document.documentElement.dataset.theme==='morning',false);
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    apply(document.documentElement.dataset.theme!=='morning',true);
+  });
 })();
 
 /* =========================================================
@@ -63,11 +74,36 @@
      WX+WY=1 を保てば元のスキームと同じ安定性。 */
   const WY = 1/(1+1/(SQUASH*SQUASH)), WX = 1-WY;
 
+  /* ---- 夜と朝の2枚のパレット ----------------------------------------
+     波のシミュレーション自体は共通で、色だけを差し替えています。
+     grad … 上から下への水の色（4段）      star … 水面に映る光の粒
+     halo … 空にある光の輪（夜=月／朝=太陽） core … その中心の芯
+     ring … 画面をタップしたときに広がる輪  mote … ただよう光の粒 */
+  const PALETTES={
+    night:{
+      grad:['#0d323d','#0a2029','#08141b','#04080c'],
+      star:'226,240,242',
+      halo:['rgba(214,236,238,.52)','rgba(159,184,189,.18)','rgba(159,184,189,0)'],
+      core:'rgba(255,255,255,.92)',
+      ring:'214,236,238',
+      mote:['233,224,190','176,205,208']
+    },
+    morning:{
+      grad:['#d8f2fd','#a5ddf6','#6ec4ea','#3ea3db'],
+      star:'255,255,255',
+      halo:['rgba(255,255,255,.62)','rgba(214,240,252,.26)','rgba(214,240,252,0)'],
+      core:'rgba(255,255,255,.95)',
+      ring:'255,255,255',
+      mote:['255,255,255','206,238,252']
+    }
+  };
+  let PAL = PALETTES[document.documentElement.dataset.theme==='morning'?'morning':'night'];
+
   function buildBG(){
     const off = document.createElement('canvas'); off.width=cols; off.height=rows;
     const o = off.getContext('2d');
     const g=o.createLinearGradient(0,0,0,rows);
-    g.addColorStop(0,'#0d323d'); g.addColorStop(.30,'#0a2029'); g.addColorStop(.62,'#08141b'); g.addColorStop(1,'#04080c');
+    g.addColorStop(0,PAL.grad[0]); g.addColorStop(.30,PAL.grad[1]); g.addColorStop(.62,PAL.grad[2]); g.addColorStop(1,PAL.grad[3]);
     o.fillStyle=g; o.fillRect(0,0,cols,rows);
     // starfield (upper sky) — refracted by ripples for a living reflection
     const stars=Math.round((cols*rows)/900);
@@ -75,16 +111,16 @@
       const sxp=Math.random()*cols, syp=Math.random()*rows*0.5;
       const a=0.25+Math.random()*0.6, rad=Math.random()<0.14?1.4:0.8;
       const sg=o.createRadialGradient(sxp,syp,0,sxp,syp,rad*2.2);
-      sg.addColorStop(0,'rgba(226,240,242,'+a+')'); sg.addColorStop(1,'rgba(226,240,242,0)');
+      sg.addColorStop(0,'rgba('+PAL.star+','+a+')'); sg.addColorStop(1,'rgba('+PAL.star+',0)');
       o.fillStyle=sg; o.fillRect(sxp-3,syp-3,6,6);
     }
     // moon halo + core
     mcx=cols*.5; mcy=rows*.13; const mr=Math.min(cols,rows)*.62;
     let mg=o.createRadialGradient(mcx,mcy,0,mcx,mcy,mr);
-    mg.addColorStop(0,'rgba(214,236,238,.52)'); mg.addColorStop(.26,'rgba(159,184,189,.18)'); mg.addColorStop(1,'rgba(159,184,189,0)');
+    mg.addColorStop(0,PAL.halo[0]); mg.addColorStop(.26,PAL.halo[1]); mg.addColorStop(1,PAL.halo[2]);
     o.fillStyle=mg; o.fillRect(0,0,cols,rows);
     let md=o.createRadialGradient(mcx,mcy,0,mcx,mcy,mr*.12);
-    md.addColorStop(0,'rgba(255,255,255,.92)'); md.addColorStop(1,'rgba(255,255,255,0)');
+    md.addColorStop(0,PAL.core); md.addColorStop(1,'rgba(255,255,255,0)');
     o.fillStyle=md; o.fillRect(0,0,cols,rows);
     bgData = o.getImageData(0,0,cols,rows).data;
 
@@ -255,7 +291,7 @@
         if(age<0)continue;
         const k=age/1500, ease=1-Math.pow(1-k,2.2);          // 開きはじめが速く、外へ行くほど緩む
         const rad=6+ease*Math.min(W,H)*0.34, a=Math.pow(1-k,1.8)*0.40*rg.a;
-        ctx.strokeStyle='rgba(214,236,238,'+a+')'; ctx.lineWidth=1.6*(1-k)+0.35;
+        ctx.strokeStyle='rgba('+PAL.ring+','+a+')'; ctx.lineWidth=1.6*(1-k)+0.35;
         ctx.beginPath(); ctx.ellipse(rg.x,rg.y,rad,rad*SQUASH,0,0,6.283); ctx.stroke();
       }
       ctx.globalCompositeOperation='source-over';
@@ -269,9 +305,9 @@
       if(now>m.next){ drop(m.x,m.y,26,3.5); m.next=now+2200+Math.random()*3200; } // touch the water
       const a=m.base*(0.55+0.45*Math.sin(now*0.001*m.tw+m.ph));
       const g=ctx.createRadialGradient(m.x,m.y,0,m.x,m.y,m.rad);
-      g.addColorStop(0,'rgba(233,224,190,'+a+')');
-      g.addColorStop(.45,'rgba(176,205,208,'+(a*0.4)+')');
-      g.addColorStop(1,'rgba(176,205,208,0)');
+      g.addColorStop(0,'rgba('+PAL.mote[0]+','+a+')');
+      g.addColorStop(.45,'rgba('+PAL.mote[1]+','+(a*0.4)+')');
+      g.addColorStop(1,'rgba('+PAL.mote[1]+',0)');
       ctx.fillStyle=g; ctx.beginPath(); ctx.arc(m.x,m.y,m.rad,0,6.283); ctx.fill();
     }
     // shooting star
@@ -350,6 +386,13 @@
     rings.push({x:x,y:y,t:now,d:240,a:.55});
     plip(.9);
   }
+
+  /* ヘッダーの朝／夜スイッチから呼ばれる。パレットを差し替えて背景を焼き直すだけで、
+     波の状態（いま広がっている波紋）はそのまま残ります。 */
+  window.__water={setTheme:function(name){
+    const next=PALETTES[name]; if(!next||next===PAL)return;
+    PAL=next; buildBG();
+  }};
 
   addEventListener('resize',resize,{passive:true});
   addEventListener('pointerdown',pointer,{passive:true});
