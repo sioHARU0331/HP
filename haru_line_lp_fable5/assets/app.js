@@ -451,14 +451,7 @@
     });
   });
 
-  // メーターの数字を言葉の数だけ用意する
-  const nums=phrases.map(function(_,i){
-    const n=document.createElement('span');
-    n.className='hs-n';
-    n.textContent=i+1;
-    meter.appendChild(n);
-    return n;
-  });
+  // メーターは1本のバーだけ。満ちたら次の言葉へ切り替わります。
   const track=document.createElement('span'); track.className='hs-track';
   const fill=document.createElement('i');     fill.className='hs-fill';
   track.appendChild(fill); meter.appendChild(track);
@@ -479,9 +472,6 @@
     p.classList.remove('is-out','is-on');
     void p.offsetWidth;                 // 頭から流し直す
     p.classList.add('is-on');
-    nums.forEach(function(n,k){n.classList.toggle('is-now',k===cur);});
-    // トラックを「いまの数字」の直後へ移す＝次に切り替わるまでの残り時間
-    meter.insertBefore(track,nums[cur].nextSibling);
     fill.classList.remove('run'); void fill.offsetWidth; fill.classList.add('run');
     timer=setTimeout(function(){show((cur+1)%phrases.length);},DUR);
   }

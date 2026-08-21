@@ -227,11 +227,8 @@ img{max-width:100%;display:block}
 @keyframes hsIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
 @keyframes hsOut{from{opacity:1;transform:none}to{opacity:0;transform:translateX(-24px)}}
 
-/* メーター：数字が並び、いま表示中の番号の直後が残り時間バーになる */
-.hs-meter{display:flex;align-items:center;gap:11px;padding:0 2px;
-  font-family:var(--latin);font-size:13px;letter-spacing:.16em}
-.hs-n{color:var(--silver-d);opacity:.5;transition:color .55s ease,opacity .55s ease}
-.hs-n.is-now{color:var(--gold-hi);opacity:1}
+/* メーター：横一本のバー。満ちたら次の言葉へ切り替わる */
+.hs-meter{display:flex;align-items:center;padding:0 2px}
 .hs-track{flex:1;height:1px;background:var(--line);position:relative;overflow:hidden}
 .hs-fill{position:absolute;inset:0;transform:scaleX(0);transform-origin:left center;
   background:linear-gradient(90deg,var(--gold-deep),var(--gold-hi))}
