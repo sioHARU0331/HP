@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260821">
+<link rel="stylesheet" href="assets/style.css?v=20260821b">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -38,6 +38,9 @@
 
   <!-- ============ ① HERO / ファーストビュー ============ -->
   <header class="hero" id="top">
+    <div class="hero-top">
+      <span class="hero-badge"><span class="dot"></span>LINE登録で 初回10分無料</span>
+    </div>
     <div class="hero-content">
       <!-- 上部バナーは一旦なし。sample01.png が横長バナーから縦長の顔写真に差し替わったので、
            下の1行をそのまま復活させても比率が合いません。ここに顔を出したくなったら、
@@ -45,13 +48,15 @@
       <div class="hero-photo"><img src="assets/sample01.png" alt="占い師 BAKU" fetchpriority="high"></div>
       -->
 
-      <!-- 横から流れてくるコピー：メーターが満ちたら次の言葉へ -->
+      <!-- 横から流れてくるコピー：メーターが満ちたら次の言葉へ。
+           文中の「|」は改行位置です（画面には出ません）。自動で折り返させると
+           行頭に1文字だけ残ることがあるので、読みやすい位置で手で区切っています。 -->
       <div class="hero-slider" id="heroSlider">
         <div class="hs-stage" aria-live="polite">
-          <p class="hs-phrase">占い師が頼る占い師</p>
-          <p class="hs-phrase">ベテランの技を、格安で</p>
-          <p class="hs-phrase">あの人の気持ち、教えるよ。</p>
-          <p class="hs-phrase">いますぐ声きかせてください</p>
+          <p class="hs-phrase">あの人の気持ち、|教えるよ。</p>
+          <p class="hs-phrase">連絡がこない、|本当の理由は？</p>
+          <p class="hs-phrase">復縁できる？|このまま待つべき？</p>
+          <p class="hs-phrase">その悩み、10分だけ|話してみませんか。</p>
         </div>
         <div class="hs-meter" id="hsMeter" aria-hidden="true"></div>
       </div>
@@ -271,6 +276,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260821"></script>
+<script src="assets/app.js?v=20260821b"></script>
 </body>
 </html>

@@ -430,12 +430,19 @@
     return out;
   }
 
-  // 1文字ずつ span に分けて、流れ込むタイミングをずらす
+  // 1文字ずつ span に分けて、流れ込むタイミングをずらす。
+  // 文中の「|」は手で入れた改行位置。高さ0の要素を挟んで flex を折り返させる。
   phrases.forEach(function(p){
     const text=p.textContent.trim();
     p.textContent='';
     let n=0;                              // 遅延は「見た目の文字数」で数える
     chunk(text).forEach(function(part){
+      if(part==='|'){
+        const br=document.createElement('span');
+        br.className='hs-br';
+        p.appendChild(br);
+        return;                           // 改行は文字数に数えない
+      }
       const s=document.createElement('span');
       s.textContent=part;
       if(!reduce) s.style.animationDelay=(n*STAGGER)+'ms';
