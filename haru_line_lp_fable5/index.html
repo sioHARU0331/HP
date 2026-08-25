@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260825i">
+<link rel="stylesheet" href="assets/style.css?v=20260825k">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -146,7 +146,7 @@
     <div class="steps-dots" id="stepsDots"></div>
 
     <!-- 料金は「いくらか」ではなく「相場と比べてどうか」を見せます。
-         ¥550 / ¥330 に線を引いてから ¥0 を出すことで、金額の意味が一目で伝わります。 -->
+         ¥550 / ¥330 に線を引いてから ¥200 を出すことで、金額の意味が一目で伝わります。 -->
     <p class="lead-c cospa-lead">電話占いは高い——。<br>その<b>常識ごと</b>、覆します。</p>
 
     <div class="priceflip">
@@ -161,11 +161,18 @@
         </div>
       </div>
       <div class="arrow">→</div>
-      <div class="price-new"><small>LINE登録した方の初回10分</small>¥0<span class="per">/10分</span></div>
+      <div class="price-new"><small>1分間の特別料金</small>¥200<span class="tax">（税込）</span><span class="per">/1分</span></div>
     </div>
-    <p class="price-note">13年やってきたベテランの鑑定を、まるごと無料で。</p>
-    <p class="price-after">11分目以降も <b>¥200</b><span class="tax">（税込）</span>/1分。<br>ベテランの平均相場、¥550の半分以下です。</p>
+    <p class="price-note">13年やってきたベテランの鑑定を、この価格で。</p>
     <p class="taglabel">低価格 <span class="x">×</span> 高クオリティ</p>
+
+    <!-- 特典。¥200 を見せ切ってから重ねる順番です。
+         先に「無料」を出すと、主役であるはずの ¥200 が霞みます。 -->
+    <div class="bonus">
+      <div class="bonus-k">さらに！</div>
+      <p class="bonus-t">LINE登録した方は<br><b>初回10分間、無料</b>で鑑定します。</p>
+      <p class="bonus-p">11分目以降も、2回目以降も、<b>1分200円（税込）</b>のまま。<br>あとから追加料金がかかることはありません。</p>
+    </div>
 
     <div class="glass teaser">
       <div class="teaser-k">ナイショの話</div>
@@ -309,6 +316,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260825i"></script>
+<script src="assets/app.js?v=20260825k"></script>
 </body>
 </html>
