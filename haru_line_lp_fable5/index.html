@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260825m">
+<link rel="stylesheet" href="assets/style.css?v=20260825n">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -77,7 +77,7 @@
     </div>
   </header>
 
-  <!-- ============ ② ABOUT BAKU（BAKU紹介） ============ -->
+  <!-- ============ ② プロフィール（占い師BAKU紹介） ============ -->
   <section class="sec vidsec reveal" id="profile">
     <div class="cospa-stage" aria-hidden="true">
       <video poster="assets/poster07.jpg" autoplay muted loop playsinline preload="none">
@@ -118,7 +118,44 @@
     </div>
   </section>
 
-  <!-- ============ ③ 料金（相場との比較） ============ -->
+  <!-- ============ ③ ご利用の流れ（LINE登録3STEP） ============ -->
+  <section class="sec vidsec reveal" id="flow">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster05.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo05.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
+    <div class="eyebrow">ご利用の流れ</div>
+    <div class="sec-title">LINE登録は<span class="gold">かんたん3STEP</span></div>
+    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
+
+    <!-- 横スワイプはCSSのスクロールスナップに任せています（指の動きをJSで追いかけていません）。
+         ブラウザ本来の横スクロールなので、慣性も端の止まり方もOS標準どおりに動きます。
+         JSがやるのは、ドットの点灯と矢印を押したときの移動だけです。
+         左右のカードが少しのぞくように、1枚の幅を74%にしてあります。 -->
+    <div class="steps">
+      <button class="steps-arw prev" type="button" aria-label="前のステップを見る">‹</button>
+      <div class="steps-track" id="stepsTrack">
+        <figure class="step-slide"><img src="assets/line_step1.jpg" alt="STEP1 LINEで友だち追加。LINE登録ボタンから友だち追加します。" width="840" height="1050" loading="lazy"></figure>
+        <figure class="step-slide"><img src="assets/line_step2.jpg" alt="STEP2 メッセージを送信。トークで「はじめての鑑定です。」と送ります。" width="840" height="1050" loading="lazy"></figure>
+        <figure class="step-slide"><img src="assets/line_step3.jpg" alt="STEP3 無料鑑定の日時を決める。日時を決めて、当日お電話で鑑定します。24時間365日受付中。" width="840" height="1050" loading="lazy"></figure>
+      </div>
+      <button class="steps-arw next" type="button" aria-label="次のステップを見る">›</button>
+    </div>
+    <div class="steps-dots" id="stepsDots"></div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">この3STEPで、いますぐ始める</span>
+      </a>
+      <p class="btn-sub">＼ 登録は30秒・24時間365日受付 ／</p>
+    </div>
+  </section>
+
+  <!-- ============ ④ 鑑定料金（相場との比較） ============ -->
   <section class="sec vidsec reveal" id="price">
     <div class="cospa-stage" aria-hidden="true">
       <video poster="assets/poster06.jpg" autoplay muted loop playsinline preload="none">
@@ -176,79 +213,7 @@
     </div>
   </section>
 
-  <!-- ============ ④ ご利用の流れ（LINE登録3STEP） ============ -->
-  <section class="sec vidsec reveal" id="flow">
-    <div class="cospa-stage" aria-hidden="true">
-      <video poster="assets/poster05.jpg" autoplay muted loop playsinline preload="none">
-        <source src="assets/mo05.mp4" type="video/mp4">
-      </video>
-      <div class="veil"></div>
-    </div>
-    <div class="eyebrow">ご利用の流れ</div>
-    <div class="sec-title">LINE登録は<span class="gold">かんたん3STEP</span></div>
-    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
-
-    <!-- 横スワイプはCSSのスクロールスナップに任せています（指の動きをJSで追いかけていません）。
-         ブラウザ本来の横スクロールなので、慣性も端の止まり方もOS標準どおりに動きます。
-         JSがやるのは、ドットの点灯と矢印を押したときの移動だけです。
-         左右のカードが少しのぞくように、1枚の幅を74%にしてあります。 -->
-    <div class="steps">
-      <button class="steps-arw prev" type="button" aria-label="前のステップを見る">‹</button>
-      <div class="steps-track" id="stepsTrack">
-        <figure class="step-slide"><img src="assets/line_step1.jpg" alt="STEP1 LINEで友だち追加。LINE登録ボタンから友だち追加します。" width="840" height="1050" loading="lazy"></figure>
-        <figure class="step-slide"><img src="assets/line_step2.jpg" alt="STEP2 メッセージを送信。トークで「はじめての鑑定です。」と送ります。" width="840" height="1050" loading="lazy"></figure>
-        <figure class="step-slide"><img src="assets/line_step3.jpg" alt="STEP3 無料鑑定の日時を決める。日時を決めて、当日お電話で鑑定します。24時間365日受付中。" width="840" height="1050" loading="lazy"></figure>
-      </div>
-      <button class="steps-arw next" type="button" aria-label="次のステップを見る">›</button>
-    </div>
-    <div class="steps-dots" id="stepsDots"></div>
-
-    <div class="btn-wrap cta-line">
-      <!-- LINE登録リンク: 本番のLINE公式URLに差し替え -->
-      <a class="btn" href="#" data-line>
-        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
-        <span class="free">無料</span><span class="txt">この3STEPで、いますぐ始める</span>
-      </a>
-      <p class="btn-sub">＼ 登録は30秒・24時間365日受付 ／</p>
-    </div>
-  </section>
-
-  <!-- ============ ⑤ 悩み共感 ============ -->
-  <section class="sec vidsec reveal" id="worry">
-    <div class="cospa-stage" aria-hidden="true">
-      <video poster="assets/poster08.jpg" autoplay muted loop playsinline preload="none">
-        <source src="assets/mo08.mp4" type="video/mp4">
-      </video>
-      <div class="veil"></div>
-    </div>
-    <div class="eyebrow">こんな夜に</div>
-    <div class="sec-title">その気持ち、<br><span class="gold">ひとりで抱えないで。</span></div>
-    <div class="divider"><span></span><i class="diamond"></i><span></span></div>
-    <p class="worry-lead">恋の悩みは、誰にも言えないほど<br>ひとりで大きくなっていくもの。</p>
-
-    <ul class="worry-list" id="worryList">
-      <li data-key="彼の気持ち">彼の気持ちが、わからない</li>
-      <li data-key="既読スルー">既読スルーの理由が知りたい</li>
-      <li data-key="復縁">復縁できる可能性を知りたい</li>
-      <li data-key="本命か遊びか">本命なのか、遊びなのか</li>
-    </ul>
-
-    <div class="worry-soft">
-      <b>大丈夫。ひとりで抱えなくていい。</b>
-      <span>15,000人の恋を見てきたBAKUが、彼の本音と次の一歩を、はっきり導きます。</span>
-    </div>
-
-    <div class="btn-wrap cta-line">
-      <!-- LINE登録リンク③（悩み共感後）: 本番のLINE公式URLに差し替え -->
-      <a class="btn" href="#" data-line>
-        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
-        <span class="txt">今の悩みを無料の電話で相談する</span>
-      </a>
-      <p class="btn-sub">＼ どんな小さな悩みでも大丈夫 ／</p>
-    </div>
-  </section>
-
-  <!-- ============ ⑥ お客様の声 ============ -->
+  <!-- ============ ⑤ お客様の声 ============ -->
   <section class="sec vidsec reveal" id="voices">
     <div class="cospa-stage" aria-hidden="true">
       <video poster="assets/poster09.jpg" autoplay muted loop playsinline preload="none">
@@ -293,7 +258,7 @@
     </div>
   </section>
 
-  <!-- ============ ⑦ 最終CTA ============ -->
+  <!-- ============ ⑥ 最終CTA ============ -->
   <section class="ctablock reveal" id="final">
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
     <div class="ck">まずは、無料の電話から。</div>
@@ -338,6 +303,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260825m"></script>
+<script src="assets/app.js?v=20260825n"></script>
 </body>
 </html>

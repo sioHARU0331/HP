@@ -502,7 +502,8 @@
   const ctaTextMap={
     top:'LINEで無料電話鑑定を受ける',
     profile:'この先生に無料の電話で相談してみる',
-    worry:'今の悩みを無料の電話で相談する',
+    flow:'LINE登録して10分無料で相談する',
+    price:'まずは10分、無料で相談してみる',
     voices:'無料の電話で相手の気持ちを占ってもらう',
     final:'LINE登録で無料電話鑑定を受ける'
   };
@@ -575,18 +576,6 @@
   if(prev)prev.addEventListener('click',function(){go(current()-1);});
   if(next)next.addEventListener('click',function(){go(current()+1);});
   sync();
-})();
-
-/* ===== 悩みリストの出し分け（?utm_content= で先頭を差し替え） ===== */
-(function(){
-  const list=document.getElementById('worryList');
-  if(!list)return;
-  const featured=new URLSearchParams(location.search).get('utm_content');
-  if(!featured)return;
-  const target=list.querySelector('li[data-key="'+(window.CSS&&CSS.escape?CSS.escape(featured):featured)+'"]');
-  if(!target)return;
-  list.insertBefore(target,list.firstElementChild); // 先頭へ移動
-  target.classList.add('featured');                 // 強調（CSS側でボーダー太く）
 })();
 
 /* ===== modals ===== */

@@ -353,24 +353,6 @@ img{max-width:100%;display:block}
   .steps-track{scroll-behavior:auto}
 }
 
-/* ===== CONCERNS / 悩み共感 ===== */
-.worry-lead{font-family:var(--serif);text-align:center;font-size:16.5px;line-height:1.9;color:var(--moon);
-  letter-spacing:.05em;margin-bottom:22px;text-shadow:0 2px 14px rgba(2,5,8,.9)}
-.worry-list{list-style:none;display:grid;gap:10px;margin:0 0 8px}
-.worry-list li{position:relative;font-family:var(--serif);font-size:14px;line-height:1.65;color:var(--pearl);
-  padding:14px 16px 14px 44px;border-radius:12px;letter-spacing:.03em;
-  background:rgba(8,22,28,.5);border:1px solid var(--line);
-  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.worry-list li::before{content:"";position:absolute;left:16px;top:50%;transform:translateY(-50%);
-  width:16px;height:16px;border-radius:50%;border:1px solid var(--line-gold);
-  background:radial-gradient(circle at 35% 30%,var(--moon),transparent 70%)}
-.worry-soft{margin-top:22px;text-align:center;font-family:var(--serif);font-size:16px;line-height:1.95;
-  letter-spacing:.05em;color:var(--gold-hi);border:1px solid var(--line-gold);border-radius:16px;
-  padding:22px 20px;background:rgba(201,176,121,.07);text-shadow:0 2px 14px rgba(2,5,8,.9)}
-.worry-soft b{color:#fff;font-weight:600}
-.worry-soft span{display:block;font-family:var(--sans);font-size:12.5px;font-weight:300;color:var(--moon);
-  letter-spacing:.06em;margin-top:10px;line-height:1.85}
-
 /* ===== VOICES / 口コミ ===== */
 .voice-grid{display:grid;gap:14px}
 .voice-card{padding:20px 20px}
@@ -547,12 +529,6 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   box-shadow:0 20px 52px rgba(0,0,0,.55);
   animation:fadeUp 1s .1s both}
 .hero-photo img{width:100%;height:100%;object-fit:contain;display:block}
-
-/* ===== 悩みリスト：出し分けで先頭に来たカードを強調 ===== */
-.worry-list li.featured{border-color:var(--gold-hi);border-width:2px;
-  background:rgba(201,176,121,.09);color:var(--pearl);font-weight:600;
-  box-shadow:0 6px 20px rgba(201,176,121,.14)}
-.worry-list li.featured::before{background:var(--gold-hi)}
 
 /* ===== 口コミ：LINEトーク風 ===== */
 .talk{padding:18px 16px 16px}
@@ -796,19 +772,6 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   border-color:rgba(11,91,147,.3);color:var(--accent)}
 [data-theme="morning"] .steps-dots i{border-color:var(--silver-d)}
 [data-theme="morning"] .steps-dots i.on{background:var(--accent);border-color:var(--accent)}
-
-/* --- 悩み共感 --- */
-[data-theme="morning"] .worry-lead{text-shadow:0 2px 14px rgba(255,255,255,.9)}
-[data-theme="morning"] .worry-list li{background:rgba(255,255,255,.66)}
-[data-theme="morning"] .worry-list li::before{
-  background:radial-gradient(circle at 35% 30%,var(--accent),transparent 70%)}
-[data-theme="morning"] .worry-list li.featured{border-color:var(--accent);
-  background:rgba(11,91,147,.10);box-shadow:0 6px 20px rgba(12,64,102,.14)}
-[data-theme="morning"] .worry-list li.featured::before{background:var(--accent)}
-[data-theme="morning"] .worry-soft{color:var(--accent);border-color:rgba(11,91,147,.28);
-  background:rgba(255,255,255,.6);text-shadow:0 2px 14px rgba(255,255,255,.9)}
-/* 夜は白抜きだった強調文字。明るい背景では見えなくなるので濃紺に戻します */
-[data-theme="morning"] .worry-soft b{color:var(--pearl)}
 
 /* --- お客様の声 --- */
 [data-theme="morning"] .talk-topic{color:var(--accent)}
