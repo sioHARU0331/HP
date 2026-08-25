@@ -262,11 +262,12 @@ img{max-width:100%;display:block}
    ---------------------------------------------------------
    スワイプはブラウザの横スクロール＋scroll-snap にそのまま任せています。
    指の動きをJSで追う実装より安定していて、慣性も端の止まり方もOS標準です。
-   ・.steps を左右 -26px して .sec の余白ぶんを打ち消し、画面の端まで使う
+   ・セクションの枠（.cospa-stage）からカードがはみ出して見えないよう、
+     .steps は .sec の余白の内側に収めています（以前の -26px は廃止）
    ・1枚を74%幅にして、両側に次のカードを13%ずつのぞかせる
    ・スクロールバーは消す（body 側で overflow-x:hidden なので横スクロールは出ません）
    ========================================================= */
-.steps{position:relative;margin:0 -26px}
+.steps{position:relative;margin:0}
 .steps-track{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;padding:2px 13% 4px;
   -webkit-overflow-scrolling:touch;
