@@ -354,16 +354,19 @@ img{max-width:100%;display:block}
 .profile-name{font-family:var(--serif);font-size:12px;line-height:1.35;letter-spacing:.2em;color:var(--moon);
   text-align:center;margin:0 0 22px;text-shadow:0 2px 18px rgba(2,5,8,.8)}
 .profile-name span{display:block;font-family:var(--latin);font-size:30px;letter-spacing:.12em;margin-top:3px}
-.stats{display:flex;justify-content:center;gap:0;margin-bottom:22px}
-.stat{flex:1;text-align:center;padding:0 6px;position:relative}
-.stat+.stat::before{content:"";position:absolute;left:0;top:14%;height:72%;width:1px;
+/* 数字は2列×2行。横1行に4つ並べると1列が狭くなりすぎるためです。 */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:24px 0;margin-bottom:22px}
+.stat{text-align:center;padding:0 8px;position:relative}
+/* 縦の区切り線は右の列の左側だけに出します */
+.stat:nth-child(2n)::before{content:"";position:absolute;left:0;top:6%;height:88%;width:1px;
   background:linear-gradient(transparent,var(--line),transparent)}
 .stat .num{font-family:var(--latin);font-size:34px;font-weight:500;color:var(--moon);
   line-height:1;letter-spacing:.02em;white-space:nowrap;text-shadow:0 0 22px rgba(211,232,234,.3)}
 /* 単位は数字の真下。横に並べると「20,000人以上」が3等分した列からはみ出します。 */
 .stat .num small{display:block;font-family:var(--serif);font-size:12.5px;font-weight:600;
   letter-spacing:.06em;color:var(--gold-hi);margin-top:5px;line-height:1}
-.stat .lbl{font-size:10px;letter-spacing:.1em;color:var(--silver);margin-top:9px;line-height:1.5}
+/* ラベルは数字の上。長い名前（プロデュースした占い師）でも1行で収まる字送りにしています。 */
+.stat .lbl{font-size:10px;letter-spacing:.04em;color:var(--silver);margin:0 0 8px;line-height:1.5}
 /* 見出しは指定どおり2行で収めたいので、狭い画面では少しだけ縮めます */
 #profile .sec-title{font-size:clamp(19px,5.9vw,25px)}
 /* 数字の下の一文。長文にはせず、1〜2行で終わる高さに収めています。 */
