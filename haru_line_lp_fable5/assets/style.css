@@ -16,7 +16,7 @@
   --gold-hi:#e7d6a6;
   --gold-deep:#8a734a;
   --rose:#e8c2c7;            /* やわらかい女性向けアクセント */
-  --line-green:#06c755;      /* LINEらしさ（アイコン用に限定使用） */
+  --line-green:#06c755;      /* LINE登録ボタンとアイコンの緑 */
   --line-green-d:#04a548;
   --muted:var(--silver);
   --line:rgba(207,230,232,.16);
@@ -157,29 +157,33 @@ img{max-width:100%;display:block}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;
   max-width:340px;padding:16px 14px;font-family:var(--serif);
   font-size:clamp(11.5px,3.2vw,15px);font-weight:600;line-height:1.45;
-  letter-spacing:.02em;color:var(--abyss);border:none;border-radius:48px;
+  letter-spacing:.02em;color:#fff;border:none;border-radius:48px;
   cursor:pointer;text-decoration:none;
-  background:linear-gradient(180deg,var(--gold-hi),var(--gold) 60%,#ad9259);
-  box-shadow:0 14px 40px rgba(201,176,121,.34),inset 0 1px 0 rgba(255,255,255,.5);
+  /* LINE登録が目的のLPなので、ボタンはLINEの緑。押した先がどこかを色で伝えます。 */
+  background:linear-gradient(180deg,#2ade79,var(--line-green) 55%,var(--line-green-d));
+  box-shadow:0 14px 40px rgba(6,199,85,.34),inset 0 1px 0 rgba(255,255,255,.35);
   position:relative;overflow:hidden;transition:transform .12s}
 .btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
   transform:skewX(-18deg);animation:sheen 5.5s ease-in-out 1.5s infinite}
 @keyframes sheen{0%,72%{left:-70%}86%{left:130%}100%{left:130%}}
 .btn:active{transform:translateY(2px)}
-/* LINE chat icon (green circle) */
+/* ボタン自体が緑になったので、アイコンは白地に緑ヌキ（緑の上に緑では消えるため）。
+   SVGの fill="#fff" はCSSのほうが強いので、こちらで緑に上書きしています。 */
 .btn .line-ic{flex:0 0 auto;width:23px;height:23px;border-radius:7px;
-  background:linear-gradient(180deg,#3fd977,var(--line-green) 55%,var(--line-green-d));
-  display:grid;place-items:center;box-shadow:0 2px 8px rgba(6,199,85,.5),inset 0 1px 0 rgba(255,255,255,.35);position:relative;z-index:1}
+  background:#fff;
+  display:grid;place-items:center;box-shadow:0 2px 8px rgba(2,40,18,.28);position:relative;z-index:1}
 .btn .line-ic svg{width:15px;height:15px;display:block}
+.btn .line-ic svg path{fill:var(--line-green)}
 .btn .txt{position:relative;z-index:1}
 .btn .free{flex:0 0 auto;font-family:var(--serif);font-size:11px;font-weight:700;
-  background:var(--abyss);color:var(--gold-hi);white-space:nowrap;
+  background:#fff;color:var(--line-green-d);white-space:nowrap;
   padding:3px 7px;border-radius:20px;position:relative;z-index:1;letter-spacing:.04em}
 .btn.ghost{background:transparent;color:var(--gold-hi);border:1px solid var(--line-gold);
   box-shadow:none;font-size:14px}
 .btn.ghost::after{display:none}
 .btn.ghost .line-ic{background:linear-gradient(180deg,#3fd977,var(--line-green) 55%,var(--line-green-d))}
+.btn.ghost .line-ic svg path{fill:#fff}
 .btn-sub{font-size:11px;color:var(--silver);letter-spacing:.1em;margin-top:11px;text-align:center;
   text-shadow:0 2px 12px rgba(2,5,8,.9)}
 .btn-wrap{text-align:center}
