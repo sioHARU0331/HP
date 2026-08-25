@@ -496,6 +496,14 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   border-bottom:1px solid var(--line);position:relative}
 .concern-list li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:11px;top:13px}
 .modal-body .voice-item p{margin-bottom:0}
+/* パネル内の「◆鑑定歴：…」のような項目リスト。項目名を上、内容を下に置いて、
+   スマホの幅でも項目名と内容が改行でぶつからないようにしています。 */
+.fact-list{list-style:none;margin:4px 0 20px}
+.fact-list li{font-size:13px;color:#cfdfe0;line-height:1.85;padding:11px 0 11px 20px;
+  border-bottom:1px solid var(--line);position:relative}
+.fact-list li::before{content:"◆";position:absolute;left:0;color:var(--gold);font-size:10px;top:14px}
+.fact-list li span{display:block;font-family:var(--serif);font-size:11px;letter-spacing:.16em;
+  color:var(--gold-hi);margin-bottom:2px}
 
 /* ===== HERO：SNS特化（写真拡大・文字圧縮・価格の匂わせ） ===== */
 /* ヒーロー上部のバナー画像。いまは index.html 側でコメントアウトしていて未使用ですが、
