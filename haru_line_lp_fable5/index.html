@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260825f">
+<link rel="stylesheet" href="assets/style.css?v=20260825g">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -119,7 +119,13 @@
   </section>
 
   <!-- ============ ③ ご利用の流れ（LINE登録3STEP） ============ -->
-  <section class="sec reveal" id="flow">
+  <section class="sec vidsec reveal" id="flow">
+    <div class="cospa-stage" aria-hidden="true">
+      <video poster="assets/poster06.jpg" autoplay muted loop playsinline preload="none">
+        <source src="assets/mo06.mp4" type="video/mp4">
+      </video>
+      <div class="veil"></div>
+    </div>
     <div class="eyebrow">ご利用の流れ</div>
     <div class="sec-title">LINE登録は<span class="gold">かんたん3STEP</span></div>
     <div class="divider"><span></span><i class="diamond"></i><span></span></div>
@@ -138,6 +144,26 @@
       <button class="steps-arw next" type="button" aria-label="次のステップを見る">›</button>
     </div>
     <div class="steps-dots" id="stepsDots"></div>
+
+    <!-- 料金とLINE登録はセットで見せます。金額を先に開示してから登録ボタンを置くことで、
+         「登録したら請求されるのでは」という不安を残したままボタンを押させないためです。 -->
+    <div class="glass price-card">
+      <div class="price-k">鑑定料金</div>
+      <ul class="price-list">
+        <li><span class="pl-t">初回10分</span><span class="pl-v"><b class="pl-free">無料</b></span></li>
+        <li><span class="pl-t">11分目以降</span><span class="pl-v">1分 <b>200</b>円</span></li>
+      </ul>
+      <p class="price-note">通話料はかかりません。10分で切っても料金は0円です。延長したいときだけ、その場でお伝えください。<br>無理な勧誘や、しつこい連絡は一切ありません。</p>
+    </div>
+
+    <div class="btn-wrap cta-line">
+      <!-- LINE登録リンク（ご利用の流れ・料金の直後）: 本番のLINE公式URLに差し替え -->
+      <a class="btn" href="#" data-line>
+        <span class="line-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.5 1.5 4.7 3.8 6.2-.2.7-.7 2.4-.8 2.8 0 .3.2.4.4.3.2-.1 2.7-1.8 3.7-2.5.9.1 1.9.2 2.9.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></span>
+        <span class="free">無料</span><span class="txt">LINE登録して10分無料で相談する</span>
+      </a>
+      <p class="btn-sub">＼ 登録は30秒・24時間365日受付 ／</p>
+    </div>
   </section>
 
   <!-- ============ ④ 悩み共感 ============ -->
@@ -265,6 +291,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260825f"></script>
+<script src="assets/app.js?v=20260825g"></script>
 </body>
 </html>
