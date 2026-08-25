@@ -120,6 +120,23 @@ img{max-width:100%;display:block}
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   box-shadow:0 24px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(211,232,234,.07)}
 
+/* プロフィールカード（たたんだ紹介文＋「プロフィールを読む」）
+   本文は2行で切って、続きは下から出るパネルで読ませます。 */
+.teaser{padding:24px 22px;text-align:left;position:relative;overflow:hidden}
+.teaser::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--silver),transparent);opacity:.5}
+.teaser-k{font-family:var(--serif);font-size:14px;letter-spacing:.3em;color:var(--gold);
+  margin-bottom:10px}
+.teaser-t{font-family:var(--serif);font-size:16.5px;font-weight:500;line-height:1.7;margin-bottom:9px;color:var(--moon)}
+.teaser-p{font-size:13px;color:var(--silver);line-height:1.9;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.readmore{margin-top:16px;display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--serif);font-size:12.5px;letter-spacing:.18em;color:var(--gold-hi);
+  background:none;border:none;cursor:pointer;padding:0}
+.readmore .ic{width:26px;height:26px;border:1px solid var(--line-gold);border-radius:50%;
+  display:grid;place-items:center;font-family:var(--latin);transition:.3s}
+.readmore:active .ic{background:var(--gold);color:var(--abyss)}
+
 /* section video background */
 .vidsec{position:relative;overflow:visible}
 .vidsec>*:not(.cospa-stage){position:relative;z-index:1}
@@ -728,6 +745,8 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 [data-theme="morning"] .stat .num small{color:var(--accent)}
 [data-theme="morning"] .about-note{text-shadow:0 2px 14px rgba(255,255,255,.9)}
 [data-theme="morning"] .about-note b{color:var(--accent)}
+[data-theme="morning"] .teaser-k{color:var(--accent)}
+[data-theme="morning"] .readmore{color:var(--accent)}
 [data-theme="morning"] .step-slide{box-shadow:0 16px 36px rgba(12,64,102,.28)}
 [data-theme="morning"] .steps-arw{background:rgba(255,255,255,.82);
   border-color:rgba(11,91,147,.3);color:var(--accent)}
