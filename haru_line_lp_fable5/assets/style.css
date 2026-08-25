@@ -296,23 +296,39 @@ img{max-width:100%;display:block}
   background:transparent;border:1px solid var(--silver-d);transition:.25s}
 .steps-dots i.on{background:var(--gold-hi);border-color:var(--gold-hi);transform:scale(1.3)}
 
-/* 料金カード（ご利用の流れの中）。金額は「初回10分：無料」を一番大きく見せ、
-   延長料金はその下に小さく置いています。 */
-.price-card{margin:26px auto 0;max-width:400px;padding:22px 20px 20px}
-.price-k{font-family:var(--serif);font-size:11.5px;letter-spacing:.3em;color:var(--gold);
-  text-align:center;margin-bottom:14px}
-.price-list{list-style:none;margin:0}
-.price-list li{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  padding:11px 2px;border-bottom:1px solid var(--line)}
-.price-list li:last-child{border-bottom:none}
-.pl-t{font-size:12.5px;letter-spacing:.06em;color:var(--silver)}
-.pl-v{font-family:var(--serif);font-size:14px;color:var(--moon);letter-spacing:.04em}
-.pl-v b{font-family:var(--latin);font-size:24px;font-weight:500;letter-spacing:.02em;margin-right:1px}
-.pl-free{font-family:var(--serif)!important;font-size:22px!important;color:var(--gold-hi);
-  text-shadow:0 0 20px rgba(231,214,166,.35)}
-.price-note{font-size:11px;line-height:1.95;color:var(--silver-d);margin-top:14px;text-align:left}
-[data-theme="morning"] .price-k{color:var(--accent)}
-[data-theme="morning"] .pl-free{color:var(--accent);text-shadow:0 2px 14px rgba(255,255,255,.9)}
+/* 料金の見せ方（ご利用の流れの中）。
+   相場（¥550 / ¥330）に斜線を引いてから ¥0 を出す並びです。
+   金額を単体で書いても高いか安いか伝わらないので、必ず相場とセットで見せます。 */
+.cospa-lead{margin-top:26px}
+.priceflip{display:flex;flex-direction:column;align-items:center;gap:10px;margin:24px 0 18px}
+.price-old{font-family:var(--latin);color:var(--silver);display:flex;gap:14px;min-width:150px}
+.market-price{position:relative;flex:1;text-align:center}
+/* 斜めの取り消し線。数字の高さに合わせて top を決めています */
+.market-price::after{content:"";position:absolute;left:-2px;right:-2px;top:18px;height:1px;
+  background:var(--silver);transform:rotate(-8deg)}
+.market-price .yen{display:block;font-size:26px;line-height:1;color:var(--pearl);
+  text-shadow:0 0 14px rgba(238,244,242,.35);white-space:nowrap}
+.market-price .yen small{font-size:11px;letter-spacing:.04em}
+.market-price .label{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.02em;
+  line-height:1.45;margin-top:5px;color:var(--moon);text-shadow:0 1px 8px rgba(2,5,8,.95);white-space:nowrap}
+.arrow{color:var(--gold);font-size:18px;line-height:1;transform:rotate(90deg)}
+.price-new{font-family:var(--latin);font-size:56px;font-weight:600;line-height:.9;text-align:center;
+  color:var(--gold-hi);text-shadow:0 0 18px rgba(231,214,166,.65),0 0 44px rgba(201,176,121,.45)}
+.price-new small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.18em;
+  color:var(--gold-hi);margin-bottom:6px}
+.price-new .per{display:inline;font-family:var(--sans);font-size:13px;letter-spacing:.08em;color:var(--gold-hi)}
+.price-note{font-family:var(--serif);font-size:13px;letter-spacing:.08em;color:var(--gold-hi);
+  text-align:center;margin-bottom:12px;text-shadow:0 2px 14px rgba(2,5,8,.9)}
+.price-after{font-size:12px;line-height:1.9;letter-spacing:.04em;color:var(--silver);text-align:center;margin-bottom:20px}
+.price-after b{font-family:var(--latin);font-size:19px;font-weight:600;color:var(--moon);letter-spacing:.02em}
+.price-after .tax{font-size:10px;color:var(--silver-d)}
+.taglabel{font-family:var(--serif);font-size:14px;letter-spacing:.2em;color:var(--pearl);text-align:center;
+  margin-bottom:24px;text-shadow:0 2px 14px rgba(2,5,8,.9)}
+.taglabel .x{color:var(--gold);font-family:var(--latin);padding:0 4px}
+[data-theme="morning"] .price-new{text-shadow:0 2px 18px rgba(255,255,255,.95)}
+[data-theme="morning"] .price-note{color:var(--accent);text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .taglabel{text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .market-price .label{text-shadow:0 1px 8px rgba(255,255,255,.9)}
 
 @media (prefers-reduced-motion:reduce){
   .steps-track{scroll-behavior:auto}

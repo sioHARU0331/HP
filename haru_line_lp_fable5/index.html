@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260825g">
+<link rel="stylesheet" href="assets/style.css?v=20260825h">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -145,15 +145,33 @@
     </div>
     <div class="steps-dots" id="stepsDots"></div>
 
-    <!-- 料金とLINE登録はセットで見せます。金額を先に開示してから登録ボタンを置くことで、
-         「登録したら請求されるのでは」という不安を残したままボタンを押させないためです。 -->
-    <div class="glass price-card">
-      <div class="price-k">鑑定料金</div>
-      <ul class="price-list">
-        <li><span class="pl-t">初回10分</span><span class="pl-v"><b class="pl-free">無料</b></span></li>
-        <li><span class="pl-t">11分目以降</span><span class="pl-v">1分 <b>200</b>円</span></li>
-      </ul>
-      <p class="price-note">通話料はかかりません。10分で切っても料金は0円です。延長したいときだけ、その場でお伝えください。<br>無理な勧誘や、しつこい連絡は一切ありません。</p>
+    <!-- 料金は「いくらか」ではなく「相場と比べてどうか」を見せます。
+         ¥550 / ¥330 に線を引いてから ¥0 を出すことで、金額の意味が一目で伝わります。 -->
+    <p class="lead-c cospa-lead">電話占いは高い——。<br>その<b>常識ごと</b>、覆します。</p>
+
+    <div class="priceflip">
+      <div class="price-old">
+        <div class="market-price">
+          <span class="yen">¥550<small>〜（税込）</small></span>
+          <span class="label">ベテラン占い師の平均相場</span>
+        </div>
+        <div class="market-price">
+          <span class="yen">¥330<small>〜（税込）</small></span>
+          <span class="label">レギュラー占い師の平均相場</span>
+        </div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="price-new"><small>LINE登録した方の初回10分</small>¥0<span class="per">/10分</span></div>
+    </div>
+    <p class="price-note">13年やってきたベテランの鑑定を、まるごと無料で。</p>
+    <p class="price-after">11分目以降も <b>¥200</b><span class="tax">（税込）</span>/1分。<br>ベテランの平均相場、¥550の半分以下です。</p>
+    <p class="taglabel">低価格 <span class="x">×</span> 高クオリティ</p>
+
+    <div class="glass teaser">
+      <div class="teaser-k">ナイショの話</div>
+      <div class="teaser-t">なぜ電話占いは、こんなに高いのか。</div>
+      <p class="teaser-p">相場は初心者でも1分300円、ベテランなら500円超え、1000円を超える占い師も珍しくない世界。料金が高いのは当然のこと——でも、それにしても高すぎませんか？どこに無駄があり、なぜ価格が膨らむのか。私は、その構造を全部知っています。</p>
+      <button class="readmore" data-modal="cospa">つづきを読む<span class="ic">＋</span></button>
     </div>
 
     <div class="btn-wrap cta-line">
@@ -291,6 +309,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260825g"></script>
+<script src="assets/app.js?v=20260825h"></script>
 </body>
 </html>
