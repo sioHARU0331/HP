@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <!-- ?v= の数字は、style.css / app.js を直したら日付などに変えてください。
      これを変えないと、スマホが前に読み込んだ古いファイルを使い続けます。 -->
-<link rel="stylesheet" href="assets/style.css?v=20260825n">
+<link rel="stylesheet" href="assets/style.css?v=20260825p">
 <!-- 朝／夜。前回選んだほうを、CSSが効き始める前に <html> へ付けておきます。
      これをやらないと、朝を選んでいる人に一瞬だけ夜が見えてしまいます。 -->
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('baku-theme')==='morning'?'morning':'night';}catch(e){document.documentElement.dataset.theme='night';}</script>
@@ -192,8 +192,12 @@
          先に「無料」を出すと、主役であるはずの ¥200 が霞みます。 -->
     <div class="bonus">
       <div class="bonus-k">さらに！</div>
-      <p class="bonus-t">LINE登録した方は<br><b>初回10分間、無料</b>で鑑定します。</p>
-      <p class="bonus-p">11分目以降も、2回目以降も、<b>1分200円（税込）</b>のまま。<br>あとから追加料金がかかることはありません。</p>
+      <p class="bonus-t">
+        <span class="bt-s">LINE登録した方は</span>
+        <b>初回10分間、無料</b>
+        <span class="bt-s">で鑑定します。</span>
+      </p>
+      <p class="bonus-p">11分目以降も、2回目以降も <b>1分200円（税込）</b>のまま。<br>あとから追加料金がかかることはありません。</p>
     </div>
 
     <div class="glass teaser">
@@ -303,6 +307,6 @@
   </div>
 </div>
 
-<script src="assets/app.js?v=20260825n"></script>
+<script src="assets/app.js?v=20260825p"></script>
 </body>
 </html>

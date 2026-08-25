@@ -325,25 +325,42 @@ img{max-width:100%;display:block}
   margin-bottom:24px;text-shadow:0 2px 14px rgba(2,5,8,.9)}
 .taglabel .x{color:var(--gold);font-family:var(--latin);padding:0 4px}
 
-/* 「さらに！」の特典枠。¥200 を見せ切ったあとに置く"もう一段"なので、
-   金の枠で囲って、本文より一段明るく見せています。 */
-.bonus{position:relative;max-width:400px;margin:0 auto 24px;padding:26px 20px 20px;
-  border:1px solid var(--line-gold);border-radius:14px;text-align:center;
-  background:linear-gradient(180deg,rgba(201,176,121,.10),rgba(8,24,30,.30));
-  box-shadow:0 18px 44px rgba(0,0,0,.35),inset 0 1px 0 rgba(231,214,166,.14)}
-.bonus-k{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
-  font-family:var(--serif);font-size:12px;letter-spacing:.18em;color:var(--abyss);
-  background:linear-gradient(180deg,var(--gold-hi),var(--gold));
-  padding:3px 16px;border-radius:40px;white-space:nowrap;
-  box-shadow:0 4px 14px rgba(201,176,121,.35)}
-.bonus-t{font-family:var(--serif);font-size:15px;line-height:1.95;color:var(--moon);letter-spacing:.04em}
-.bonus-t b{display:inline-block;font-size:19px;font-weight:600;color:var(--gold-hi);
-  text-shadow:0 0 18px rgba(231,214,166,.5)}
-.bonus-p{font-size:11.5px;line-height:1.95;color:var(--silver);margin-top:12px;letter-spacing:.02em}
-.bonus-p b{color:var(--moon);font-weight:600}
-[data-theme="morning"] .bonus{background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.5))}
-[data-theme="morning"] .bonus-k{color:#fff;background:linear-gradient(180deg,var(--accent),#0a4a79)}
-[data-theme="morning"] .bonus-t b{color:var(--accent);text-shadow:0 2px 14px rgba(255,255,255,.9)}
+/* 「さらに！」の特典枠。このLPで一番手を止めてほしい場所なので、
+   背景動画を透かさず、金の枠＋発光でページから浮かせています。
+   （半透明にすると後ろの動画に負けて、ただの注意書きに見えてしまいます） */
+.bonus{position:relative;max-width:400px;margin:0 auto 26px;padding:32px 20px 22px;
+  border:1px solid var(--gold);border-radius:16px;text-align:center;
+  background:
+    radial-gradient(120% 90% at 50% 0%,rgba(201,176,121,.20),transparent 60%),
+    linear-gradient(180deg,#0d2731 0%,#06131a 100%);
+  box-shadow:0 0 0 4px rgba(201,176,121,.09),
+             0 22px 54px rgba(0,0,0,.62),
+             0 0 46px rgba(201,176,121,.22),
+             inset 0 1px 0 rgba(231,214,166,.28)}
+.bonus-k{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:.18em;color:#2a1e08;
+  background:linear-gradient(180deg,#fff3d0,var(--gold-hi) 45%,var(--gold));
+  padding:5px 20px;border-radius:40px;white-space:nowrap;
+  box-shadow:0 6px 18px rgba(201,176,121,.45),inset 0 1px 0 rgba(255,255,255,.6)}
+.bonus-t{letter-spacing:.04em}
+.bonus-t .bt-s{display:block;font-family:var(--serif);font-size:14px;line-height:1.9;color:var(--moon)}
+/* 一番読ませたい一行。折り返すと勢いが死ぬので、画面幅に合わせて字を縮めます */
+.bonus-t b{display:block;font-family:var(--serif);font-size:clamp(22px,7vw,29px);font-weight:600;
+  line-height:1.35;margin:6px 0;color:#fff6dd;letter-spacing:.02em;white-space:nowrap;
+  text-shadow:0 0 16px rgba(231,214,166,.85),0 0 40px rgba(201,176,121,.55)}
+.bonus-p{font-size:12px;line-height:1.95;color:var(--moon);margin-top:16px;letter-spacing:.02em;
+  padding-top:14px;border-top:1px solid rgba(201,176,121,.22)}
+.bonus-p b{color:var(--gold-hi);font-weight:600}
+[data-theme="morning"] .bonus{
+  background:radial-gradient(120% 90% at 50% 0%,rgba(255,255,255,.9),rgba(255,255,255,.72));
+  border-color:var(--accent);
+  box-shadow:0 0 0 4px rgba(11,91,147,.10),0 22px 48px rgba(12,64,102,.24),0 0 34px rgba(255,255,255,.8)}
+[data-theme="morning"] .bonus-k{color:#fff;background:linear-gradient(180deg,#1f7cba,var(--accent));
+  box-shadow:0 6px 18px rgba(12,64,102,.35)}
+[data-theme="morning"] .bonus-t .bt-s{color:var(--pearl)}
+[data-theme="morning"] .bonus-t b{color:var(--accent);text-shadow:0 2px 16px rgba(255,255,255,.95)}
+[data-theme="morning"] .bonus-p{color:var(--pearl);border-top-color:rgba(11,91,147,.22)}
+[data-theme="morning"] .bonus-p b{color:var(--accent)}
 [data-theme="morning"] .price-new{text-shadow:0 2px 18px rgba(255,255,255,.95)}
 [data-theme="morning"] .price-note{color:var(--accent);text-shadow:0 2px 14px rgba(255,255,255,.9)}
 [data-theme="morning"] .taglabel{text-shadow:0 2px 14px rgba(255,255,255,.9)}
