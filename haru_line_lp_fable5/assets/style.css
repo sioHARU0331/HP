@@ -160,7 +160,7 @@ img{max-width:100%;display:block}
   letter-spacing:.02em;color:#fff;border:none;border-radius:48px;
   cursor:pointer;text-decoration:none;
   /* LINE登録が目的のLPなので、ボタンはLINEの緑。押した先がどこかを色で伝えます。 */
-  background:linear-gradient(180deg,#2ade79,var(--line-green) 55%,var(--line-green-d));
+  background:linear-gradient(180deg,#0ad167,var(--line-green) 55%,var(--line-green-d));
   box-shadow:0 14px 40px rgba(6,199,85,.34),inset 0 1px 0 rgba(255,255,255,.35);
   position:relative;overflow:hidden;transition:transform .12s}
 .btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;
