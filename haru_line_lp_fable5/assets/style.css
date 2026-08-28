@@ -410,12 +410,17 @@ img{max-width:100%;display:block}
 .profile-name{font-family:var(--serif);font-size:12px;line-height:1.35;letter-spacing:.2em;color:var(--moon);
   text-align:center;margin:0 0 22px;text-shadow:0 2px 18px rgba(2,5,8,.8)}
 .profile-name span{display:block;font-family:var(--latin);font-size:30px;letter-spacing:.12em;margin-top:3px}
-/* 数字は2列×2行。横1行に4つ並べると1列が狭くなりすぎるためです。 */
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:24px 0;margin-bottom:22px}
-.stat{text-align:center;padding:0 8px;position:relative}
-/* 縦の区切り線は右の列の左側だけに出します */
-.stat:nth-child(2n)::before{content:"";position:absolute;left:0;top:6%;height:88%;width:1px;
+/* 数字は上段に2つ、下段に1つを中央置き。
+   3つを横1列にすると1列が110px前後になり、「プロデュースした占い師」のような
+   長いラベルが2〜3行に折れて窮屈になるため、下段だけ2列ぶんを使っています。
+   行の間は 30px。ラベルが折り返しても上下がぶつからない幅にしてあります。 */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:30px 0;margin-bottom:22px}
+.stat{text-align:center;padding:0 10px;position:relative}
+/* 縦の区切り線は上段の右側（2つ目）の左にだけ。下段は1つなので線は引きません。 */
+.stat:nth-child(2)::before{content:"";position:absolute;left:0;top:6%;height:88%;width:1px;
   background:linear-gradient(transparent,var(--line),transparent)}
+/* 下段は2列ぶんを使い切って中央へ。長いラベルが1行に収まります。 */
+.stat:nth-child(3){grid-column:1 / -1}
 .stat .num{font-family:var(--latin);font-size:34px;font-weight:500;color:var(--moon);
   line-height:1;letter-spacing:.02em;white-space:nowrap;text-shadow:0 0 22px rgba(211,232,234,.3)}
 /* 単位は数字の真下。横に並べると「20,000人以上」が3等分した列からはみ出します。 */
