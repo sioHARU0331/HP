@@ -570,8 +570,6 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
   box-shadow:0 4px 14px rgba(6,199,85,.22)}
 /* お客様の声だけを並べる場合（片側吹き出し） */
 .talk.solo .bubble{max-width:100%}
-.talk.solo .talk-row+.talk-row{margin-top:-4px}
-.talk.solo .talk-row+.talk-row .bubble{border-top-left-radius:16px}
 .talk-meta{display:flex;align-items:center;justify-content:flex-end;gap:10px;
   margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
 .talk-meta .voice-stars{margin-bottom:0}
