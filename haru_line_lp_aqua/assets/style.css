@@ -113,6 +113,9 @@ body.menu-open{overflow:hidden}
 .divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:6px auto 20px}
 .eyebrow+.sec-title{margin-top:20px;margin-bottom:20px}
 .sec-title+.divider{margin-top:0}
+/* 見出しを置かず、小見出しのすぐ下にリード文を置くセクション用 */
+.eyebrow+.lead-c{margin-top:20px}
+.lead-c+.divider{margin-top:0}
 .divider span{height:1px;width:44px;background:linear-gradient(90deg,transparent,var(--silver-d))}
 .divider span:last-child{background:linear-gradient(90deg,var(--silver-d),transparent)}
 .diamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);box-shadow:0 0 10px var(--gold)}
@@ -512,7 +515,6 @@ footer .note{font-size:10px;color:var(--silver-d);line-height:1.9;letter-spacing
 .talk.solo .bubble{max-width:100%}
 .talk-meta{display:flex;align-items:center;justify-content:flex-end;gap:10px;
   margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
-.talk-meta .voice-stars{margin-bottom:0}
 .talk-who{font-size:10.5px;color:var(--silver-d);letter-spacing:.06em;font-family:var(--serif)}
 
 /* ===== 料金前の安心一言バンド ===== */
