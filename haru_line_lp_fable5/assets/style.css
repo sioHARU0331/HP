@@ -322,6 +322,9 @@ img{max-width:100%;display:block}
 .price-new small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.18em;
   color:var(--gold-hi);margin-bottom:6px}
 .price-new .per{display:inline;font-family:var(--sans);font-size:13px;letter-spacing:.08em;color:var(--gold-hi)}
+/* 価格の真下の注釈。主役の¥200 を邪魔しない大きさに抑えています */
+.price-caution{font-family:var(--sans);font-size:11px;letter-spacing:.04em;line-height:1.6;
+  color:var(--moon);text-align:center;margin:-8px 0 14px;text-shadow:0 1px 8px rgba(2,5,8,.95)}
 .price-note{font-family:var(--serif);font-size:13px;letter-spacing:.08em;color:var(--gold-hi);
   text-align:center;margin-bottom:12px;text-shadow:0 2px 14px rgba(2,5,8,.9)}
 .price-new .tax{font-size:.28em;letter-spacing:.04em}
@@ -367,6 +370,7 @@ img{max-width:100%;display:block}
 [data-theme="morning"] .bonus-p b{color:var(--accent)}
 [data-theme="morning"] .price-new{text-shadow:0 2px 18px rgba(255,255,255,.95)}
 [data-theme="morning"] .price-note{color:var(--accent);text-shadow:0 2px 14px rgba(255,255,255,.9)}
+[data-theme="morning"] .price-caution{color:var(--silver);text-shadow:0 1px 10px rgba(255,255,255,.9)}
 [data-theme="morning"] .taglabel{text-shadow:0 2px 14px rgba(255,255,255,.9)}
 [data-theme="morning"] .market-price .label{text-shadow:0 1px 8px rgba(255,255,255,.9)}
 
