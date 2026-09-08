@@ -249,7 +249,7 @@ img{max-width:100%;display:block}
 .hs-track{flex:1;height:1px;background:var(--line);position:relative;overflow:hidden}
 .hs-fill{position:absolute;inset:0;transform:scaleX(0);transform-origin:left center;
   background:linear-gradient(90deg,var(--gold-deep),var(--gold-hi))}
-.hs-fill.run{animation:hsFill var(--hs-dur,4800ms) linear both}
+.hs-fill.run{animation:hsFill var(--hs-dur,3360ms) linear both}
 @keyframes hsFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media (prefers-reduced-motion:reduce){
   .hs-phrase span,.hs-phrase.is-on span,.hs-phrase.is-out span{

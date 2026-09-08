@@ -415,7 +415,7 @@
   const phrases=Array.prototype.slice.call(slider.querySelectorAll('.hs-phrase'));
   if(!phrases.length)return;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const DUR=4800, STAGGER=38, OUT=520;
+  const DUR=3360, STAGGER=38, OUT=520;   // 4800ms の 70%。メーターが長すぎると次の言葉まで待たされる
 
   // 禁則処理：span は folding の単位でもあるので、行頭にきてほしくない文字（、。ー など）は
   // 前の文字と、行末にきてほしくない文字（「（ など）は次の文字と、同じ span にまとめます。
